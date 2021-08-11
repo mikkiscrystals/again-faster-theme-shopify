@@ -1,0 +1,33 @@
+{
+  "name": "again-faster-theme-shopify",
+  "version": "0.0.3",
+  "description": "A theme for Again / Faster store",
+  "scripts": {
+    "dev": "theme watch --allow-live",
+    "deploy": "theme deploy --allow-live",
+    "git": "npm version patch --no-git-tag-version && git add . && git commit -m",
+    "git-minor": "npm version minor --no-git-tag-version && git add . && git commit -m",
+    "git-major": "npm version major --no-git-tag-version && git add . && git commit -m",
+    "postgit": "npm run push",
+    "postgit-minor": "npm run push",
+    "postgit-major": "npm run push",
+    "push": "git push",
+    "push-demo": "git push origin main:demo",
+    "push-prod": "git push origin main:prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/botirbaev/again-faster-theme-shopify.git"
+  },
+  "keywords": [
+    "store",
+    "theme",
+    "shopify"
+  ],
+  "author": "Davlatyor Botirbaev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/botirbaev/again-faster-theme-shopify/issues"
+  },
+  "homepage": "https://github.com/botirbaev/again-faster-theme-shopify#readme"
+}
