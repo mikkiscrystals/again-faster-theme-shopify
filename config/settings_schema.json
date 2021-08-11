@@ -17,6 +17,11 @@
       },
       {
         "type": "image_picker",
+        "id": "logo_alt",
+        "label": "Logo alternative"
+      },
+      {
+        "type": "image_picker",
         "id": "favicon",
         "label": "Favicon"
       },
@@ -68,9 +73,27 @@
       },
       {
         "type": "color",
+        "id": "color_text_focus",
+        "label": "Text focus color",
+        "default": "#5d5d5d"
+      },
+      {
+        "type": "color",
         "id": "color_text_bg",
         "label": "Text background color",
         "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_text_bg_focus",
+        "label": "Text background focus color",
+        "default": "#b8b8b8"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_1",
+        "label": "Text background 1",
+        "default": "#FBFBFB"
       },
       {
         "type": "color",

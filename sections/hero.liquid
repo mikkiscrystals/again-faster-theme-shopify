@@ -4,20 +4,20 @@
     {% endif %}
 
     {% if section.settings.description %}
-        <div class="c-hero__description s-richtext">{{ section.settings.description }}</div>
+        <div class="c-hero__description s-hero-richtext s-richtext">{{ section.settings.description }}</div>
     {% endif %}
 
     {% if section.settings.button_title and section.settings.button_url %}
         <a href="{{ section.settings.button_url }}" class="o-button c-hero__cta">
             <span class="o-text">{{ section.settings.button_title }}</span>
-            <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="{{ section.settings.button_title }}" class="o-image" height="9">
+            <img src="{{ 'icon.arrow-right-white.svg' | asset_url }}" alt="{{ section.settings.button_title }}" class="o-image c-arrow-icon" height="9">
         </a>
     {% endif %}
 
 </div>
 <div class="c-hero__background-box">
     {% if section.settings.background_image %}
-        <img src="{{ section.settings.background_image | img_url: '1920x1080' }}" alt="{{ section.settings.title }}" class="c-hero__background-image">
+        <img class="c-hero__background-image" src="{{ section.settings.background_image | img_url: '1920x1080' }}" alt="{{ section.settings.title }}">
     {% endif %}
 </div>
 

@@ -8,6 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: var(--side-distance-4);
 }
 
 body > div:not([class]) {
@@ -19,6 +20,7 @@ body > div:not([class]) {
   position: relative;
   display: grid;
   grid-auto-flow: row;
+  gap: var(--side-distance-4);
 }
 
 .c-page-top {
@@ -32,4 +34,25 @@ body > div:not([class]) {
 .c-page-content {
   display: grid;
   grid-auto-flow: row;
+  gap: var(--side-distance-4);
+}
+
+.o-section {
+  position: relative;
+}
+
+.o-button {
+  color: var(--color-text);
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.o-button:hover,
+.o-button:focus {
+  color: var(--color-text-focus);
+}
+
+.c-arrow-icon {
+  height: 1em;
 }
