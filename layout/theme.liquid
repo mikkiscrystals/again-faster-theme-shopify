@@ -8,6 +8,8 @@
         <meta name="description" content="{{ page_description | escape }}">
         <link rel="canonical" href="{{ canonical_url }}">
         <meta content="width=device-width,initial-scale=1,shrink-to-fit=no" name="viewport">
+        <link rel="icon" type="image/png" sizes="256x256" href="{{ settings.favicon | img_url: '256x256' }}"/>
+
         {{ content_for_header }}
 
         {{ 'style.global.css' | asset_url | stylesheet_tag }}

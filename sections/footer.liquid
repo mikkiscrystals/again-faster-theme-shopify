@@ -1,3 +1,50 @@
+<div class="c-footer__newsletter">
+    <h3 class="c-footer__title">{{ 'sections.footer.newsletter.title' | t }}</h3>
+    {% include 'form-newsletter-subscribe' %}
+    <ul class="o-list c-socials">
+        {% if settings.facebook %}
+            <li class="o-list">
+                <a href="{{ settings.facebook }}" class="o-button">
+                    <img src="{{ 'icon.fb.svg' | asset_url }}" alt="" class="o-image" height="12">
+                </a>
+            </li>
+        {% endif %}
+        {% if settings.instagram %}
+            <li class="o-list">
+                <a href="{{ settings.instagram }}" class="o-button">
+                    <img src="{{ 'icon.inst.svg' | asset_url }}" alt="" class="o-image" height="12">
+                </a>
+            </li>
+        {% endif %}
+        {% if settings.email %}
+            <li class="o-list">
+                <a href="mailto:{{ settings.email }}" class="o-button">
+                    <img src="{{ 'icon.mail.svg' | asset_url }}" alt="" class="o-image" height="12">
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="c-footer__links">
+    <ul class="o-list">
+        {% for link in linklists.footer.links %}
+            <li class="o-list__item">
+                <a href="{{ link.url }}" class="o-button">{{ link.title }}</a>
+                <ul class="o-list o-list--dropdown">
+                    {% for link in link.links %}
+                        <li class="o-list__item">
+                            <a href="{{ link.url }}" class="o-button">{{ link.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="c-footer__copyright">{{ settings.copyright }}</div>
+
 {% schema %}
 
 {
