@@ -1,0 +1,21 @@
+<nav class="c-header__desktop u-desktop-only">
+    <div class="c-header__left">
+        <a class="c-header__logo-box" href="">
+            <img class="c-header__logo" src="{{ settings.logo | img_url: '300x20' }}" alt="{{ shop.name }}" height="20">
+        </a>
+    </div>
+    <div class="c-header__center"></div>
+    <div class="c-header__right"></div>
+</nav>
+
+<nav class="c-header__mobile u-mobile-only"></nav>
+
+{% schema %}
+
+{
+    "name": "Header",
+    "tag": "header",
+    "class": "c-header"
+}
+
+{% endschema %}

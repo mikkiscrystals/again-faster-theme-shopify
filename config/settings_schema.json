@@ -6,5 +6,20 @@
     "theme_author": "Davlatyor Botirbaev",
     "theme_documentation_url": "https://github.com/botirbaev/again-faster-theme-shopify",
     "theme_support_url": "https://github.com/botirbaev/again-faster-theme-shopify/issues"
+  },
+  {
+    "name": "General",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
   }
 ]
