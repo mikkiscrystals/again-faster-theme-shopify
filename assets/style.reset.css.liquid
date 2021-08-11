@@ -1,3 +1,161 @@
+:root {
+  font-size: 18px;
+}
+
+html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: red;
+  padding: 0;
+  margin: 0;
+  height: inherit;
+}
+
+header,
+main,
+footer {
+  position: relative;
+}
+
+header {
+  z-index: 300;
+}
+
+main {
+  z-index: 200;
+}
+
+footer {
+  z-index: 100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+li,
+dd,
+dt,
+td,
+th,
+button {
+  line-height: 1.5em;
+  margin: 0;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  transition: color 0.3s ease, border-width 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+textarea,
+button,
+input,
+select,
+label {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+button,
+label {
+  cursor: pointer;
+}
+
+button[disabled],
+.u-is-pending {
+  cursor: not-allowed;
+}
+
+button,
+input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+button {
+  padding: 0;
+}
+
+.u-no-padding {
+  padding: 0;
+}
+
+.o-list {
+  list-style: none;
+  padding: 0;
+}
+
+.o-list,
+figure,
+.u-no-margin {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+pre,
+p,
+a,
+li,
+span {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1600px) {
+  :root {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 1440px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1200px) {
+  :root {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 992px + 1px) {
+  .u-mobile-only {
+    display: none !important;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    font-size: 14px;
+  }
+  .u-desktop-only {
+    display: none !important;
+  }
 }

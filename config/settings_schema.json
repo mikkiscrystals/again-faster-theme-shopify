@@ -56,5 +56,28 @@
         "label": "E-mail"
       }
     ]
+  },
+  {
+    "name": "Visual",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_text_bg",
+        "label": "Text background color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_1",
+        "label": "Accent color 1",
+        "default": "#C2A578"
+      }
+    ]
   }
 ]

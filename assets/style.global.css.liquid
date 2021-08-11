@@ -1,0 +1,35 @@
+html {
+  font-family: var(--font-1);
+  font-weight: var(--font-1-weight);
+}
+
+body {
+  background-color: var(--color-text-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+body > div:not([class]) {
+  position: absolute;
+}
+
+.c-page-top,
+.c-page-bottom {
+  position: relative;
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.c-page-top {
+  z-index: 300;
+}
+
+.c-page-bottom {
+  z-index: 200;
+}
+
+.c-page-content {
+  display: grid;
+  grid-auto-flow: row;
+}

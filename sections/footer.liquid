@@ -1,6 +1,6 @@
 <div class="c-footer__newsletter">
     <h3 class="c-footer__title">{{ 'sections.footer.newsletter.title' | t }}</h3>
-    {% include 'form-newsletter-subscribe' %}
+    {% include 'form-subscribtion' %}
     <ul class="o-list c-socials">
         {% if settings.facebook %}
             <li class="o-list">
@@ -18,7 +18,7 @@
         {% endif %}
         {% if settings.email %}
             <li class="o-list">
-                <a href="mailto:{{ settings.email }}" class="o-button">
+                <a class="o-button" href="mailto:{{ settings.email }}">
                     <img src="{{ 'icon.mail.svg' | asset_url }}" alt="" class="o-image" height="12">
                 </a>
             </li>
