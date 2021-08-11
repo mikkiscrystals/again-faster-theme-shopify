@@ -1,0 +1,104 @@
+<ul class="o-list c-i-cards">
+    {% for block in section.blocks %}
+
+        {% if block.settings.image_1 and block.settings.image_2 %}
+            {% assign totalImages = 2 %}
+        {% else %}
+            {% if block.settings.image_1 or block.settings.image_2 %}
+                {% assign totalImages = 1 %}
+            {% else %}
+                {% assign totalImages = 0 %}
+            {% endif %}
+        {% endif %}
+
+        <li class="o-list__item c-i-cards__item c-i-card" data-total-images="{{ totalImages }}">
+            {% if block.settings.image_1 %}
+                <figure class="c-i-card__image-box c-i-card__image-box--1">
+                    <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt }}" class="c-i-card__image">
+                </figure>
+            {% endif %}
+
+            {% if block.settings.image_2 %}
+                <figure class="c-i-card__image-box c-i-card__image-box--2">
+                    <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt }}" class="c-i-card__image">
+                </figure>
+            {% endif %}
+
+            <div class="c-i-card__copy">
+
+                {% if block.settings.subtitle %}
+                    <h3 class="c-i-card__subtitle">{{ block.settings.subtitle }}</h3>
+                {% endif %}
+
+                {% if block.settings.title %}
+                    <h2 class="c-i-card__title">{{ block.settings.title }}</h2>
+                {% endif %}
+
+                {% if block.settings.description %}
+                    <div class="c-i-card__description">{{ block.settings.description }}</div>
+                {% endif %}
+
+                {% if block.settings.button_url and block.settings.button_title %}
+                    <a href="{{ block.settings.button_url }}" class="o-button">{{ block.settings.button_title }}</a>
+                {% endif %}
+
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+{% schema %}
+{
+    "name": "Image cards",
+    "tag": "section",
+    "class": "o-section c-image-cards",
+    "blocks": [
+        {
+            "name": "Card",
+            "type": "slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image_1",
+                    "label": "Image 1"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image_2",
+                    "label": "Image 2"
+                },
+                {
+                    "type": "text",
+                    "id": "subtitle",
+                    "label": "Subtitle"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "description",
+                    "label": "Description"
+                },
+                {
+                    "type": "text",
+                    "id": "button_title",
+                    "label": "Button title"
+                },
+                {
+                    "type": "url",
+                    "id": "button_url",
+                    "label": "Button URL"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Image cards"
+        }
+    ]
+}
+{% endschema %}
