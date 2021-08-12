@@ -12,6 +12,7 @@
 .c-products__list {
   display: grid;
   grid-auto-flow: column;
+  padding-bottom: 2rem;
 }
 
 .c-products__item {
@@ -21,6 +22,8 @@
 .c-product__button {
   display: grid;
   grid-auto-flow: row;
+  padding: 1rem;
+  font-size: 0.7rem;
 }
 
 .c-product__image {
@@ -30,4 +33,23 @@
 }
 
 .c-product__title {
+  justify-content: center;
+}
+
+.c-product__title-icon {
+  height: 1rem;
+}
+
+.c-product__button:not(:hover):not(:focus) .c-product__title-icon {
+  opacity: 0;
+}
+
+.c-product__button:hover .c-product__title-text,
+.c-product__button:focus .c-product__title-text {
+  color: var(--color-text-focus);
+}
+
+.c-product__button:hover .c-product__title-icon,
+.c-product__button:focus .c-product__title-icon {
+  opacity: var(--opacity-icon-focus);
 }

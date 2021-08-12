@@ -13,14 +13,14 @@ class DragSlider {
     this.isDown = true;
     setTimeout(() => {
       this.sliderElement.classList.add("is-active");
-    }, 100);
+    }, 200);
   }
 
   _deactivateDrag() {
     this.isDown = false;
     setTimeout(() => {
       this.sliderElement.classList.remove("is-active");
-    }, 100);
+    }, 200);
   }
 
   applyListeners() {

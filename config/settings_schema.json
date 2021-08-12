@@ -79,6 +79,12 @@
       },
       {
         "type": "color",
+        "id": "color_text_2",
+        "label": "Text color 2",
+        "default": "#767676"
+      },
+      {
+        "type": "color",
         "id": "color_text_bg",
         "label": "Text background color",
         "default": "#FFFFFF"

@@ -51,18 +51,19 @@ body > div:not([class]) {
 .o-button:hover,
 .o-button:focus {
   color: var(--color-text-focus);
+  border-color: var(--color-text-focus);
 }
 
 .o-button:hover .o-button__icon,
 .o-button:focus .o-button__icon {
-  opacity: 0.64;
+  opacity: var(--opacity-icon-focus);
 }
 
 .c-arrow-icon {
   height: 1em;
 }
 
-.c-text-caps,
+.u-text-caps,
 .s-announcement-richtext p,
 .s-announcement-richtext a {
   font-family: var(--font-2);
@@ -115,4 +116,16 @@ body > div:not([class]) {
 
 .u-scroll-hor::-webkit-scrollbar {
   height: 0.25rem;
+}
+
+.u-truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.u-truncate--2 {
+  -webkit-line-clamp: 2;
 }
