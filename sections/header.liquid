@@ -16,7 +16,7 @@
         <ul class="o-list c-header__desktop-list c-header__center-list">
             {% for link in linklists.main-menu.links %}
                 <li class="o-list__item">
-                    <a class="o-button" href="{{ link.url }}">{{ link.title }}</a>
+                    <a class="o-button c-header__button" href="{{ link.url }}">{{ link.title }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -24,24 +24,28 @@
     <div class="c-header__right">
         <ul class="o-list c-header__desktop-list c-header__right-list">
             <li class="o-list__item">
-                <button class="o-button" type="button" title="{{ 'sections.search.title' | t }}">
+                <a class="o-button c-header__button" href="{{ routes.search_url }}" title="{{ 'sections.search.title' | t }}">
                     <img class="o-image o-button__icon c-header__icon c-header__icon--search" src="{{ 'icon.search.svg' | asset_url }}" alt="{{ 'sections.search.title' | t }}" height="11"/>
-                </button>
+                    <img class="o-image o-button__icon c-header__icon--alt c-header__icon--search" src="{{ 'icon.search-white.svg' | asset_url }}" alt="{{ 'sections.search.title' | t }}" height="11"/>
+                </a>
             </li>
             <li class="o-list__item">
                 {% if customer.has_account %}
-                    <a href="{{ routes.account_url }}" class="o-button" title="{{ 'templates.account.title' | t }}">
+                    <a href="{{ routes.account_url }}" class="o-button c-header__button" title="{{ 'templates.account.title' | t }}">
                         <img class="o-image o-button__icon c-header__icon" src="{{ 'icon.user.svg' | asset_url }}" alt="{{ 'templates.account.title' | t }}" height="11"/>
+                        <img class="o-image o-button__icon c-header__icon--alt" src="{{ 'icon.user-white.svg' | asset_url }}" alt="{{ 'templates.account.title' | t }}" height="11"/>
                     </a>
                 {% else %}
-                    <a href="{{ routes.account_login_url }}" class="o-button" title="{{ 'templates.login.title' | t }}">
+                    <a href="{{ routes.account_login_url }}" class="o-button c-header__button" title="{{ 'templates.login.title' | t }}">
                         <img class="o-image o-button__icon c-header__icon" src="{{ 'icon.user.svg' | asset_url }}" alt="{{ 'templates.login.title' | t }}" height="11"/>
+                        <img class="o-image o-button__icon c-header__icon--alt" src="{{ 'icon.user-white.svg' | asset_url }}" alt="{{ 'templates.login.title' | t }}" height="11"/>
                     </a>
                 {% endif %}
             </li>
             <li class="o-list__item">
-                <a href="{{ routes.cart_url }}" class="o-button" title="{{ 'templates.cart.title' | t }}">
+                <a href="{{ routes.cart_url }}" class="o-button c-header__button" title="{{ 'templates.cart.title' | t }}">
                     <img class="o-image o-button__icon c-header__icon" src="{{ 'icon.bag.svg' | asset_url }}" alt="{{ 'templates.cart.title' | t }}" height="11"/>
+                    <img class="o-image o-button__icon c-header__icon--alt" src="{{ 'icon.bag-white.svg' | asset_url }}" alt="{{ 'templates.cart.title' | t }}" height="11"/>
                 </a>
             </li>
         </ul>

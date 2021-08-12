@@ -118,6 +118,18 @@
         "id": "color_accent_1",
         "label": "Accent color 1",
         "default": "#C2A578"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success color",
+        "default": "#76a51c"
+      },
+      {
+        "type": "color",
+        "id": "color_fail",
+        "label": "Fail color",
+        "default": "#bb3838"
       }
     ]
   }
