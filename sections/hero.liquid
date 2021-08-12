@@ -10,14 +10,14 @@
     {% if section.settings.button_title and section.settings.button_url %}
         <a href="{{ section.settings.button_url }}" class="o-button c-hero__cta">
             <span class="o-text">{{ section.settings.button_title }}</span>
-            <img src="{{ 'icon.arrow-right-white.svg' | asset_url }}" alt="{{ section.settings.button_title }}" class="o-image c-arrow-icon" height="9"/>
+            <img src="{{ 'icon.arrow-right-white.svg' | asset_url }}" alt="{{ section.settings.button_title }}" class="o-image c-arrow-icon" width="17" width="17" height="9"/>
         </a>
     {% endif %}
 
 </div>
 <div class="c-hero__background-box">
     {% if section.settings.background_image %}
-        <img class="c-hero__background-image" src="{{ section.settings.background_image | img_url: '1920x1080' }}" alt="{{ section.settings.title }}" loading="lazy"/>
+        <img class="c-hero__background-image" src="{{ section.settings.background_image | img_url: '1920x1080' }}" alt="{{ section.settings.title }}" width="960" height="540" loading="lazy"/>
     {% endif %}
 </div>
 

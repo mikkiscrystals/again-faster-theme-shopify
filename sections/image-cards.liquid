@@ -15,7 +15,7 @@
             <div class="c-i-card__block">
                 {% if block.settings.image_1 %}
                     <figure class="c-i-card__image-box c-i-card__image-box--1">
-                        <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt }}" class="c-i-card__image" loading="lazy"/>
+                        <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt }}" class="c-i-card__image" loading="lazy" width="1024" height="1024"/>
                     </figure>
                 {% endif %}
             </div>
@@ -24,7 +24,7 @@
 
                 {% if block.settings.image_2 %}
                     <figure class="c-i-card__image-box c-i-card__image-box--2">
-                        <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt }}" class="c-i-card__image" loading="lazy"/>
+                        <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt }}" width="1024" height="1024" class="c-i-card__image" loading="lazy"/>
                     </figure>
                 {% endif %}
 

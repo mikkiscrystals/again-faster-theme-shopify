@@ -1,3 +1,10 @@
+{% if settings.announcement != blank %}
+    {% assign hasAnnouncement = true %}
+{% else %}
+    {% assign hasAnnouncement = false %}
+{% endif %}
+
+
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
 
@@ -6,7 +13,7 @@
         {% include 'head' %}
     </head>
 
-    <body class="s-template-{{ template.name }}">
+    <body class="s-template-{{ template.name }}" data-has-announcement="{{ hasAnnouncement }}">
 
         <div class="c-page-top">
 

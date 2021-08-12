@@ -6,22 +6,22 @@
     <ul class="o-list c-socials">
         {% if settings.facebook %}
             <li class="o-list">
-                <a href="{{ settings.facebook }}" target="_blank" class="o-button c-socials__button">
-                    <img src="{{ 'icon.fb.svg' | asset_url }}" alt="" class="c-socials__icon o-image o-button__icon" height="12" loading="lazy"/>
+                <a href="{{ settings.facebook }}" target="_blank" class="o-button c-socials__button" rel="noopener noreferrer">
+                    <img src="{{ 'icon.fb.svg' | asset_url }}" alt="Facebook" class="c-socials__icon o-image o-button__icon" width="12" height="12" loading="lazy"/>
                 </a>
             </li>
         {% endif %}
         {% if settings.instagram %}
             <li class="o-list">
-                <a href="{{ settings.instagram }}" target="_blank" class="o-button c-socials__button">
-                    <img src="{{ 'icon.inst.svg' | asset_url }}" alt="" class="c-socials__icon o-image o-button__icon" height="12" loading="lazy"/>
+                <a href="{{ settings.instagram }}" target="_blank" class="o-button c-socials__button" rel="noopener noreferrer">
+                    <img src="{{ 'icon.inst.svg' | asset_url }}" alt="Instagram" class="c-socials__icon o-image o-button__icon" width="12" height="12" loading="lazy"/>
                 </a>
             </li>
         {% endif %}
         {% if settings.email %}
             <li class="o-list">
                 <a class="o-button c-socials__button" href="mailto:{{ settings.email }}">
-                    <img src="{{ 'icon.mail.svg' | asset_url }}" alt="" class="c-socials__icon o-image o-button__icon" height="12" loading="lazy"/>
+                    <img src="{{ 'icon.mail.svg' | asset_url }}" alt="E-mail" class="c-socials__icon o-image o-button__icon" width="12" height="12" loading="lazy"/>
                 </a>
             </li>
         {% endif %}
