@@ -15,7 +15,7 @@
             <div class="c-i-card__block">
                 {% if block.settings.image_1 %}
                     <figure class="c-i-card__image-box c-i-card__image-box--1">
-                        <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt }}" class="c-i-card__image">
+                        <img src="{{ block.settings.image_1 | img_url: '1024x1024' }}" alt="{{ block.settings.image_1.alt }}" class="c-i-card__image" loading="lazy"/>
                     </figure>
                 {% endif %}
             </div>
@@ -24,30 +24,30 @@
 
                 {% if block.settings.image_2 %}
                     <figure class="c-i-card__image-box c-i-card__image-box--2">
-                        <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt }}" class="c-i-card__image">
+                        <img src="{{ block.settings.image_2 | img_url: '1024x1024' }}" alt="{{ block.settings.image_2.alt }}" class="c-i-card__image" loading="lazy"/>
                     </figure>
                 {% endif %}
-    
+
                 <div class="c-i-card__copy">
-    
+
                     {% if block.settings.subtitle %}
                         <h3 class="c-i-card__subtitle u-text-caps">{{ block.settings.subtitle }}</h3>
                     {% endif %}
-    
+
                     {% if block.settings.title %}
                         <h2 class="c-i-card__title">{{ block.settings.title }}</h2>
                     {% endif %}
-    
+
                     {% if block.settings.description %}
                         <div class="c-i-card__description">{{ block.settings.description }}</div>
                     {% endif %}
-    
+
                     {% if block.settings.button_url and block.settings.button_title %}
                         <a href="{{ block.settings.button_url }}" class="o-button c-i-card__button">{{ block.settings.button_title }}</a>
                     {% endif %}
-    
+
                 </div>
-                
+
             </div>
         </li>
     {% endfor %}

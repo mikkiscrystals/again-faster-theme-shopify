@@ -6,13 +6,13 @@
                     <li class="o-list__item c-products__item c-product">
                         <a href="{{ product.url }}" title="{{ product.title }}" class="o-button c-product__button">
                             {% if product.featured_image %}
-                                <img src="{{ product.featured_image | img_url: '480x480' }}" alt="{{ product.title }}" class="o-image c-product__image"/>
+                                <img src="{{ product.featured_image | img_url: '480x480' }}" alt="{{ product.title }}" class="o-image c-product__image" loading="lazy"/>
                             {% else %}
                                 {{ 'image' | placeholder_svg_tag: 'o-image c-product__image' }}
                             {% endif %}
                             <h3 class="o-button c-product__title u-text-caps">
                                 <span class="o-text c-arrow-icon u-smooth c-product__title-text u-truncate">{{ product.title }}</span>
-                                <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" height="9" class="o-image  u-smooth c-product__title-icon o-button__icon">
+                                <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" height="9" class="o-image  u-smooth c-product__title-icon o-button__icon" loading="lazy"/>
                             </h3>
                         </a>
                     </li>
