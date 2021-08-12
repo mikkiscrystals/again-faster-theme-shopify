@@ -85,6 +85,12 @@
       },
       {
         "type": "color",
+        "id": "color_text_3",
+        "label": "Text color 3",
+        "default": "#C4C4C4"
+      },
+      {
+        "type": "color",
         "id": "color_text_bg",
         "label": "Text background color",
         "default": "#FFFFFF"
@@ -100,6 +106,12 @@
         "id": "color_bg_1",
         "label": "Text background 1",
         "default": "#FBFBFB"
+      },
+      {
+        "type": "color",
+        "id": "color_bg_2",
+        "label": "Text background 2",
+        "default": "#F1F1F1"
       },
       {
         "type": "color",

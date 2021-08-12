@@ -4,22 +4,22 @@
     <ul class="o-list c-socials">
         {% if settings.facebook %}
             <li class="o-list">
-                <a href="{{ settings.facebook }}" class="o-button">
-                    <img src="{{ 'icon.fb.svg' | asset_url }}" alt="" class="o-image" height="12">
+                <a href="{{ settings.facebook }}" class="o-button c-socials__button">
+                    <img src="{{ 'icon.fb.svg' | asset_url }}" alt="" class="c-socials__icon o-image o-button__icon" height="12">
                 </a>
             </li>
         {% endif %}
         {% if settings.instagram %}
             <li class="o-list">
-                <a href="{{ settings.instagram }}" class="o-button">
-                    <img src="{{ 'icon.inst.svg' | asset_url }}" alt="" class="o-image" height="12">
+                <a href="{{ settings.instagram }}" class="o-button c-socials__button">
+                    <img src="{{ 'icon.inst.svg' | asset_url }}" alt="" class="c-socials__icon o-image o-button__icon" height="12">
                 </a>
             </li>
         {% endif %}
         {% if settings.email %}
             <li class="o-list">
-                <a class="o-button" href="mailto:{{ settings.email }}">
-                    <img src="{{ 'icon.mail.svg' | asset_url }}" alt="" class="o-image" height="12">
+                <a class="o-button c-socials__button" href="mailto:{{ settings.email }}">
+                    <img src="{{ 'icon.mail.svg' | asset_url }}" alt="" class="c-socials__icon o-image o-button__icon" height="12">
                 </a>
             </li>
         {% endif %}
@@ -27,14 +27,14 @@
 </div>
 
 <div class="c-footer__links">
-    <ul class="o-list">
+    <ul class="o-list c-footer__list">
         {% for link in linklists.footer.links %}
-            <li class="o-list__item">
-                <a href="{{ link.url }}" class="o-button">{{ link.title }}</a>
-                <ul class="o-list o-list--dropdown">
+            <li class="o-list__item c-footer__list-item">
+                <a href="{{ link.url }}" class="o-button c-footer__list__button">{{ link.title }}</a>
+                <ul class="o-list c-footer__list-nested-1">
                     {% for link in link.links %}
-                        <li class="o-list__item">
-                            <a href="{{ link.url }}" class="o-button">{{ link.title }}</a>
+                        <li class="o-list__item c-footer__list-nested-1__item">
+                            <a href="{{ link.url }}" class="o-button c-footer__list__button-nested-1">{{ link.title }}</a>
                         </li>
                     {% endfor %}
                 </ul>
