@@ -26,4 +26,6 @@
 {{ 'style.section.hero.css' | asset_url | stylesheet_tag }}
 {{ 'style.section.image-cards.css' | asset_url | stylesheet_tag }}
 
-{{ 'script.global.js' | asset_url | script_tag }}
+<script src="{{ 'script.classes.js' | asset_url }}" type="text/javascript" defer></script>
+<script src="{{ 'script.global.js' | asset_url }}" type="text/javascript" defer></script>
+<script src="{{ 'script.section.featured-collections.js' | asset_url }}" type="text/javascript" defer></script>

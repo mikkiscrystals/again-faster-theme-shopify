@@ -1,0 +1,33 @@
+.c-collections {
+  display: grid;
+  grid-auto-flow: row;
+  padding-left: var(--side-distance-1);
+  padding-right: var(--side-distance-1);
+}
+
+.c-products {
+  overflow-x: auto;
+}
+
+.c-products__list {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.c-products__item {
+  width: calc((100vw - (var(--side-distance-1) * 2)) / 4);
+}
+
+.c-product__button {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.c-product__image {
+  width: 100%;
+  height: calc((100vw - (var(--side-distance-1) * 2)) / 4);
+  object-fit: cover;
+}
+
+.c-product__title {
+}

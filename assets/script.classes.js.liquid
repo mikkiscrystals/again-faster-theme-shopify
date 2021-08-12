@@ -1,0 +1,49 @@
+class DragSlider {
+  sliderElement;
+  isDown = false;
+  startX;
+  scrollLeft;
+
+  constructor(element) {
+    this.sliderElement = element;
+    this.applyListeners();
+  }
+
+  _activateDrag() {
+    this.isDown = true;
+    setTimeout(() => {
+      this.sliderElement.classList.add("is-active");
+    }, 100);
+  }
+
+  _deactivateDrag() {
+    this.isDown = false;
+    setTimeout(() => {
+      this.sliderElement.classList.remove("is-active");
+    }, 100);
+  }
+
+  applyListeners() {
+    this.sliderElement.addEventListener("mousedown", (e) => {
+      this._activateDrag();
+      this.startX = e.pageX - this.sliderElement.offsetLeft;
+      this.scrollLeft = this.sliderElement.scrollLeft;
+    });
+
+    this.sliderElement.addEventListener("mouseleave", () => {
+      this._deactivateDrag();
+    });
+
+    this.sliderElement.addEventListener("mouseup", () => {
+      this._deactivateDrag();
+    });
+
+    this.sliderElement.addEventListener("mousemove", (e) => {
+      if (!this.isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.sliderElement.offsetLeft;
+      const walk = (x - this.startX) * 3;
+      this.sliderElement.scrollLeft = this.scrollLeft - walk;
+    });
+  }
+}

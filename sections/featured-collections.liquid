@@ -1,16 +1,16 @@
 <ul class="o-list c-collections">
     {% for block in section.blocks %}
-        <li class="o-list__item c-collections__item">
-            <ul class="o-list c-products">
+        <li class="o-list__item c-collections__item c-products u-scroll-hor js-drag-slider">
+            <ul class="o-list c-products__list">
                 {% for product in block.settings.collection.products %}
                     <li class="o-list__item c-products__item c-product">
                         <a href="{{ product.url }}" title="{{ product.title }}" class="o-button c-product__button">
                             {% if product.featured_image %}
-                                <img src="{{ product.featured_image | img_url: '340x340' }}" alt="{{ product.title }}" class="o-image c-product__image"/>
+                                <img src="{{ product.featured_image | img_url: '480x480' }}" alt="{{ product.title }}" class="o-image c-product__image"/>
                             {% else %}
                                 {{ 'image' | placeholder_svg_tag: 'o-image c-product__image' }}
                             {% endif %}
-                            <h3 class="c-product__title">
+                            <h3 class="c-product__title c-text-caps">
                                 <span class="o-text">{{ product.title }}</span>
                                 <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" height="9" class="o-image">
                             </h3>

@@ -53,6 +53,66 @@ body > div:not([class]) {
   color: var(--color-text-focus);
 }
 
+.o-button:hover .o-button__icon,
+.o-button:focus .o-button__icon {
+  opacity: 0.64;
+}
+
 .c-arrow-icon {
   height: 1em;
+}
+
+.c-text-caps,
+.s-announcement-richtext p,
+.s-announcement-richtext a {
+  font-family: var(--font-2);
+  font-weight: var(--font-2-weight);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.u-smooth,
+.o-button__icon {
+  transition: color 0.3s ease, border-width 0.3s ease, border-color 0.3s ease,
+    background-color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.js-drag-slider,
+.js-drag-slider a,
+.js-drag-slider button {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.js-drag-slider.is-active a {
+  pointer-events: none;
+}
+
+.u-scroll-ver,
+.u-scroll-hor {
+  will-change: transform;
+  -webkit-overflow-scrolling: touch;
+}
+
+.u-scroll-ver::-webkit-scrollbar-track,
+.u-scroll-hor::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 0%, 0.09);
+}
+
+.u-scroll-ver::-webkit-scrollbar-thumb,
+.u-scroll-hor::-webkit-scrollbar-thumb {
+  background: hsla(0, 0%, 0%, 0.72);
+}
+
+.u-scroll-ver::-webkit-scrollbar-thumb:hover,
+.u-scroll-hor::-webkit-scrollbar-thumb:hover {
+  background: hsla(0, 0%, 0%, 0.96);
+}
+
+.u-scroll-ver::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.u-scroll-hor::-webkit-scrollbar {
+  height: 0.25rem;
 }
