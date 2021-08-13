@@ -1,23 +1,7 @@
 <ul class="o-list c-collections">
     {% for block in section.blocks %}
-        <li class="o-list__item c-collections__item c-products u-scroll-hor js-drag-slider">
-            <ul class="o-list c-products__list">
-                {% for product in block.settings.collection.products %}
-                    <li class="o-list__item c-products__item c-product">
-                        <a href="{{ product.url }}" title="{{ product.title }}" class="o-button c-product__button">
-                            {% if product.featured_image %}
-                                <img src="{{ product.featured_image | img_url: '480x480' }}" alt="{{ product.title }}" class="o-image c-product__image" loading="lazy" width="480" height="480"/>
-                            {% else %}
-                                {{ 'image' | placeholder_svg_tag: 'o-image c-product__image' }}
-                            {% endif %}
-                            <h3 class="o-button c-product__title u-text-caps">
-                                <span class="o-text c-arrow-icon u-smooth c-product__title-text u-truncate">{{ product.title }}</span>
-                                <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" width="17" height="9" class="o-image  u-smooth c-product__title-icon o-button__icon" loading="lazy"/>
-                            </h3>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
+        <li class="o-list__item c-collections__item c-products c-products--hor-scroll u-scroll-hor js-drag-slider">
+            {% render 'products-list' with products: block.settings.collection.products %}
         </li>
     {% endfor %}
 </ul>

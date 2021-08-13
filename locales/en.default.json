@@ -38,6 +38,10 @@
           "success": "You are subscribed to our newsletter"
         }
       }
+    },
+    "pagination": {
+      "prev": "Previous page",
+      "next": "Next page"
     }
   }
 }

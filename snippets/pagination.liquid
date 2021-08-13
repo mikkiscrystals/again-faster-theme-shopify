@@ -1,0 +1,21 @@
+<nav class="c-pagination">
+    <ul class="o-list c-pagination__list">
+
+        {% if paginate.previous.is_link %}
+            <li class="o-list__item c-pagination__list-item">
+                <a href="{{ paginate.previous.url }}" title="{{ 'snippets.pagination.prev' | t }}ks" class="o-button c-pagination__button">
+                    <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="{{ 'snippets.pagination.prev' | t }}" class="o-image c-arrow-icon c-arrow-icon--reverse o-button__icon" width="17" width="17" height="9"/>
+                </a>
+            </li>
+        {% endif %}
+
+        {% if paginate.next.is_link %}
+            <li class="o-list__item c-pagination__list-item">
+                <a href="{{ paginate.next.url }}" title="{{ 'snippets.pagination.next' | t }}" class="o-button c-pagination__button">
+                    <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="{{ 'snippets.pagination.next' | t }}" class="o-image c-arrow-icon o-button__icon" width="17" width="17" height="9"/>
+                </a>
+            </li>
+        {% endif %}
+
+    </ul>
+</nav>

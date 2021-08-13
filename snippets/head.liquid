@@ -21,16 +21,19 @@
 <!---- fonts -->
 <link rel="preload" as="font" href="{{ 'font.arca-majora-3-bold.woff' | asset_url }}" type="font/woff2">
 <link rel="preload" as="style" href="{{ 'font.arca-majora-3.css' | asset_url }}" >
-<!---</temp>- styles -->
+<!---</temp></temp></temp></temp>- styles -->
 <link rel="preload" as="style" href="{{ 'style.reset.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.global.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.form.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.snippet.form-subscription.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'style.snippet.products-list.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'style.snippet.pagination.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.section.header.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.section.footer.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.section.search.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.section.featured-collections.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.section.hero.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'style.section.collection.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.section.image-cards.css' | asset_url }}">
 <!---- scripts -->
 <link rel="preload" as="script" href="{{ 'script.classes.js' | asset_url }}">
@@ -51,6 +54,8 @@
 {{ 'style.form.css' | asset_url | stylesheet_tag }}
 
 {{ 'style.snippet.form-subscription.css' | asset_url | stylesheet_tag }}
+{{ 'style.snippet.products-list.css' | asset_url | stylesheet_tag }}
+{{ 'style.snippet.pagination.css' | asset_url | stylesheet_tag }}
 
 {{ 'style.section.header.css' | asset_url | stylesheet_tag }}
 {{ 'style.section.footer.css' | asset_url | stylesheet_tag }}
@@ -58,6 +63,7 @@
 
 {{ 'style.section.featured-collections.css' | asset_url | stylesheet_tag }}
 {{ 'style.section.hero.css' | asset_url | stylesheet_tag }}
+{{ 'style.section.collection.css' | asset_url | stylesheet_tag }}
 {{ 'style.section.image-cards.css' | asset_url | stylesheet_tag }}
 
 {% case template.name %}

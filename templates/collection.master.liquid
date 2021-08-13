@@ -1,0 +1,46 @@
+<div class="c-collection c-collection--master">
+
+    <div class="c-collection-hero">
+
+        <div class="c-collection-hero__copy">
+            {% if collection.metafields.accentuate.eyebrow %}
+                <p class="c-collection-hero__eyebrow u-text-caps">{{ collection.metafields.accentuate.eyebrow }}</p>
+            {% endif %}
+
+            {% if collection.metafields.accentuate.title %}
+                <h1 class="c-collection-hero__title">{{ collection.metafields.accentuate.title }}</h1>
+            {% endif %}
+
+            {% if collection.metafields.accentuate.button_label and collection.metafields.accentuate.button_url %}
+                <a href="{{ collection.metafields.accentuate.button_url }}" class="o-button c-collection-hero__cta">
+                    <span class="o-text">{{ collection.metafields.accentuate.button_label }}</span>
+                    <img src="{{ 'icon.arrow-right-white.svg' | asset_url }}" alt="{{ collection.metafields.accentuate.button_label }}" class="o-image c-arrow-icon" width="17" width="17" height="9"/>
+                </a>
+            {% endif %}
+        </div>
+
+        <figure class="c-collection-hero__images">
+
+            {% assign image1 = collection.metafields.accentuate.image_1 | first %}
+            {% if image1 %}
+                <img src="{{ image1.src }}" width="{{ image1.width }}" height="{{ image1.height }}" alt="{{ image1.alt }}" class="c-collection-hero__image c-collection-hero__image--1" loading="lazy"/>
+            {% endif %}
+
+            {% assign image2 = collection.metafields.accentuate.image_2 | first %}
+            {% if image2 %}
+                <img src="{{ image2.src }}" width="{{ image2.width }}" height="{{ image2.height }}" alt="{{ image2.alt }}" class="c-collection-hero__image c-collection-hero__image--2" loading="lazy"/>
+            {% endif %}
+
+        </figure>
+
+    </div>
+
+    {% paginate collection.products by 8 %}
+
+        {% render 'products-list' with products: collection.products %}
+
+        {% render 'pagination' with paginate: paginate %}
+
+    {% endpaginate %}
+
+</div>
