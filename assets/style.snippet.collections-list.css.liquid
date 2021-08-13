@@ -1,0 +1,43 @@
+.c-collections__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.c-collection__button {
+  display: grid;
+  grid-auto-flow: row;
+  padding: 1rem;
+  font-size: 0.7rem;
+}
+
+.c-collection__image {
+  width: 100%;
+  height: calc((100vw - (var(--side-distance-1) * 2)) / 4);
+  object-fit: cover;
+}
+
+.c-collection__title {
+  justify-content: center;
+}
+
+.c-collection__title-icon {
+  height: 1rem;
+}
+
+.c-collection__button:not(:hover):not(:focus) .c-collection__title-icon {
+  opacity: 0;
+}
+
+.c-collection__title-text {
+  min-height: 1rem;
+}
+
+.c-collection__button:hover .c-collection__title-text,
+.c-collection__button:focus .c-collection__title-text {
+  color: var(--color-text-focus);
+}
+
+.c-collection__button:hover .c-collection__title-icon,
+.c-collection__button:focus .c-collection__title-icon {
+  opacity: var(--opacity-icon-focus);
+}

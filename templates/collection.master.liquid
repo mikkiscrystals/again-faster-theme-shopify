@@ -37,15 +37,14 @@
 
     {% assign collectionNames = collection.metafields.accentuate.subcollections | split: '|' %}
 
-    {% for collectionName in collectionNames %}
+    <ul class="o-list c-collections__list">
 
-        {% paginate collections.[collectionName].products by 8 %}
+        {% for collectionName in collectionNames %}
 
-            {% render 'products-list' with products: collections[collectionName].products %}
+            {% render 'collections-list-item' with collectionItem: collections[collectionName] %}
 
-        {% endpaginate %}
-
-    {% endfor %}
+        {% endfor %}
+    </ul>
 
 
 </div>

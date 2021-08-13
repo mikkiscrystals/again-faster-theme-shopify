@@ -1,10 +1,10 @@
-<ul class="o-list c-collections">
-    {% for block in section.blocks %}
-        <li class="o-list__item c-collections__item c-products c-products--hor-scroll u-scroll-hor js-drag-slider">
-            {% render 'products-list' with products: block.settings.collection.products %}
-        </li>
-    {% endfor %}
-</ul>
+<div class="c-collections">
+    <ul class="o-list c-collections__list c-collections__list--hor-scroll u-scroll-hor js-drag-slider">
+        {% for block in section.blocks %}
+            {% render 'collections-list-item' with collectionItem: block.settings.collection %}
+        {% endfor %}
+    </ul>
+</div>
 
 {% schema %}
 {

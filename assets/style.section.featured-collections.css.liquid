@@ -5,15 +5,12 @@
   padding-right: var(--side-distance-1);
 }
 
-.c-products {
+.c-collections__list--hor-scroll {
+  padding-bottom: 2rem;
+  grid-auto-flow: column;
   overflow-x: auto;
 }
 
-.c-products--hor-scroll .c-products__list {
-  padding-bottom: 2rem;
-  grid-auto-flow: column;
-}
-
-.c-products--hor-scroll .c-products__item {
+.c-collections__list--hor-scroll .c-collections__item {
   width: calc((100vw - (var(--side-distance-1) * 2)) / 4);
 }
