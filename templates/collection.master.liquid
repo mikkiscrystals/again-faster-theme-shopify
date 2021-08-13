@@ -8,13 +8,13 @@
             {% endif %}
 
             {% if collection.metafields.accentuate.title %}
-                <h1 class="c-collection-hero__title">{{ collection.metafields.accentuate.title }}</h1>
+                <h1 class="c-collection-hero__title c-title-1">{{ collection.metafields.accentuate.title }}</h1>
             {% endif %}
 
             {% if collection.metafields.accentuate.button_label and collection.metafields.accentuate.button_url %}
-                <a href="{{ collection.metafields.accentuate.button_url }}" class="o-button c-collection-hero__cta">
+                <a href="{{ collection.metafields.accentuate.button_url }}" class="o-button c-collection-hero__cta c-cta-1">
                     <span class="o-text">{{ collection.metafields.accentuate.button_label }}</span>
-                    <img src="{{ 'icon.arrow-right-white.svg' | asset_url }}" alt="{{ collection.metafields.accentuate.button_label }}" class="o-image c-arrow-icon" width="17" width="17" height="9"/>
+                    <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="{{ collection.metafields.accentuate.button_label }}" class="o-image c-arrow-icon" width="17" width="17" height="9"/>
                 </a>
             {% endif %}
         </div>

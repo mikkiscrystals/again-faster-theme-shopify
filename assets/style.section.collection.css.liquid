@@ -3,3 +3,59 @@
   grid-auto-flow: row;
   gap: var(--side-distance-1);
 }
+
+.c-collection-hero {
+  display: grid;
+  grid-template-columns: 6fr 7fr;
+  gap: var(--side-distance-2);
+  padding-left: var(--side-distance-1);
+  padding-right: var(--side-distance-1);
+}
+
+.c-collection-hero__copy {
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--side-distance-1);
+  align-items: center;
+  align-content: center;
+  justify-content: start;
+  justify-items: start;
+}
+
+.c-collection-hero__title {
+  line-height: 1.5;
+  font-size: 2.2em;
+}
+
+.c-collection-hero__cta {
+  font-size: 0.84em;
+}
+
+.c-collection-hero__images {
+  height: 90vh;
+  width: 100%;
+  position: relative;
+}
+
+.c-collection-hero__image {
+  position: absolute;
+  object-fit: cover;
+}
+
+.c-collection-hero__image--1 {
+  top: 0;
+  left: 0;
+  width: calc(100% - (var(--side-distance-4) * 2));
+  height: calc(100% - var(--side-distance-3));
+}
+
+.c-collection-hero__image--2 {
+  bottom: 0;
+  right: 0;
+  width: calc(var(--side-distance-4) * 3);
+  height: calc(var(--side-distance-4) * 4);
+}
+
+.c-collection .c-pagination {
+  margin-top: var(--side-distance-1);
+}
