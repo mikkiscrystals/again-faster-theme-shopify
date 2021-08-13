@@ -35,12 +35,17 @@
 
     </div>
 
-    {% paginate collection.products by 8 %}
+    {% assign collectionNames = collection.metafields.accentuate.subcollections | split: '|' %}
 
-        {% render 'products-list' with products: collection.products %}
+    {% for collectionName in collectionNames %}
 
-        {% render 'pagination' with paginate: paginate %}
+        {% paginate collections.[collectionName].products by 8 %}
 
-    {% endpaginate %}
+            {% render 'products-list' with products: collections[collectionName].products %}
+
+        {% endpaginate %}
+
+    {% endfor %}
+
 
 </div>
