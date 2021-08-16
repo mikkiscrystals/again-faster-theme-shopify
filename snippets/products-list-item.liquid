@@ -3,8 +3,15 @@
 {% assign hasFreeShipping = false %}
 {% assign isBestseller = false %}
 {% assign canBePreOrdered = false %}
+{% assign rating = productItem.metafields.accentuate.rating | plus: 0 %}
 
-{% if productItem.compare_at_price_min <= 0 %}
+{% for tag in productItem.tags %}
+    {% if tag contains 'Bestseller' %}
+        {% assign isBestseller = true %}
+    {% endif %}
+{% endfor %}
+
+{% if productItem.compare_at_price_min > 0 %}
     {% assign isInSale = true %}
 {% endif %}
 
@@ -57,6 +64,17 @@
                 <span class="o-text c-arrow-icon u-smooth c-product-item__title-text u-truncate">{{ productItem.title }}</span>
                 <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" width="17" height="9" class="o-image  u-smooth c-product-item__title-icon o-button__icon" loading="lazy"/>
             </h3>
+            {% if rating > 0 %}
+                <div class="c-product-item__rating c-rating">
+                    {% for num in (1..5) %}
+                        {% if num <= rating %}
+                            <img class="c-rating__star c-rating__star--active" src="{{ 'icon.star.svg' | asset_url }}" width="16" height="16" />
+                        {% else %}
+                            <img class="c-rating__star c-rating__star--inactive" src="{{ 'icon.star-inactive.svg' | asset_url }}" width="16" height="16" />    
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class="c-product-item__prices u-text-caps">
                 {% if isInSale %}
                     <p class="c-product-item__price--old">
