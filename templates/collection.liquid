@@ -1,4 +1,27 @@
-{% paginate collection.products by 2 %}
+{% paginate collection.products by 18 %}
+
+    <div class="c-collection">
+
+        <div class="c-collection__header">
+            <h1 class="c-collection__title c-title-1">{{ collection.title }}</h1>
+            {% section 'collection-tabs' %}
+        </div>
+
+        <div class="c-collection__content c-products">
+            <ul class="o-list c-products__list">
+                {% for product in collection.products %}
+                    {% render 'products-list-item' with productItem: product %}
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    {% render 'pagination' with paginate: paginate %}
+
+{% endpaginate %}
+
+<!-- {% paginate collection.products by 2 %}
     <h1>{{ collection.title }}</h1>
     {% for product in collection.products %}
         <div>
@@ -16,4 +39,4 @@
     {% if paginate.pages > 1 %}
         {{ paginate | default_pagination }}
     {% endif %}
-{% endpaginate %}
+{% endpaginate %} -->

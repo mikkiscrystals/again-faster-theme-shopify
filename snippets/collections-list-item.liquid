@@ -1,13 +1,13 @@
-<li class="o-list__item c-collections__item c-collection">
-    <a href="{{ collectionItem.url }}" title="{{ collectionItem.title }}" class="o-button c-collection__button">
+<li class="o-list__item c-collections__item c-collection-item">
+    <a href="{{ collectionItem.url }}" title="{{ collectionItem.title }}" class="o-button c-collection-item__button">
         {% if collectionItem.featured_image %}
-            <img src="{{ collectionItem.featured_image | img_url: '480x480' }}" alt="{{ collectionItem.title }}" class="o-image c-collection__image" loading="lazy" width="480" height="480"/>
+            <img src="{{ collectionItem.featured_image | img_url: '480x480' }}" alt="{{ collectionItem.title }}" class="o-image c-collection-item__image" loading="lazy" width="480" height="480"/>
         {% else %}
-            {{ 'image' | placeholder_svg_tag: 'o-image c-collection__image' }}
+            {{ 'image' | placeholder_svg_tag: 'o-image c-collection-item__image' }}
         {% endif %}
-        <h3 class="o-button c-collection__title u-text-caps">
-            <span class="o-text c-arrow-icon u-smooth c-collection__title-text u-truncate">{{ collectionItem.title }}</span>
-            <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" width="17" height="9" class="o-image  u-smooth c-collection__title-icon o-button__icon" loading="lazy"/>
+        <h3 class="o-button c-collection-item__title u-text-caps">
+            <span class="o-text c-arrow-icon u-smooth c-collection-item__title-text u-truncate">{{ collectionItem.title }}</span>
+            <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" width="17" height="9" class="o-image  u-smooth c-collection-item__title-icon o-button__icon" loading="lazy"/>
         </h3>
     </a>
 </li>

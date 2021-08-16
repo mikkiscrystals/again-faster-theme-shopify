@@ -1,0 +1,141 @@
+.c-collection {
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--side-distance-1);
+}
+
+.c-collection-hero {
+  display: grid;
+  grid-template-columns: 6fr 7fr;
+  gap: var(--side-distance-2);
+  padding-left: var(--side-distance-1);
+  padding-right: var(--side-distance-1);
+}
+
+.c-collection-hero__copy {
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--side-distance-1);
+  align-items: center;
+  align-content: center;
+  justify-content: start;
+  justify-items: start;
+}
+
+.c-collection-hero__title {
+  line-height: 1.5;
+  font-size: 2.2em;
+}
+
+.c-collection-hero__cta {
+  font-size: 0.84em;
+}
+
+.c-collection-hero__images {
+  height: 90vh;
+  width: 100%;
+  position: relative;
+}
+
+.c-collection-hero__image {
+  position: absolute;
+  object-fit: cover;
+}
+
+.c-collection-hero__image--1 {
+  top: 0;
+  left: 0;
+  width: calc(100% - (var(--side-distance-4) * 2));
+  height: calc(100% - var(--side-distance-3));
+}
+
+.c-collection-hero__image--2 {
+  bottom: 0;
+  right: 0;
+  width: calc(var(--side-distance-4) * 3);
+  height: calc(var(--side-distance-4) * 4);
+}
+
+.c-collection .c-pagination {
+  margin-top: var(--side-distance-1);
+}
+
+.c-collections__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.c-products__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--side-distance-1) 1rem;
+}
+
+.c-collection-item__button {
+  padding: 1rem;
+}
+
+.c-product-item__button {
+  gap: 0.75rem;
+}
+
+.c-collection-item__button,
+.c-product-item__button {
+  display: grid;
+  grid-auto-flow: row;
+  font-size: 0.7rem;
+  position: relative;
+}
+
+.c-collection-item__title,
+.c-productks-item__title {
+  justify-content: center;
+}
+
+.c-collection-item__title-icon,
+.c-product-item__title-icon {
+  height: 1rem;
+}
+
+.c-collection-item__title-text,
+.c-product-item__title-text {
+  min-height: 1rem;
+}
+
+.c-collection-item__button:not(:hover):not(:focus)
+  .c-collection-item__title-icon,
+.c-product-item__button:not(:hover):not(:focus) .c-product-item__title-icon {
+  opacity: 0;
+}
+
+.c-collection-item__button:hover .c-collection-item__title-text,
+.c-collection-item__button:focus .c-collection-item__title-text,
+.c-product-item__button:hover .c-product-item__title-text,
+.c-product-item__button:focus .c-product-item__title-text {
+  color: var(--color-text-focus);
+}
+
+.c-collection-item__button:hover .c-collection-item__title-icon,
+.c-collection-item__button:focus .c-collection-item__title-icon,
+.c-product-item__button:hover .c-product-item__title-icon,
+.c-product-item__button:focus .c-product-item__title-icon {
+  opacity: var(--opacity-icon-focus);
+}
+
+.c-collection__title {
+  letter-spacing: 0.18em;
+  font-size: 1.84em;
+  text-align: center;
+}
+
+.c-collection__header,
+.c-collection__content {
+  padding-left: var(--side-distance-1);
+  padding-right: var(--side-distance-1);
+}
+
+.c-collection__header {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+}

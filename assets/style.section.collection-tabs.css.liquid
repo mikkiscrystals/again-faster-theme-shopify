@@ -1,0 +1,28 @@
+.c-collection__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.c-collection__tab:not(:last-child)::after {
+  content: "/";
+  margin-left: 0.3rem;
+  margin-right: 0.5rem;
+  color: var(--color-text-3);
+}
+
+.c-collection__tab-button {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9em;
+  padding-bottom: 0.25rem;
+  border-bottom: solid transparent 0.15em;
+}
+
+.c-collection__tab-button[data-is-current="false"]:not(:hover):not(:focus) {
+  color: var(--color-text-3);
+}
+
+.c-collection__tab-button[data-is-current="true"] {
+  border-bottom-color: var(--color-accent-1);
+}

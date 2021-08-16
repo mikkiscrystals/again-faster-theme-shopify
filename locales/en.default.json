@@ -42,6 +42,13 @@
     "pagination": {
       "prev": "Previous page",
       "next": "Next page"
+    },
+    "product": {
+      "inSale": "Sale",
+      "hasFreeShipping": "Free shipping",
+      "isBestseller": "Bestseller",
+      "canBePreodered": "Pre-Order",
+      "soldOut": "Sold out"
     }
   }
 }

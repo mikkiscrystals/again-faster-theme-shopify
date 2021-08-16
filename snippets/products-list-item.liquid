@@ -1,0 +1,76 @@
+{% assign isInSale = false %}
+{% assign isAvailable = productItem.available %}
+{% assign hasFreeShipping = false %}
+{% assign isBestseller = false %}
+{% assign canBePreOrdered = false %}
+
+{% if productItem.compare_at_price_min <= 0 %}
+    {% assign isInSale = true %}
+{% endif %}
+
+<li class="o-list__item c-products__item c-product-item">
+    <h1>{{ shipping_method.title }}</h1>
+    <a 
+        href="{{ productItem.url }}" 
+        title="{{ productItem.title }}" 
+        class="o-button c-product-item__button" 
+        data-is-available="{{ isAvailable }}"
+        data-in-sale="{{ isInSale }}"
+    >
+        <figure class="c-product-item__image-box">
+            <figcaption class="c-product-item__features">
+
+                {% if isAvailable == false %}
+                    <span class="c-product-item__feature c-product-item__sold-out-text">{{ 'snippets.product.soldOut' | t }}</span>
+                {% endif %}
+
+                {% if isAvailable %}
+
+                    {% if isInSale %}
+                        <span class="c-product-item__feature c-product-item__in-sale-text">{{ 'snippets.product.inSale' | t }}</span>
+                    {% endif %}
+
+                    {% if hasFreeShipping %}
+                        <span class="c-product-item__feature c-product-item__free-shipping-text">{{ 'snippets.product.hasFreeShipping' | t }}</span>
+                    {% endif %}
+
+                {% endif %}
+
+                {% if isBestseller %}
+                    <span class="c-product-item__feature c-product-item__bestseller-text">{{ 'snippets.product.isBestseller' | t }}</span>
+                {% endif %}
+
+                {% if canBePreOrdered %}
+                    <span class="c-product-item__feature c-product-item__can-be-pre-ordered-text">{{ 'snippets.product.canBePreodered' | t }}</span>
+                {% endif %}
+
+            </figcaption>
+
+            {% if productItem.featured_image %}
+                <img src="{{ productItem.featured_image | img_url: '480x480' }}" alt="{{ productItem.title }}" class="o-image c-product-item__image" loading="lazy" width="480" height="480"/>
+            {% else %}
+                {{ 'image' | placeholder_svg_tag: 'o-image c-product-item__image' }}
+            {% endif %}
+        </figure>
+        <div class="c-product-item__copy">
+            <h3 class="o-button c-product-item__title u-text-caps">
+                <span class="o-text c-arrow-icon u-smooth c-product-item__title-text u-truncate">{{ productItem.title }}</span>
+                <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" width="17" height="9" class="o-image  u-smooth c-product-item__title-icon o-button__icon" loading="lazy"/>
+            </h3>
+            <div class="c-product-item__prices u-text-caps">
+                {% if isInSale %}
+                    <p class="c-product-item__price--old">
+                        <s>{{ productItem.compare_at_price_min | money }}</s>
+                    </p>
+                {% endif %}
+                <p class="c-product-item__price">
+                    {% if productItem.price_min != productItem.price_max %}
+                        {{ productItem.price_min | money }} — {{ productItem.price_max | money }}
+                    {% else %}
+                        {{ productItem.price_min | money }}
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </a>
+</li>

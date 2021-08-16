@@ -1,0 +1,41 @@
+<ul class="o-list c-collection__tabs">
+
+    {% for block in section.blocks %}
+
+        {% assign isCurrentTab = false %}
+
+        {% if collection.id == block.settings.collection.id %}
+            {% assign isCurrentTab = true %}
+        {% endif %}
+
+        <li class="o-list__item c-collection__tab">
+            <a class="o-button c-collection__tab-button" href="{{ block.settings.collection.url }}" data-is-current={{ isCurrentTab }}>
+                {{ block.settings.collection.title }}
+            </a>
+        </li>
+
+    {% endfor %}
+
+</ul>
+
+
+{% schema %}
+{
+    "name": "Collection tabs",
+    "tag": "div",
+    "class": "c-collection__tabs-box",
+    "blocks": [
+        {
+            "name": "Collection",
+            "type": "collection",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
