@@ -2,14 +2,14 @@
 
     {% for block in section.blocks %}
 
-        {% assign isCurrentTab = false %}
+        {% assign is_current_tab = false %}
 
         {% if collection.id == block.settings.collection.id %}
-            {% assign isCurrentTab = true %}
+            {% assign is_current_tab = true %}
         {% endif %}
 
         <li class="o-list__item c-collection__tab">
-            <a class="o-button c-collection__tab-button" href="{{ block.settings.collection.url }}" data-is-current={{ isCurrentTab }}>
+            <a class="o-button c-collection__tab-button" href="{{ block.settings.collection.url }}" data-is-current={{ is_current_tab }}>
                 {{ block.settings.collection.title }}
             </a>
         </li>

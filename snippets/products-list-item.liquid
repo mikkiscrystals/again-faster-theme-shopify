@@ -1,94 +1,83 @@
-{% assign isInSale = false %}
-{% assign isAvailable = productItem.available %}
-{% assign hasFreeShipping = false %}
-{% assign isBestseller = false %}
-{% assign canBePreOrdered = false %}
-{% assign rating = productItem.metafields.accentuate.rating | plus: 0 %}
+{% assign is_in_sale = false %}
+{% assign is_available = product_item.available %}
+{% assign has_free_shipping = false %}
+{% assign is_bestseller = false %}
+{% assign can_be_pre_ordered = false %}
+{% assign rating = product_item.metafields.accentuate.rating | plus: 0 %}
 
-{% for tag in productItem.tags %}
+{% for tag in product_item.tags %}
     {% if tag contains 'Bestseller' %}
-        {% assign isBestseller = true %}
+        {% assign is_bestseller = true %}
     {% endif %}
 {% endfor %}
 
-{% if productItem.compare_at_price_min > 0 %}
-    {% assign isInSale = true %}
+{% if product_item.compare_at_price_min > 0 %}
+    {% assign is_in_sale = true %}
 {% endif %}
 
 <li class="o-list__item c-products__item c-product-item">
     <h1>{{ shipping_method.title }}</h1>
     <a 
-        href="{{ productItem.url }}" 
-        title="{{ productItem.title }}" 
+        href="{{ product_item.url }}" 
+        title="{{ product_item.title }}" 
         class="o-button c-product-item__button" 
-        data-is-available="{{ isAvailable }}"
-        data-in-sale="{{ isInSale }}"
+        data-is-available="{{ is_available }}"
+        data-in-sale="{{ is_in_sale }}"
     >
         <figure class="c-product-item__image-box">
             <figcaption class="c-product-item__features">
 
-                {% if isAvailable == false %}
-                    <span class="c-product-item__feature c-product-item__sold-out-text">{{ 'snippets.product.soldOut' | t }}</span>
+                {% if is_available == false %}
+                    <span class="c-product-item__feature c-product-item__sold-out-text">{{ 'snippets.product.sold_out' | t }}</span>
                 {% endif %}
 
-                {% if isAvailable %}
+                {% if is_available %}
 
-                    {% if isInSale %}
-                        <span class="c-product-item__feature c-product-item__in-sale-text">{{ 'snippets.product.inSale' | t }}</span>
+                    {% if is_in_sale %}
+                        <span class="c-product-item__feature c-product-item__in-sale-text">{{ 'snippets.product.in_sale' | t }}</span>
                     {% endif %}
 
-                    {% if hasFreeShipping %}
-                        <span class="c-product-item__feature c-product-item__free-shipping-text">{{ 'snippets.product.hasFreeShipping' | t }}</span>
+                    {% if has_free_shipping %}
+                        <span class="c-product-item__feature c-product-item__free-shipping-text">{{ 'snippets.product.has_free_shipping' | t }}</span>
                     {% endif %}
 
                 {% endif %}
 
-                {% if isBestseller %}
-                    <span class="c-product-item__feature c-product-item__bestseller-text">{{ 'snippets.product.isBestseller' | t }}</span>
+                {% if is_bestseller %}
+                    <span class="c-product-item__feature c-product-item__bestseller-text">{{ 'snippets.product.is_bestseller' | t }}</span>
                 {% endif %}
 
-                {% if canBePreOrdered %}
-                    <span class="c-product-item__feature c-product-item__can-be-pre-ordered-text">{{ 'snippets.product.canBePreodered' | t }}</span>
+                {% if can_be_pre_ordered %}
+                    <span class="c-product-item__feature c-product-item__can-be-pre-ordered-text">{{ 'snippets.product.can_be_pre_ordered' | t }}</span>
                 {% endif %}
 
             </figcaption>
 
-            {% if productItem.featured_image %}
-                <img src="{{ productItem.featured_image | img_url: '480x480' }}" alt="{{ productItem.title }}" class="o-image c-product-item__image" loading="lazy" width="480" height="480"/>
+            {% if product_item.featured_image %}
+                <img src="{{ product_item.featured_image | img_url: '480x480' }}" alt="{{ product_item.title }}" class="o-image c-product-item__image" loading="lazy" width="480" height="480"/>
             {% else %}
                 {{ 'image' | placeholder_svg_tag: 'o-image c-product-item__image' }}
             {% endif %}
         </figure>
         <div class="c-product-item__copy">
             <h3 class="o-button c-product-item__title u-text-caps">
-                <span class="o-text c-arrow-icon u-smooth c-product-item__title-text u-truncate">{{ productItem.title }}</span>
+                <span class="o-text c-arrow-icon u-smooth c-product-item__title-text u-truncate">{{ product_item.title }}</span>
                 <img src="{{ 'icon.arrow-right.svg' | asset_url }}" alt="" width="17" height="9" class="o-image  u-smooth c-product-item__title-icon o-button__icon" loading="lazy"/>
             </h3>
-            {% if rating > 0 %}
-                <div class="c-product-item__rating c-rating">
-                    {% for num in (1..5) %}
-                        {% if num <= rating %}
-                            <img class="c-rating__star c-rating__star--active" src="{{ 'icon.star.svg' | asset_url }}" width="16" height="16" />
-                        {% else %}
-                            <img class="c-rating__star c-rating__star--inactive" src="{{ 'icon.star-inactive.svg' | asset_url }}" width="16" height="16" />    
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
-            <div class="c-product-item__prices u-text-caps">
-                {% if isInSale %}
-                    <p class="c-product-item__price--old">
-                        <s>{{ productItem.compare_at_price_min | money }}</s>
-                    </p>
-                {% endif %}
-                <p class="c-product-item__price">
-                    {% if productItem.price_min != productItem.price_max %}
-                        {{ productItem.price_min | money }} — {{ productItem.price_max | money }}
-                    {% else %}
-                        {{ productItem.price_min | money }}
-                    {% endif %}
-                </p>
-            </div>
+
+            {% render 
+                'product-rating' with 
+                rating: rating,
+                main_class: 'c-product-item'
+            %}
+
+            {% render 
+                'product-prices' with 
+                product_item: product_item, 
+                is_in_sale: is_in_sale,
+                main_class: 'c-product-item',
+                extra_classes: 'u-text-caps'
+            %}
         </div>
     </a>
 </li>

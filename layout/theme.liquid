@@ -1,7 +1,7 @@
 {% if settings.announcement != blank %}
-    {% assign hasAnnouncement = true %}
+    {% assign has_announcement = true %}
 {% else %}
-    {% assign hasAnnouncement = false %}
+    {% assign has_announcement = false %}
 {% endif %}
 
 
@@ -13,7 +13,7 @@
         {% include 'head' %}
     </head>
 
-    <body class="s-template--{{ template.name }}" data-has-announcement="{{ hasAnnouncement }}">
+    <body class="s-template--{{ template.name }}" data-has-announcement="{{ has_announcement }}">
 
         <div class="c-page-top">
 

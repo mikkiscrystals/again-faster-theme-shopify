@@ -10,7 +10,7 @@
         <div class="c-collection__content c-products">
             <ul class="o-list c-products__list">
                 {% for product in collection.products %}
-                    {% render 'products-list-item' with productItem: product %}
+                    {% render 'products-list-item' with product_item: product %}
                 {% endfor %}
             </ul>
         </div>

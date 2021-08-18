@@ -44,11 +44,15 @@
       "next": "Next page"
     },
     "product": {
-      "inSale": "Sale",
-      "hasFreeShipping": "Free shipping",
-      "isBestseller": "Bestseller",
-      "canBePreodered": "Pre-Order",
-      "soldOut": "Sold out"
+      "in_sale": "Sale",
+      "has_free_shipping": "Free shipping",
+      "is_bestseller": "Bestseller",
+      "can_be_pre_odered": "Pre-Order",
+      "sold_out": "Sold out",
+      "add_to_cart": "Add to Cart",
+      "recommended_title": "You might also like",
+      "upsells_title": "Consider also",
+      "cross_sells_title": "Frequently bought with"
     }
   }
 }

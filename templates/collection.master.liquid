@@ -21,27 +21,27 @@
 
         <figure class="c-collection-hero__images">
 
-            {% assign image1 = collection.metafields.accentuate.image_1 | first %}
-            {% if image1 %}
-                <img src="{{ image1.src }}" width="{{ image1.width }}" height="{{ image1.height }}" alt="{{ image1.alt }}" class="c-collection-hero__image c-collection-hero__image--1" loading="lazy"/>
+            {% assign image_1 = collection.metafields.accentuate.image_1 | first %}
+            {% if image_1 %}
+                <img src="{{ image_1.src }}" width="{{ image_1.width }}" height="{{ image_1.height }}" alt="{{ image_1.alt }}" class="c-collection-hero__image c-collection-hero__image--1" loading="lazy"/>
             {% endif %}
 
-            {% assign image2 = collection.metafields.accentuate.image_2 | first %}
-            {% if image2 %}
-                <img src="{{ image2.src }}" width="{{ image2.width }}" height="{{ image2.height }}" alt="{{ image2.alt }}" class="c-collection-hero__image c-collection-hero__image--2" loading="lazy"/>
+            {% assign image_2 = collection.metafields.accentuate.image_2 | first %}
+            {% if image_2 %}
+                <img src="{{ image_2.src }}" width="{{ image_2.width }}" height="{{ image_2.height }}" alt="{{ image_2.alt }}" class="c-collection-hero__image c-collection-hero__image--2" loading="lazy"/>
             {% endif %}
 
         </figure>
 
     </div>
 
-    {% assign collectionNames = collection.metafields.accentuate.subcollections | split: '|' %}
+    {% assign collection_names = collection.metafields.accentuate.subcollections | split: '|' %}
 
     <ul class="o-list c-collections__list">
 
-        {% for collectionName in collectionNames %}
+        {% for collection_name in collection_names %}
 
-            {% render 'collections-list-item' with collectionItem: collections[collectionName] %}
+            {% render 'collections-list-item' with collection_item: collections[collection_name] %}
 
         {% endfor %}
     </ul>

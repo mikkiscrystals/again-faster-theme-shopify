@@ -2,16 +2,16 @@
     {% for block in section.blocks %}
 
         {% if block.settings.image_1 and block.settings.image_2 %}
-            {% assign totalImages = 2 %}
+            {% assign total_images = 2 %}
         {% else %}
             {% if block.settings.image_1 or block.settings.image_2 %}
-                {% assign totalImages = 1 %}
+                {% assign total_images = 1 %}
             {% else %}
-                {% assign totalImages = 0 %}
+                {% assign total_images = 0 %}
             {% endif %}
         {% endif %}
 
-        <li class="o-list__item c-i-cards__item c-i-card" data-total-images="{{ totalImages }}">
+        <li class="o-list__item c-i-cards__item c-i-card" data-total-images="{{ total_images }}">
             <div class="c-i-card__block">
                 {% if block.settings.image_1 %}
                     <figure class="c-i-card__image-box c-i-card__image-box--1">

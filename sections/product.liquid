@@ -1,0 +1,106 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+{% assign is_in_sale = false %}
+{% assign is_available = product.available %}
+{% assign has_free_shipping = false %}
+{% assign is_bestseller = false %}
+{% assign can_be_pre_ordered = false %}
+{% assign rating = product.metafields.accentuate.rating | plus: 0 %}
+
+{% for tag in product.tags %}
+    {% if tag contains 'Bestseller' %}
+        {% assign is_bestseller = true %}
+    {% endif %}
+{% endfor %}
+
+{% if product.compare_at_price_min > 0 %}
+    {% assign is_in_sale = true %}
+{% endif %}
+
+<figure class="c-product__gallery">
+    {% for image in product.images %}
+        <img src="{{ image.src | img_url: '720x900' }}" alt="{{ image.alt }}" class="c-product__image" width="720" height="900">
+    {% endfor %}
+</figure>
+<div class="c-product__info">
+
+    <h1 class="c-product__title">{{ product.title }}</h1>
+
+    {% render 
+        'product-prices' with 
+        product_item: product,
+        is_in_sale: is_in_sale
+    %}
+
+    {% render 
+        'product-rating' with 
+        rating: rating
+    %}
+
+    {% render 
+        'richtext' with 
+        richtext: product.description,
+        main_class: 'c-product__description'
+    %}
+
+    <div class="c-product__variants"></div>
+
+    <div class="c-product__actions"></div>
+
+    {% unless is_available %}
+
+        {% capture upsells_title %}
+            {{ 'snippets.product.upsells_title' | t }}
+        {% endcapture %}
+        {% assign upsells_products = product.metafields.accentuate.upsells | split: '|' %}
+        {% assign upsells_products_count = upsells_products | size %}
+        {% if upsells_products_count > 0 %}
+            {% render 
+                'related-products' with 
+                title: upsells_title,
+                product_items: upsells_products,
+                main_class: 'c-product__upsells'
+            %}
+        {% endif %}
+    {% endunless %}
+
+    {% capture cross_sells_title %}
+        {{ 'snippets.product.cross_sells_title' | t }}
+    {% endcapture %}
+    {% assign cross_sells_products = product.metafields.accentuate.crosssells | split: '|' %}
+    {% assign cross_sells_products_count = cross_sells_products | size %}
+    {% if cross_sells_products_count > 0 %}
+        {% render 
+            'related-products' with 
+            title: cross_sells_title,
+            product_items: cross_sells_products,
+            main_class: 'c-product__cross-sells'
+        %}
+    {% endif %}
+
+</div>
+
+<article class="c-product__presentation">
+    {% for description in product.metafields.accentuate.description %}
+
+        {% render 
+            'richtext' with 
+            richtext: description.html,
+            main_class: 'c-product__presentation-description'
+        %}
+
+        {% assign image = product.metafields.accentuate.image[forloop.index0] | first %}
+        <figure class="c-product__presentation-image-box">
+            <img src="{{ image.src }}" alt="{{ image.alt }}" class="c-product__presentation-image" width="480" height="460"/>
+        </figure>
+
+    {% endfor %}
+</article>
+
+{% schema %}
+{
+    "name": "Product",
+    "tag": "section",
+    "class": "o-section c-product"
+}
+{% endschema %}

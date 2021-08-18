@@ -1,0 +1,13 @@
+{% assign main_class = main_class | default: 'c-product' %}
+
+{% if rating > 0 %}
+    <div class="{{ main_class }}__rating c-rating">
+        {% for num in (1..5) %}
+            {% if num <= rating %}
+                <img class="c-rating__star c-rating__star--active" src="{{ 'icon.star.svg' | asset_url }}" width="16" height="16"/>
+            {% else %}
+                <img class="c-rating__star c-rating__star--inactive" src="{{ 'icon.star-inactive.svg' | asset_url }}" width="16" height="16"/>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
