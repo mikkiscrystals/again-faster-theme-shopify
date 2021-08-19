@@ -1,5 +1,10 @@
 {% if settings.announcement != blank %}
-    <div class="c-header__announcement s-announcement-richtext s-richtext">{{ settings.announcement }}</div>
+    {% render 
+        'richtext' with 
+        richtext: settings.announcement,
+        main_class: 'c-header__announcement',
+        extra_classes: 's-announcement-richtext s-richtext'
+    %}
 {% endif %}
 
 <nav class="c-header__desktop u-desktop-only">

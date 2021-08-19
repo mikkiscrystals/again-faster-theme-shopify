@@ -51,20 +51,41 @@
             extra_classes: 'u-scroll-ver'
         %}
 
-        <div class="c-product__actions">
-            <div class="o-list c-product__variants" data-total-options="{{ product.variants | size }}">
-                {% for variant in product.variants %}
-                    <input type="radio" name="variant" id="variant-{{ product.id }}" class="o-button c-product__variant-option" value="{{ product.id }}" {% if variant.available == false %} disabled {% endif %}/>
-                    <label class="c-product__variant-label" for="variant-{{ product.id }}">
-                        <span class="o-text c-product__variant-title">{{ variant.title }}</span>
-                        {% if variant.available %}
-                            <span class="o-text c-product__variant-price">{{ variant.price | money }}</span>
-                        {% else %}
-                            <span class="o-text c-product__variant-sold-out">{{ 'snippets.product.sold_out' | t }}</span>
-                        {% endif %}
-                    </label>
-                {% endfor %}
-            </div>
+        <div class="c-product__actions-box">
+            {% if is_available %}
+                
+                <ul class="o-list c-product__variants" data-total-options="{{ product.variants | size }}">
+                    {% for variant in product.variants %}
+                        <li class="o-list__item c-product__variant">
+                            <input type="radio" name="product{{product.id}}variant" id="variant-{{ variant.id }}" class="o-button c-product__variant-option" value="{{ variant.id }}" {% if variant.available == false %} disabled {% endif %}/>
+                            <label class="c-product__variant-label u-smooth" for="variant-{{ variant.id }}">
+                                <span class="o-text c-product__variant-title u-truncate">{{ variant.title }}</span>
+                                {% if variant.available %}
+                                    <span class="o-text c-product__variant-price">{{ variant.price | money }}</span>
+                                {% else %}
+                                    <span class="o-text c-product__variant-sold-out">{{ 'snippets.product.sold_out' | t }}</span>
+                                {% endif %}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            
+            {% endif %}
+
+            <ul class="o-list c-product__actions">
+                {% if is_available %}
+                    <li class="o-list__item c-product__action c-product__action--add-to-cart">
+                        <button 
+                            class="o-button c-product__action-button c-product__action-button--add-to-cart js-add-to-cart" 
+                            data-variant-name="product{{product.id}}variant" 
+                            data-qty="1" 
+                            type="button"
+                        >
+                            {{ 'snippets.product.add_to_cart' | t }}
+                        </button>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
 
         <div class="c-product__related-options">

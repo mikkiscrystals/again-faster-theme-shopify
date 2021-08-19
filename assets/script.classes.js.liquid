@@ -47,3 +47,27 @@ class DragSlider {
     });
   }
 }
+
+class AgainFasterAPI {
+  static async addToCart(variantID, qty) {
+    const data = {
+      items: [
+        {
+          id: variantID,
+          quantity: qty,
+        },
+      ],
+    };
+    const response = await fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error("Something went wrong");
+    const json = await response.json();
+
+    return json;
+  }
+}

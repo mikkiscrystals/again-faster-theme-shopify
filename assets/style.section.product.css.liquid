@@ -64,3 +64,99 @@
   background-color: var(--color-text);
   color: var(--color-text-bg);
 }
+
+.c-product__actions-box {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.c-product__variants {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.c-product__variants[data-total-options="1"] {
+  display: none;
+}
+
+.c-product__variant {
+  position: relative;
+}
+
+.c-product__variant-option {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.c-product__variant-label {
+  display: grid;
+  grid-auto-flow: row;
+  border: 0.1em solid var(--color-bg-2);
+}
+
+.c-product__variant-label,
+.c-product__action-button {
+  padding: 0.5rem 1rem;
+}
+
+.c-product__variant-option[disabled],
+.c-product__variant-option[disabled] ~ .c-product__variant-label {
+  pointer-events: none;
+}
+
+.c-product__variant-option[disabled] ~ .c-product__variant-label {
+  color: var(--color-text-3);
+}
+
+.c-product__variant-option:hover ~ .c-product__variant-label,
+.c-product__variant-option:focus ~ .c-product__variant-label {
+  border-color: var(--color-text-2);
+}
+
+.c-product__variant-option:checked ~ .c-product__variant-label,
+.c-product__variant-option:checked:hover ~ .c-product__variant-label,
+.c-product__variant-option:checked:focus ~ .c-product__variant-label {
+  border-color: var(--color-text);
+}
+
+.c-product__variant-title {
+  font-weight: bold;
+}
+
+.c-product__actions {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.c-product__action--add-to-cart {
+  grid-column: span 6;
+}
+
+.c-product__action-button {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  display: block;
+  width: 100%;
+  background-color: var(--color-bg-1);
+}
+
+.c-product__action-button--add-to-cart {
+  color: var(--color-text-bg);
+  background-color: var(--color-text);
+}
+
+.c-product__action-button--add-to-cart:hover,
+.c-product__action-button--add-to-cart:focus {
+  color: var(--color-text-bg-focus);
+}

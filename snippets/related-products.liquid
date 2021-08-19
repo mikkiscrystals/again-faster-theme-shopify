@@ -18,7 +18,7 @@
                             product_item: product_item,
                             main_class: 'c-rel-product'
                         %}
-                        <button class="o-button c-rel-product__action c-rel-product__action--add-to-cart" type="button">
+                        <button class="o-button c-rel-product__action c-rel-product__action--add-to-cart js-add-to-cart" type="button" data-variant-id="{{ product_item.first_available_variant.id }}" data-qty="1">
                             {{ 'snippets.product.add_to_cart' | t }}
                         </button>
                     </div>
