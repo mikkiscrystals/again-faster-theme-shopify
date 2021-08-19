@@ -18,8 +18,8 @@
 {% endif %}
 
 <div class="c-product__general-data">
-    <figure class="c-product__gallery u-smooth js-product-gallery-slider">
-        {% assign total_images = product.images | size %}
+    {% assign total_images = product.images | size %}
+    <figure class="c-product__gallery u-smooth js-product-gallery-slider" data-total-images="{{ total_images }}">
         {% if total_images > 0 %}
             {% for image in product.images %}
                 <img src="{{ image.src | img_url: '720x900' }}" alt="{{ image.alt }}" class="c-product__image" width="720" height="900">
