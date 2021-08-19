@@ -1,23 +1,29 @@
-<div class="c-rel-products {{ main_class }}">
-    <h2 class="c-rel-products__title">{{ title }}</h2>
-    <ul class="o-list c-rel-products__list">
-        {% for product_item_handle in product_items %}
-            {% assign product_item = all_products[product_item_handle] %}
-            <li class="o-list__item c-rel_products__list-item c-rel-product">
-                <figure class="c-rel-product__image-box">
-                    <img src="{{ product_item.featured_image | img_url: '140x200' }}" alt="{{ product_item.title }}" width="140" height="200" class="c-rel-product__image">
-                </figure>
-                <h3 class="c-rel-product__title">{{ product_item.title }}</h3>
-                {% render 
-                    'product-prices' with 
-                    product_item: product_item,
-                    main_class: 'c-rel-product'
-                %}
-                <button class="c-rel-product__action c-rel-product__action--add-to-cart" type="button">
-                    {{ 'snippets.product.add_to_cart' | t }}
-                </button>
-                <a href="{{ product_item.url }}" class="c-rel-product__link"></a>
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+{% assign products_items_count = product_items | size %}
+
+{% if products_items_count > 0 %}
+    <div class="c-rel-products {{ main_class }}">
+        <h2 class="c-rel-products__title">{{ title }}</h2>
+        <ul class="o-list c-rel-products__list">
+            {% for product_item_handle in product_items %}
+                {% assign product_item = all_products[product_item_handle] %}
+                <li class="o-list__item c-rel_products__list-item c-rel-product">
+                    <a href="{{ product_item.url }}" class="c-rel-product__link"></a>
+                    <figure class="c-rel-product__image-box">
+                        <img src="{{ product_item.featured_image | img_url: '140x200' }}" alt="{{ product_item.title }}" width="140" height="200" class="c-rel-product__image">
+                    </figure>
+                    <div class="c-rel-product__info">
+                        <h3 class="c-rel-product__title u-truncate u-smooth">{{ product_item.title }}</h3>
+                        {% render 
+                            'product-prices' with 
+                            product_item: product_item,
+                            main_class: 'c-rel-product'
+                        %}
+                        <button class="o-button c-rel-product__action c-rel-product__action--add-to-cart" type="button">
+                            {{ 'snippets.product.add_to_cart' | t }}
+                        </button>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

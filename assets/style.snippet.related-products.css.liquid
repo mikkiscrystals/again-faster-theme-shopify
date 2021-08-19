@@ -1,0 +1,78 @@
+.c-rel-products {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+}
+
+.c-rel-products__title {
+  font-size: 1.2em;
+}
+
+.c-rel-products__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.c-rel-product,
+.c-rel-product__image-box,
+.c-rel-product__info {
+  position: relative;
+}
+
+.c-rel-product {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.c-rel-product__image-box,
+.c-rel-product__info {
+  z-index: 50;
+  pointer-events: none;
+}
+
+.c-rel-product__image-box {
+  width: 5.5rem;
+  height: 0;
+  padding-top: 125%;
+}
+
+.c-rel-product__image {
+  object-fit: cover;
+}
+
+.c-rel-product__info a,
+.c-rel-product__info button {
+  pointer-events: auto;
+}
+
+.c-rel-product__link,
+.c-rel-product__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.c-rel-product__title {
+  font-size: 1em;
+  line-height: 1.2;
+}
+
+.c-rel-product__action {
+  border-bottom: 0.1em dashed var(--color-text);
+}
+
+.c-rel-product__link {
+  z-index: 10;
+}
+
+.c-rel-product__link:hover ~ .c-rel-product__info .c-rel-product__title,
+.c-rel-product__link:focus ~ .c-rel-product__info .c-rel-product__title {
+  color: var(--color-text-focus);
+}

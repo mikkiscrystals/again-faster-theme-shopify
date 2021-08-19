@@ -17,67 +17,86 @@
     {% assign is_in_sale = true %}
 {% endif %}
 
-<figure class="c-product__gallery">
-    {% for image in product.images %}
-        <img src="{{ image.src | img_url: '720x900' }}" alt="{{ image.alt }}" class="c-product__image" width="720" height="900">
-    {% endfor %}
-</figure>
-<div class="c-product__info">
+<div class="c-product__general-data">
+    <figure class="c-product__gallery">
+        {% assign total_images = product.images | size %}
+        {% if total_images > 0 %}
+            {% for image in product.images %}
+                <img src="{{ image.src | img_url: '720x900' }}" alt="{{ image.alt }}" class="c-product__image" width="720" height="900">
+            {% endfor %}
+        {% else %}
+            {{ 'image' | placeholder_svg_tag: 'o-image c-product__image' }}
+        {% endif %}
+    </figure>
 
-    <h1 class="c-product__title">{{ product.title }}</h1>
+    <div class="c-product__info">
 
-    {% render 
-        'product-prices' with 
-        product_item: product,
-        is_in_sale: is_in_sale
-    %}
+        <h1 class="c-product__title o-title-1">{{ product.title }}</h1>
 
-    {% render 
-        'product-rating' with 
-        rating: rating
-    %}
+        {% render 
+            'product-prices' with 
+            product_item: product,
+            is_in_sale: is_in_sale
+        %}
 
-    {% render 
-        'richtext' with 
-        richtext: product.description,
-        main_class: 'c-product__description'
-    %}
+        {% render 
+            'product-rating' with 
+            rating: rating
+        %}
 
-    <div class="c-product__variants"></div>
+        {% render 
+            'richtext' with 
+            richtext: product.description,
+            main_class: 'c-product__description',
+            extra_classes: 'u-scroll-ver'
+        %}
 
-    <div class="c-product__actions"></div>
+        <div class="c-product__actions">
+            <div class="o-list c-product__variants" data-total-options="{{ product.variants | size }}">
+                {% for variant in product.variants %}
+                    <input type="radio" name="variant" id="variant-{{ product.id }}" class="o-button c-product__variant-option" value="{{ product.id }}" {% if variant.available == false %} disabled {% endif %}/>
+                    <label class="c-product__variant-label" for="variant-{{ product.id }}">
+                        <span class="o-text c-product__variant-title">{{ variant.title }}</span>
+                        {% if variant.available %}
+                            <span class="o-text c-product__variant-price">{{ variant.price | money }}</span>
+                        {% else %}
+                            <span class="o-text c-product__variant-sold-out">{{ 'snippets.product.sold_out' | t }}</span>
+                        {% endif %}
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
 
-    {% unless is_available %}
+        <div class="c-product__related-options">
 
-        {% capture upsells_title %}
-            {{ 'snippets.product.upsells_title' | t }}
-        {% endcapture %}
-        {% assign upsells_products = product.metafields.accentuate.upsells | split: '|' %}
-        {% assign upsells_products_count = upsells_products | size %}
-        {% if upsells_products_count > 0 %}
+            {% unless is_available %}
+
+                {% capture upsells_title %}
+                    {{ 'snippets.product.upsells_title' | t }}
+                {% endcapture %}
+                {% assign upsells_products = product.metafields.accentuate.upsells | split: '|' %}
+                {% render 
+                    'related-products' with 
+                    title: upsells_title,
+                    product_items: upsells_products,
+                    main_class: 'c-product__upsells'
+                %}
+            {% endunless %}
+
+            {% capture cross_sells_title %}
+                {{ 'snippets.product.cross_sells_title' | t }}
+            {% endcapture %}
+            {% assign cross_sells_products = product.metafields.accentuate.crosssells | split: '|' %}
             {% render 
                 'related-products' with 
-                title: upsells_title,
-                product_items: upsells_products,
-                main_class: 'c-product__upsells'
+                title: cross_sells_title,
+                product_items: cross_sells_products,
+                main_class: 'c-product__cross-sells'
             %}
-        {% endif %}
-    {% endunless %}
 
-    {% capture cross_sells_title %}
-        {{ 'snippets.product.cross_sells_title' | t }}
-    {% endcapture %}
-    {% assign cross_sells_products = product.metafields.accentuate.crosssells | split: '|' %}
-    {% assign cross_sells_products_count = cross_sells_products | size %}
-    {% if cross_sells_products_count > 0 %}
-        {% render 
-            'related-products' with 
-            title: cross_sells_title,
-            product_items: cross_sells_products,
-            main_class: 'c-product__cross-sells'
-        %}
-    {% endif %}
+        </div>
 
+    </div>
 </div>
 
 <article class="c-product__presentation">

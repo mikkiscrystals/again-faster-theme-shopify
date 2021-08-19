@@ -1,0 +1,66 @@
+.c-product {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+.c-product__general-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.c-product__gallery {
+  position: relative;
+  width: 100%;
+  height: calc(50vw / 100 * 125);
+  max-height: 100vh;
+}
+
+.c-product__info {
+  padding: var(--side-distance-2) var(--side-distance-4);
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.5rem;
+  align-items: start;
+  align-content: start;
+  justify-items: start;
+  justify-content: start;
+}
+
+.c-product__related-options {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1.5rem;
+}
+
+.c-product__image {
+  position: absolute;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: var(--color-bg-2);
+}
+
+.c-product__title {
+  letter-spacing: 0.12em;
+}
+
+.c-product__prices {
+  font-size: 0.9em;
+}
+
+.c-product__rating {
+  font-size: 0.8em;
+}
+
+.c-product__description {
+  max-height: 15rem;
+  overflow: auto;
+}
+
+.c-product__presentation {
+  background-color: var(--color-text);
+  color: var(--color-text-bg);
+}

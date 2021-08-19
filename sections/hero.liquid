@@ -1,6 +1,6 @@
 <div class="c-hero__copy">
     {% if section.settings.title %}
-        <h1 class="c-hero__title c-title-1">{{ section.settings.title }}</h1>
+        <h1 class="c-hero__title o-title-1">{{ section.settings.title }}</h1>
     {% endif %}
 
     {% if section.settings.description %}
@@ -8,7 +8,7 @@
     {% endif %}
 
     {% if section.settings.button_title and section.settings.button_url %}
-        <a href="{{ section.settings.button_url }}" class="o-button c-hero__cta c-cta-1">
+        <a href="{{ section.settings.button_url }}" class="o-button c-hero__cta o-cta-1">
             <span class="o-text">{{ section.settings.button_title }}</span>
             <img src="{{ 'icon.arrow-right-white.svg' | asset_url }}" alt="{{ section.settings.button_title }}" class="o-image c-arrow-icon" width="17" width="17" height="9"/>
         </a>
