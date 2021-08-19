@@ -68,6 +68,13 @@
   border-bottom: 0.1em dashed var(--color-text);
 }
 
+.c-rel-product__action:not([data-has-succeed="true"])
+  ~ .c-rel-product__action-feedback--success,
+.c-rel-product__action:not([data-has-failed="true"])
+  ~ .c-rel-product__action-feedback--fail {
+  display: none;
+}
+
 .c-rel-product__link {
   z-index: 10;
 }

@@ -7,9 +7,9 @@ addToCartButtons.forEach((button) => {
   selectDefaultVariant(button);
 
   // adds product to user's cart when button is clicked
-  button.addEventListener("click", (event) =>
-    onAddToCartButtonClicked(event.target)
-  );
+  button.addEventListener("click", (event) => {
+    onAddToCartButtonClicked(event.target.closest("button"));
+  });
 });
 
 function getVariantID(variantName) {

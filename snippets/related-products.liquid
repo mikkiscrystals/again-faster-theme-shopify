@@ -18,9 +18,23 @@
                             product_item: product_item,
                             main_class: 'c-rel-product'
                         %}
-                        <button class="o-button c-rel-product__action c-rel-product__action--add-to-cart js-add-to-cart" type="button" data-variant-id="{{ product_item.first_available_variant.id }}" data-qty="1">
-                            {{ 'snippets.product.add_to_cart' | t }}
-                        </button>
+                        <div class="c-rel-product__action-box">
+                            <button class="o-button c-rel-product__action c-rel-product__action--add-to-cart js-add-to-cart" type="button" data-variant-id="{{ product_item.first_available_variant.id }}" data-qty="1">
+                                <span class="o-text">
+                                    {{ 'snippets.product.add_to_cart' | t }}
+                                </span>
+                                <i class="o-icon c-icon-spinner">
+                                    {% render 'icon-spinner' %}
+                                </i>
+                            </button>
+                            <p class="o-feedback o-feedback--success c-rel-product__action-feedback c-rel-product__action-feedback--success">
+                                {{ 'snippets.product.added_to_cart_short' | t }}.
+                                <a class="o-feedback__link" href="{{ routes.cart_url }}">{{ 'snippets.product.go_to_cart' | t }}</a>
+                            </p>
+                            <p class="o-feedback o-feedback--fail c-rel-product__action-feedback c-rel-product__action-feedback--fail">
+                                {{ 'snippets.product.failed_to_add_to_cart_short' | t }}.
+                            </p>
+                        </div>
                     </div>
                 </li>
             {% endfor %}

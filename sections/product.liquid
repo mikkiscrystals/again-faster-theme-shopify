@@ -51,10 +51,14 @@
             extra_classes: 'u-scroll-ver'
         %}
 
+        {% if is_available == false %}
+            <p class="c-product__status c-product__status--sold-out"><em>{{ 'snippets.product.sold_out' | t }}</em></p>
+        {% endif %}
+
         <div class="c-product__actions-box">
             {% if is_available %}
-                
-                <ul class="o-list c-product__variants" data-total-options="{{ product.variants | size }}">
+
+                <ul class="o-list c-product__variants u-scroll-ver" data-total-options="{{ product.variants | size }}">
                     {% for variant in product.variants %}
                         <li class="o-list__item c-product__variant">
                             <input type="radio" name="product{{product.id}}variant" id="variant-{{ variant.id }}" class="o-button c-product__variant-option" value="{{ variant.id }}" {% if variant.available == false %} disabled {% endif %}/>
@@ -69,20 +73,27 @@
                         </li>
                     {% endfor %}
                 </ul>
-            
+
             {% endif %}
 
             <ul class="o-list c-product__actions">
                 {% if is_available %}
                     <li class="o-list__item c-product__action c-product__action--add-to-cart">
-                        <button 
-                            class="o-button c-product__action-button c-product__action-button--add-to-cart js-add-to-cart" 
-                            data-variant-name="product{{product.id}}variant" 
-                            data-qty="1" 
-                            type="button"
-                        >
-                            {{ 'snippets.product.add_to_cart' | t }}
+                        <button class="o-button c-product__action-button c-product__action-button--add-to-cart js-add-to-cart" data-qty="1" data-variant-name="product{{product.id}}variant" type="button">
+                            <span class="o-text">
+                                {{ 'snippets.product.add_to_cart' | t }}
+                            </span>
+                            <i class="o-icon c-icon-spinner">
+                                {% render 'icon-spinner' %}
+                            </i>
                         </button>
+                        <p class="o-feedback o-feedback--success c-product__action-feedback c-product__action-feedback--success">
+                            {{ 'snippets.product.added_to_cart' | t }}.
+                            <a class="o-feedback__link" href="{{ routes.cart_url }}">{{ 'snippets.product.go_to_cart' | t }}</a>
+                        </p>
+                        <p class="o-feedback o-feedback--fail c-product__action-feedback c-product__action-feedback--fail">
+                            {{ 'snippets.product.failed_to_add_to_cart' | t }}.
+                        </p>
                     </li>
                 {% endif %}
             </ul>
@@ -122,19 +133,25 @@
 
 <article class="c-product__presentation">
     {% for description in product.metafields.accentuate.description %}
+        <div class="c-product__presentation-block">
+            {% render 
+                'richtext' with 
+                richtext: description.html,
+                main_class: 'c-product__presentation-description'
+            %}
 
-        {% render 
-            'richtext' with 
-            richtext: description.html,
-            main_class: 'c-product__presentation-description'
-        %}
-
-        {% assign image = product.metafields.accentuate.image[forloop.index0] | first %}
-        <figure class="c-product__presentation-image-box">
-            <img src="{{ image.src }}" alt="{{ image.alt }}" class="c-product__presentation-image" width="480" height="460"/>
-        </figure>
+            {% assign image = product.metafields.accentuate.image[forloop.index0] | first %}
+            <figure class="c-product__presentation-image-box">
+                <img src="{{ image.src }}" alt="{{ image.alt }}" class="c-product__presentation-image" width="480" height="460"/>
+            </figure>
+        </div>
 
     {% endfor %}
+    <div class="c-product__presentation-decor">
+        {% for i in (1..3) %}
+            <span class="c-product__presentation-decor-line"></span>            
+        {% endfor %}
+    </div>
 </article>
 
 {% schema %}

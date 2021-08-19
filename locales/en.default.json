@@ -52,7 +52,12 @@
       "add_to_cart": "Add to Cart",
       "recommended_title": "You might also like",
       "upsells_title": "Consider also",
-      "cross_sells_title": "Frequently bought with"
+      "cross_sells_title": "Frequently bought with",
+      "added_to_cart": "Product was added to cart",
+      "added_to_cart_short": "Added",
+      "go_to_cart": "Go to cart",
+      "failed_to_add_to_cart": "Something went wrong, refresh the page or try again later",
+      "failed_to_add_to_cart_short": "Something went wrong"
     }
   }
 }
