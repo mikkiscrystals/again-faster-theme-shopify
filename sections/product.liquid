@@ -18,7 +18,7 @@
 {% endif %}
 
 <div class="c-product__general-data">
-    <figure class="c-product__gallery">
+    <figure class="c-product__gallery u-smooth js-product-gallery-slider">
         {% assign total_images = product.images | size %}
         {% if total_images > 0 %}
             {% for image in product.images %}
@@ -44,16 +44,22 @@
             rating: rating
         %}
 
+        {% if is_available and is_bestseller %}
+            <p class="c-product__status c-product__status--bestseller">{{ 'snippets.product.is_bestseller' | t }}</p>
+        {% endif %}
+
+        {% if is_available == false %}
+            <p class="c-product__status c-product__status--sold-out">
+                <em>{{ 'snippets.product.sold_out' | t }}</em>
+            </p>
+        {% endif %}
+
         {% render 
             'richtext' with 
             richtext: product.description,
             main_class: 'c-product__description',
             extra_classes: 'u-scroll-ver'
         %}
-
-        {% if is_available == false %}
-            <p class="c-product__status c-product__status--sold-out"><em>{{ 'snippets.product.sold_out' | t }}</em></p>
-        {% endif %}
 
         <div class="c-product__actions-box">
             {% if is_available %}
@@ -149,7 +155,7 @@
     {% endfor %}
     <div class="c-product__presentation-decor">
         {% for i in (1..3) %}
-            <span class="c-product__presentation-decor-line"></span>            
+            <span class="c-product__presentation-decor-line"></span>
         {% endfor %}
     </div>
 </article>

@@ -17,65 +17,63 @@ function filloutProductTemplate(productData, template) {
     )} — ${formatter.format(productData.price_max / 100)}`;
   }
 
-  template.querySelector(".c-product-item__button").href = productData.url;
-  template.querySelector(".c-product-item__button").dataset.isAvailable =
-    productData.available;
-  template.querySelector(".c-product-item__button").dataset.inSale = inSale;
-  template.querySelector(".c-product-item__title-text").innerText =
-    productData.title;
-  template.querySelector(".c-product-item__price").innerText =
-    productData.title;
+  const productButtonEl = template.querySelector(".c-product-item__button");
+  const priceEl = template.querySelector(".c-product-item__price");
+  const priceOldEl = template.querySelector(".c-product-item__price--old");
+  const titleEl = template.querySelector(".c-product-item__title-text");
+  const soldOutEl = template.querySelector(".c-product-item__sold-out-text");
+  const inSaleEl = template.querySelector(".c-product-item__in-sale-text");
+  const freeShippingEl = template.querySelector(
+    ".c-product-item__free-shipping-text"
+  );
+  const bestsellerEl = template.querySelector(
+    ".c-product-item__bestseller-text"
+  );
+  const canBePreOrderedEl = template.querySelector(
+    ".c-product-item__can-be-pre-ordered-text"
+  );
+  const productImageEl = template.querySelector(".c-product-item__image");
+  const productTemplateImageEl = template.querySelector(
+    ".c-product-item__placeholder-image-box"
+  );
+
+  productButtonEl.href = productData.url;
+  productButtonEl.dataset.isAvailable = productData.available;
+  productButtonEl.dataset.inSale = inSale;
+  titleEl.innerText = productData.title;
+  price.innerText = productData.title;
 
   if (!productData.available) {
-    template.querySelector(
-      ".c-product-item__sold-out-text"
-    ).dataset.isHidden = false;
+    soldOutEl.dataset.isHidden = false;
   }
   if (inSale) {
-    template.querySelector(
-      ".c-product-item__in-sale-text"
-    ).dataset.isHidden = false;
+    inSaleEl.dataset.isHidden = false;
   }
   if (hasFreeShipping) {
-    template.querySelector(
-      ".c-product-item__free-shipping-text"
-    ).dataset.isHidden = false;
+    freeShippingEl.dataset.isHidden = false;
   }
   if (isBestseller) {
-    template.querySelector(
-      ".c-product-item__bestseller-text"
-    ).dataset.isHidden = false;
+    bestsellerEl.dataset.isHidden = false;
   }
   if (canBePreOrdered) {
-    template.querySelector(
-      ".c-product-item__can-be-pre-ordered-text"
-    ).dataset.isHidden = false;
-  }
-  if (productData.featured_image) {
-    template.querySelector(".c-product-item__image").src =
-      productData.featured_image;
-    template.querySelector(".c-product-item__image").dataset.isHidden = false;
-    template.querySelector(
-      ".c-product-item__placeholder-image-box"
-    ).dataset.isHidden = true;
-  } else {
-    template.querySelector(".c-product-item__image").dataset.isHidden = true;
-    template.querySelector(
-      ".c-product-item__placeholder-image-box"
-    ).dataset.isHidden = false;
+    canBePreOrderedEl.dataset.isHidden = false;
   }
 
-  template.querySelector(".c-product-item__price").innerText = price;
-  if (inSale) {
-    template.querySelector(".c-product-item__price--old s").innerText =
-      oldPrice;
-    template.querySelector(
-      ".c-product-item__price--old"
-    ).dataset.isHidden = false;
+  if (productData.featured_image) {
+    productImageEl.src = productData.featured_image;
+    productImageEl.dataset.isHidden = false;
+    productTemplateImageEl.dataset.isHidden = true;
   } else {
-    template.querySelector(
-      ".c-product-item__price--old"
-    ).dataset.isHidden = true;
+    productImageEl.dataset.isHidden = true;
+    productTemplateImageEl.dataset.isHidden = false;
+  }
+
+  priceEl.innerText = price;
+  if (inSale) {
+    priceOldEl.querySelector("s").innerText = oldPrice;
+    priceOldEl.dataset.isHidden = false;
+  } else {
+    priceOldEl.dataset.isHidden = true;
   }
 
   return template;
@@ -92,7 +90,10 @@ function renderRecommendedProducts(productsData, listEl, productItemTemplate) {
 async function initRecommendedProducts(productID) {
   try {
     const products = await getRecommendedProducts(productID);
-    const recommendedProductslistElement = document.querySelector(
+    const recommendedProductsEl = document.querySelector(
+      ".c-products--recommended"
+    );
+    const recommendedProductslistEl = document.querySelector(
       ".c-products__list--recommended"
     );
     const recommendedProductItemTemplate = document.querySelector(
@@ -100,9 +101,10 @@ async function initRecommendedProducts(productID) {
     );
     renderRecommendedProducts(
       products,
-      recommendedProductslistElement,
+      recommendedProductslistEl,
       recommendedProductItemTemplate
     );
+    recommendedProductsEl.dataset.isHidden = false;
   } catch (ex) {
     console.error(ex);
   }

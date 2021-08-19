@@ -1,0 +1,38 @@
+function getVariantID(variantName) {
+  const selectedVariantID = document.querySelector(
+    `[name="${variantName}"]:checked`
+  );
+  if (selectedVariantID) return +selectedVariantID.value;
+  return null;
+}
+
+function selectDefaultVariant(button) {
+  let { variantName, variantID } = button.dataset;
+  if (variantID || !variantName) return;
+  const availableVariant = document.querySelector(
+    `[name="${variantName}"]:not([disabled])`
+  );
+  if (!availableVariant) return;
+  availableVariant.click();
+}
+
+async function onAddToCartButtonClicked(button) {
+  let { variantName, qty, variantId } = button.dataset;
+  qty = +qty;
+  if (!variantId && variantName) variantId = getVariantID(variantName);
+  if (variantId && isNaN(variantId)) {
+    variantId = +variantId;
+  }
+  try {
+    button.dataset.isProcessing = true;
+    delete button.dataset.hasFailed;
+    delete button.dataset.hasSucceed;
+    await AgainFasterAPI.addToCart(variantId, qty);
+    button.dataset.hasSucceed = true;
+  } catch (ex) {
+    button.dataset.hasFailed = true;
+    console.error(ex);
+  } finally {
+    delete button.dataset.isProcessing;
+  }
+}
