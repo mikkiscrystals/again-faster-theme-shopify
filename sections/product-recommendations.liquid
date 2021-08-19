@@ -1,17 +1,9 @@
-{% assign current_product_id = product.id %}
-
-<div class="c-products c-products--recommended">
-    <h2 class="c-products__title">{{ 'snippets.product.recommended_title' | t }}</h2>
-    <ul class="o-list c-products__list">
-
-        {% if recommendations.products_count > 0 %}
-            {% for product in recommendations.products %}
-                {% render 'products-list-item' with product_item: product %}
-            {% endfor %}
-            {% else %}
-
-        {% endif %}
-    </ul>
+<div class="c-products c-products--recommended" data-is-loaded="false">
+    <h2 class="c-products__title o-title-1">{{ 'snippets.product.recommended_title' | t }}</h2>
+    <ul class="o-list c-products__list c-products__list--recommended"></ul>
+    <template class="c-products__item-template">
+        {% render 'products-list-item' %}
+    </template>
 </div>
 
 {% schema %}

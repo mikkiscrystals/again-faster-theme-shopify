@@ -16,48 +16,94 @@
 {% endif %}
 
 <li class="o-list__item c-products__item c-product-item">
-    <h1>{{ shipping_method.title }}</h1>
     <a 
         href="{{ product_item.url }}" 
         title="{{ product_item.title }}" 
-        class="o-button c-product-item__button" 
+        class="o-button c-product-item__button js-product-item__button" 
         data-is-available="{{ is_available }}"
         data-in-sale="{{ is_in_sale }}"
     >
         <figure class="c-product-item__image-box">
             <figcaption class="c-product-item__features">
 
-                {% if is_available == false %}
-                    <span class="c-product-item__feature c-product-item__sold-out-text">{{ 'snippets.product.sold_out' | t }}</span>
-                {% endif %}
-
-                {% if is_available %}
-
-                    {% if is_in_sale %}
-                        <span class="c-product-item__feature c-product-item__in-sale-text">{{ 'snippets.product.in_sale' | t }}</span>
+                <span
+                    {% if is_available == false %}
+                        data-is-hidden='false'
+                    {% else %}
+                        data-is-hidden='true'    
                     {% endif %}
+                    class="c-product-item__feature c-product-item__sold-out-text">{{ 'snippets.product.sold_out' | t }}
+                </span>
 
-                    {% if has_free_shipping %}
-                        <span class="c-product-item__feature c-product-item__free-shipping-text">{{ 'snippets.product.has_free_shipping' | t }}</span>
+                <span
+                    {% if is_available and is_in_sale %}
+                        data-is-hidden='false'    
+                    {% else %}
+                        data-is-hidden='true'
                     {% endif %}
+                    class="c-product-item__feature c-product-item__in-sale-text"
+                >
+                    {{ 'snippets.product.in_sale' | t }}
+                </span>
 
-                {% endif %}
+                <span
+                    {% if is_available and has_free_shipping %}
+                        data-is-hidden='false'    
+                    {% else %}
+                        data-is-hidden='true'    
+                    {% endif %} 
+                    class="c-product-item__feature c-product-item__free-shipping-text"
+                >
+                    {{ 'snippets.product.has_free_shipping' | t }}
+                </span>
 
-                {% if is_bestseller %}
-                    <span class="c-product-item__feature c-product-item__bestseller-text">{{ 'snippets.product.is_bestseller' | t }}</span>
-                {% endif %}
+                <span
+                    {% if is_bestseller %}
+                        data-is-hidden='false' 
+                    {% else %}
+                        data-is-hidden='true'  
+                    {% endif %}
+                    class="c-product-item__feature c-product-item__bestseller-text"
+                >
+                    {{ 'snippets.product.is_bestseller' | t }}
+                </span>
 
-                {% if can_be_pre_ordered %}
-                    <span class="c-product-item__feature c-product-item__can-be-pre-ordered-text">{{ 'snippets.product.can_be_pre_ordered' | t }}</span>
-                {% endif %}
+                <span
+                    {% if can_be_pre_ordered %}
+                        data-is-hidden='false' 
+                    {% else %}
+                        data-is-hidden='true' 
+                    {% endif %}
+                    class="c-product-item__feature c-product-item__can-be-pre-ordered-text"
+                >
+                    {{ 'snippets.product.can_be_pre_ordered' | t }}
+                </span>
 
             </figcaption>
 
-            {% if product_item.featured_image %}
-                <img src="{{ product_item.featured_image | img_url: '480x480' }}" alt="{{ product_item.title }}" class="o-image c-product-item__image" loading="lazy" width="480" height="480"/>
-            {% else %}
+            <img 
+                {% if product_item.featured_image %}
+                    data-is-hidden='false'
+                {% else %}
+                    data-is-hidden='true' 
+                {% endif %}
+                src="{{ product_item.featured_image | img_url: '480x480' }}" 
+                alt="{{ product_item.title }}" 
+                class="o-image c-product-item__image" 
+                loading="lazy" width="480" height="480"
+            />
+
+            <div
+                class="c-product-item__placeholder-image-box"
+                {% if product_item.featured_image %}
+                    data-is-hidden='true'
+                {% else %}
+                    data-is-hidden='false' 
+                {% endif %}
+            >
                 {{ 'image' | placeholder_svg_tag: 'o-image c-product-item__image' }}
-            {% endif %}
+            </div>
+
         </figure>
         <div class="c-product-item__copy">
             <h3 class="o-button c-product-item__title u-text-caps">

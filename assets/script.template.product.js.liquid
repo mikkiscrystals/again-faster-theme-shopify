@@ -1,0 +1,111 @@
+async function getRecommendedProducts(productID) {
+  let products = await AgainFasterAPI.getRecommendedProducts(productID);
+  products = products.splice(0, 4);
+  return products;
+}
+
+function filloutProductTemplate(productData, template) {
+  const inSale = productData.price_min < productData.compare_at_price_min;
+  const isBestseller = productData.tags.includes("Bestseller");
+  const hasFreeShipping = false;
+  const canBePreOrdered = false;
+  let price = formatter.format(productData.price / 100);
+  let oldPrice = formatter.format(productData.compare_at_price / 100);
+  if (productData.price_min !== productData.price_max) {
+    price = `${formatter.format(
+      productData.price_min / 100
+    )} — ${formatter.format(productData.price_max / 100)}`;
+  }
+
+  template.querySelector(".c-product-item__button").href = productData.url;
+  template.querySelector(".c-product-item__button").dataset.isAvailable =
+    productData.available;
+  template.querySelector(".c-product-item__button").dataset.inSale = inSale;
+  template.querySelector(".c-product-item__title-text").innerText =
+    productData.title;
+  template.querySelector(".c-product-item__price").innerText =
+    productData.title;
+
+  if (!productData.available) {
+    template.querySelector(
+      ".c-product-item__sold-out-text"
+    ).dataset.isHidden = false;
+  }
+  if (inSale) {
+    template.querySelector(
+      ".c-product-item__in-sale-text"
+    ).dataset.isHidden = false;
+  }
+  if (hasFreeShipping) {
+    template.querySelector(
+      ".c-product-item__free-shipping-text"
+    ).dataset.isHidden = false;
+  }
+  if (isBestseller) {
+    template.querySelector(
+      ".c-product-item__bestseller-text"
+    ).dataset.isHidden = false;
+  }
+  if (canBePreOrdered) {
+    template.querySelector(
+      ".c-product-item__can-be-pre-ordered-text"
+    ).dataset.isHidden = false;
+  }
+  if (productData.featured_image) {
+    template.querySelector(".c-product-item__image").src =
+      productData.featured_image;
+    template.querySelector(".c-product-item__image").dataset.isHidden = false;
+    template.querySelector(
+      ".c-product-item__placeholder-image-box"
+    ).dataset.isHidden = true;
+  } else {
+    template.querySelector(".c-product-item__image").dataset.isHidden = true;
+    template.querySelector(
+      ".c-product-item__placeholder-image-box"
+    ).dataset.isHidden = false;
+  }
+
+  template.querySelector(".c-product-item__price").innerText = price;
+  if (inSale) {
+    template.querySelector(".c-product-item__price--old s").innerText =
+      oldPrice;
+    template.querySelector(
+      ".c-product-item__price--old"
+    ).dataset.isHidden = false;
+  } else {
+    template.querySelector(
+      ".c-product-item__price--old"
+    ).dataset.isHidden = true;
+  }
+
+  return template;
+}
+
+function renderRecommendedProducts(productsData, listEl, productItemTemplate) {
+  productsData.forEach((product) => {
+    const rawProductTemplate = productItemTemplate.content.cloneNode(true);
+    const productTemplate = filloutProductTemplate(product, rawProductTemplate);
+    listEl.append(productTemplate);
+  });
+}
+
+async function initRecommendedProducts(productID) {
+  try {
+    const products = await getRecommendedProducts(productID);
+    const recommendedProductslistElement = document.querySelector(
+      ".c-products__list--recommended"
+    );
+    const recommendedProductItemTemplate = document.querySelector(
+      ".c-products__item-template"
+    );
+    renderRecommendedProducts(
+      products,
+      recommendedProductslistElement,
+      recommendedProductItemTemplate
+    );
+  } catch (ex) {
+    console.error(ex);
+  }
+}
+
+initRecommendedProducts(currentProductID);

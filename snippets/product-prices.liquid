@@ -1,11 +1,16 @@
 {% assign main_class = main_class | default: 'c-product' %}
 
 <div class="{{ main_class }}__prices {{ extra_classes | default: '' }}">
-    {% if is_in_sale %}
-        <p class="{{ main_class }}__price--old">
-            <s>{{ product_item.compare_at_price_min | money }}</s>
-        </p>
-    {% endif %}
+    <p 
+        {% if is_in_sale %}
+            data-is-hidden='false'
+        {% else %}
+            data-is-hidden='true'
+        {% endif %}
+        class="{{ main_class }}__price--old"
+    >
+        <s>{{ product_item.compare_at_price_min | money }}</s>
+    </p>
     <p class="{{ main_class }}__price">
         {% if product_item.price_min != product_item.price_max %}
             {{ product_item.price_min | money }}

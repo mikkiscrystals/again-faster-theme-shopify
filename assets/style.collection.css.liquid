@@ -71,6 +71,26 @@
   gap: var(--side-distance-1) 1rem;
 }
 
+.c-product-recommendations {
+  padding-left: var(--side-distance-1);
+  padding-right: var(--side-distance-1);
+}
+
+.c-products {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+}
+
+.c-products__list--recommended {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.c-products__title {
+  font-weight: normal;
+  letter-spacing: 0.18em;
+}
+
 .c-collection-item__button {
   padding: 1rem;
 }

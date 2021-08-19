@@ -86,6 +86,16 @@
 {% endcase %}
 
 <!-- scripts -->
+<script src="{{ 'script.constants.js' | asset_url }}" type="text/javascript" defer></script>
+<script src="{{ 'script.functions.js' | asset_url }}" type="text/javascript" defer></script>
 <script src="{{ 'script.classes.js' | asset_url }}" type="text/javascript" defer></script>
 <script src="{{ 'script.global.js' | asset_url }}" type="text/javascript" defer></script>
 <script src="{{ 'script.section.featured-collections.js' | asset_url }}" type="text/javascript" defer></script>
+
+{% case template.name %}
+    {% when 'product' %}
+        <script>
+            const currentProductID = {{ product.id }};
+        </script>
+        <script src="{{ 'script.template.product.js' | asset_url }}" type="text/javascript" defer></script>
+{% endcase %}

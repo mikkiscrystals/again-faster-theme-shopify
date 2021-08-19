@@ -1,13 +1,37 @@
 {% assign main_class = main_class | default: 'c-product' %}
 
-{% if rating > 0 %}
-    <div class="{{ main_class }}__rating o-rating">
-        {% for num in (1..5) %}
-            {% if num <= rating %}
-                <img class="o-rating__star o-rating__star--active" src="{{ 'icon.star.svg' | asset_url }}" width="16" height="16"/>
-            {% else %}
-                <img class="o-rating__star o-rating__star--inactive" src="{{ 'icon.star-inactive.svg' | asset_url }}" width="16" height="16"/>
-            {% endif %}
-        {% endfor %}
-    </div>
-{% endif %}
+<div 
+    {% if rating > 0 %}
+        data-is-hidden='false'
+    {% else %}
+        data-is-hidden='true'
+    {% endif %}
+    class="{{ main_class }}__rating o-rating"
+>
+    {% for num in (1..5) %}
+        <div class="o-rating__item">
+            <img 
+                class="o-rating__star o-rating__star--active" 
+                src="{{ 'icon.star.svg' | asset_url }}" 
+                width="16" height="16"
+                {% if num <= rating %}
+                    data-is-hidden='false'
+                {% else %}
+                    data-is-hidden='true'
+                {% endif %}
+            />
+    
+            <img 
+                class="o-rating__star o-rating__star--inactive" 
+                src="{{ 'icon.star-inactive.svg' | asset_url }}" 
+                width="16" 
+                height="16"
+                {% if num <= rating %}
+                    data-is-hidden='true'
+                {% else %}
+                    data-is-hidden='false'
+                {% endif %}
+            />
+        </div>
+    {% endfor %}
+</div>

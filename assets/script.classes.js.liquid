@@ -66,8 +66,17 @@ class AgainFasterAPI {
       body: JSON.stringify(data),
     });
     if (!response.ok) throw new Error("Something went wrong");
-    const json = await response.json();
+    const responseJSON = await response.json();
 
-    return json;
+    return responseJSON;
+  }
+
+  static async getRecommendedProducts(productID) {
+    const response = await fetch(
+      `/recommendations/products.json?product_id=${productID}`
+    );
+    if (!response.ok) throw new Error("Something went wrong");
+    const responseJSON = await response.json();
+    return responseJSON.products;
   }
 }
