@@ -1,0 +1,48 @@
+<div class="c-cart__box">
+    <div class="c-cart__top">
+        <div class="c-cart__header">
+            <h2 class="c-cart__title">{{ 'sections.cart.title' | t }}</h2>
+            <ul class="o-list c-cart__header-actions">
+                <li class="o-list__item c-cart__header-action">
+                    <button class="o-button c-cart__header-action-button" title="{{ 'sections.cart.close' | t }}"></button>
+                </li>
+            </ul>
+        </div>
+        <div class="c-cart__content">
+            <div class="c-cart__empty-state" data-is-hidden="true">
+                <p>{{ 'sections.cart.empty_state_desc' | t }}</p>
+                {% if section.settings.empaty_state_cta_title and section.settings.empaty_state_cta_url %}
+                    <a href="{{ section.settings.empaty_state_cta_url }}" class="o-button">{{ section.settings.empaty_state_cta_title }}</a>
+                {% endif %}
+            </div>
+            <ol class="o-list c-cart__items" data-is-hidden="true"></ol>
+            <template class="c-cart__item-template">
+                <li class="o-list__item cart__item"></li>
+            </template>
+        </div>
+    </div>
+    <div class="c-cart__bottom">
+        <div class="c-cart__footer"></div>
+    </div>
+</div>
+
+{% schema %}
+
+{
+    "name": "Cart",
+    "tag": "aside",
+    "class": "c-cart",
+    "settings": [
+        {
+            "type": "text",
+            "id": "empaty_state_cta_title",
+            "label": "Empty state CTA title"
+        }, {
+            "type": "url",
+            "id": "empaty_state_cta_url",
+            "label": "Empty state CTA URL"
+        }
+    ]
+}
+
+{% endschema %}

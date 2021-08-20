@@ -8,6 +8,11 @@
       "newsletter": {
         "title": "Newsletter"
       }
+    },
+    "cart": {
+      "title": "My cart",
+      "empty_state_desc": "You cart is empty",
+      "close": "Close"
     }
   },
   "templates": {
