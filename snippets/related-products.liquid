@@ -29,7 +29,7 @@
                             </button>
                             <p class="o-feedback o-feedback--success c-rel-product__action-feedback c-rel-product__action-feedback--success">
                                 {{ 'snippets.product.added_to_cart_short' | t }}.
-                                <a class="o-feedback__link" href="{{ routes.cart_url }}">{{ 'snippets.product.go_to_cart' | t }}</a>
+                                <button class="o-feedback__link" onclick="showCart()" type="button">{{ 'snippets.product.go_to_cart' | t }}</button>
                             </p>
                             <p class="o-feedback o-feedback--fail c-rel-product__action-feedback c-rel-product__action-feedback--fail">
                                 {{ 'snippets.product.failed_to_add_to_cart_short' | t }}.

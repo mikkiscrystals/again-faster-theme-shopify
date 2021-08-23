@@ -49,11 +49,11 @@ class DragSlider {
 }
 
 class AgainFasterAPI {
-  static async addToCart(variantID, qty) {
+  static async addToCart(variantId, qty) {
     const data = {
       items: [
         {
-          id: variantID,
+          id: variantId,
           quantity: qty,
         },
       ],
@@ -71,6 +71,35 @@ class AgainFasterAPI {
     return responseJSON;
   }
 
+  static async getCartData() {
+    const response = await fetch("/cart.js", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) throw new Error("Something went wrong");
+    const responseJSON = await response.json();
+
+    return responseJSON;
+  }
+
+  static async changeCartProductQty(id, quantity) {
+    const response = await fetch("/cart/change.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        quantity,
+      }),
+    });
+    if (!response.ok) throw new Error("Something went wrong");
+    const responseJSON = await response.json();
+
+    return responseJSON;
+  }
+
   static async getRecommendedProducts(productID) {
     const response = await fetch(
       `/recommendations/products.json?product_id=${productID}`
@@ -78,5 +107,129 @@ class AgainFasterAPI {
     if (!response.ok) throw new Error("Something went wrong");
     const responseJSON = await response.json();
     return responseJSON.products;
+  }
+}
+
+class Cart {
+  _changeTimeout = {};
+
+  constructor(template, context, targetSelector) {
+    this._template = template;
+    this._context = {
+      ...context,
+      productQtyAddEventName: AF_EVENT.CART_PRODUCT_QTY_ADD,
+      productDeleteEventName: AF_EVENT.CART_PRODUCT_DELETE,
+    };
+    this._target = document.querySelector(targetSelector);
+    this._templateScript = Handlebars.compile(this._template);
+    this._target.classList.add("js-cart--initialized");
+    this._initEventListeners();
+    updateCart();
+  }
+
+  _compile() {
+    this._html = this._templateScript(this._context);
+    this._target.innerHTML = this._html;
+  }
+
+  _addProductQty({ detail: button }) {
+    let { targetSelector, key, addValue } = button.dataset;
+    addValue = +addValue;
+    const target = document.querySelector(targetSelector);
+    const currentValue = +target.value;
+    const newValue = currentValue + +addValue;
+    if (addValue < 0 && currentValue <= 1) return;
+    target.value = newValue;
+    this._onProductQtyChange(key, newValue, button, 500);
+  }
+
+  _onProductQtyChange(id, qty, target, doAfter = 0) {
+    console.log({ id, qty });
+    if (this._changeTimeout[id]) clearTimeout(this._changeTimeout[id]);
+
+    this._changeTimeout[id] = setTimeout(async () => {
+      try {
+        await AgainFasterAPI.changeCartProductQty(id, qty);
+        this._onProductQtyChangeSucceed(id, qty, target);
+      } catch (ex) {
+        console.error(ex);
+        this._onProductQtyChangeFail(id, qty, target);
+      }
+    }, doAfter);
+  }
+
+  _onProductQtyChangeSucceed(id, qty, target) {
+    updateCart();
+  }
+
+  _onProductQtyChangeFail(id, qty, target) {
+    if (qty === 0) return;
+    const input = document.querySelector(target.dataset.targetSelector);
+    let { verifiedValue } = input.dataset;
+    verifiedValue = +verifiedValue;
+    input.value = verifiedValue;
+  }
+
+  _deleteProduct({ detail: button }) {
+    let { key } = button.dataset;
+    this._onProductQtyChange(key, 0, button);
+  }
+
+  async _getData() {
+    try {
+      window.dispatchEvent(
+        new CustomEvent(AF_EVENT.CART_PROCESSING, {
+          detail: { isProcessing: true },
+        })
+      );
+      const data = await AgainFasterAPI.getCartData();
+      this._context.products = data.items.map((item) => {
+        item.final_price = formatter.format(
+          (item.final_price / 100) * item.quantity
+        );
+        return item;
+      });
+      this._context.subtotal = formatter.format(
+        data.items_subtotal_price / 100
+      );
+      this._compile();
+      console.log({ data, ctx: this._context });
+    } catch (ex) {
+      console.error(ex);
+    } finally {
+      window.dispatchEvent(
+        new CustomEvent(AF_EVENT.CART_PROCESSING, {
+          detail: { isProcessing: false },
+        })
+      );
+    }
+  }
+
+  _changeVisibility(isVisible) {
+    this._isVisible = isVisible;
+    window.dispatchEvent(
+      new CustomEvent(AF_EVENT.CART_VISIBILITY_CHANGE, {
+        detail: { isVisible: this._isVisible },
+      })
+    );
+  }
+
+  _initEventListeners() {
+    window.addEventListener(AF_EVENT.CART_UPDATE, () => this._getData());
+    window.addEventListener(AF_EVENT.CART_TOGGLE, () =>
+      this._changeVisibility(!this._isVisible)
+    );
+    window.addEventListener(AF_EVENT.CART_HIDE, () =>
+      this._changeVisibility(false)
+    );
+    window.addEventListener(AF_EVENT.CART_SHOW, () =>
+      this._changeVisibility(true)
+    );
+    window.addEventListener(AF_EVENT.CART_PRODUCT_QTY_ADD, (event) =>
+      this._addProductQty(event)
+    );
+    window.addEventListener(AF_EVENT.CART_PRODUCT_DELETE, (event) =>
+      this._deleteProduct(event)
+    );
   }
 }

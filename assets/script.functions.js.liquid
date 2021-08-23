@@ -28,6 +28,7 @@ async function onAddToCartButtonClicked(button) {
     delete button.dataset.hasFailed;
     delete button.dataset.hasSucceed;
     await AgainFasterAPI.addToCart(variantId, qty);
+    updateCart();
     button.dataset.hasSucceed = true;
   } catch (ex) {
     button.dataset.hasFailed = true;
@@ -35,4 +36,20 @@ async function onAddToCartButtonClicked(button) {
   } finally {
     delete button.dataset.isProcessing;
   }
+}
+
+function updateCart() {
+  window.dispatchEvent(new CustomEvent(AF_EVENT.CART_UPDATE));
+}
+
+function hideCart() {
+  window.dispatchEvent(new CustomEvent(AF_EVENT.CART_HIDE));
+}
+
+function showCart() {
+  window.dispatchEvent(new CustomEvent(AF_EVENT.CART_SHOW));
+}
+
+function toggleCart() {
+  window.dispatchEvent(new CustomEvent(AF_EVENT.CART_TOGGLE));
 }

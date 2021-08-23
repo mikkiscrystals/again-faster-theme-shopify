@@ -48,10 +48,10 @@
                 {% endif %}
             </li>
             <li class="o-list__item">
-                <a href="{{ routes.cart_url }}" class="o-button c-header__button" title="{{ 'templates.cart.title' | t }}">
+                <button type="button" onclick="showCart()" class="o-button c-header__button" title="{{ 'templates.cart.title' | t }}">
                     <img class="o-image o-button__icon c-header__icon" src="{{ 'icon.bag.svg' | asset_url }}" alt="{{ 'templates.cart.title' | t }}" width="11" height="11"/>
                     <img class="o-image o-button__icon c-header__icon--alt" src="{{ 'icon.bag-white.svg' | asset_url }}" alt="{{ 'templates.cart.title' | t }}" width="11" height="11" loading="lazy"/>
-                </a>
+                </button>
             </li>
         </ul>
     </div>

@@ -1,0 +1,110 @@
+<div class="c-cart__top">
+    <div class="c-cart__header">
+        <h2 class="c-cart__title o-title-1">{{ title }}</h2>
+        <ul class="o-list c-cart__header-actions">
+            <li class="o-list__item c-cart__header-action">
+                <button onclick="hideCart()" class="o-button c-cart__header-action-button c-cart__header-action-button--hide" title="{{ cartHideTitle }}">
+                    <img class="o-image o-button__icon c-cart__header-action-button-icon" src="{{ xIcon }}" alt="{{ cartHideTitle }}" width="11" height="11"/>
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="c-cart__content">
+        {{#if products.length }}
+
+            <ol class="o-list c-cart__items">
+                {{#each products}}
+                    <li class="o-list__item c-cart__item c-cart-product">
+                        <a title="{{ title }}" href="{{ url }}" class="c-cart-product__link"></a>
+                        <figure class="c-cart-product__image-box">
+                            {{#if featured_image.url }}
+                                <img src="{{ featured_image.url }}" alt="{{ title }}" class="c-cart-product__image">
+                            {{else}}
+                                {{{ ../featuredImagePlaceholder }}}
+                            {{/if}}
+                        </figure>
+                        <div class="c-cart-product__copy">
+                            <div class="c-cart-product__copy-block">
+                                <h2 class="c-cart-product__title u-smooth u-truncate u-text-caps">{{ title }}</h2>
+                                <p class="c-cart-product__price">{{ final_price }}</p>
+                            </div>
+                            <div class="c-cart-product__copy-block">
+                                <p class="c-cart-product__variant-title">{{ variant_title }}</p>
+                            </div>
+                            <div class="c-cart-product__copy-block">
+                                <div class="c-cart-product__qty">
+                                    <button 
+                                        class="o-button c-cart-product__action c-cart-product__action--decrease-qty" type="button"
+                                        onclick="window.dispatchEvent(new CustomEvent('{{ ../productQtyAddEventName }}', { 'detail': this }))"
+                                        data-add-value="-1"
+                                        data-variant-id="{{ variant_id }}"
+                                        data-key="{{ key }}"
+                                        data-target-selector="#product-{{ variant_id }}-qty"
+                                    >
+                                        <img class="o-image o-button__icon c-cart-product__action-icon" src="{{ ../minusIcon }}" alt="" width="11" height="11"/>
+                                    </button>
+                                    <input 
+                                        id="product-{{ variant_id }}-qty"
+                                        data-variant-id="{{ variant_id }}"
+                                        class="c-cart-product__input c-cart-product__input--qty"
+                                        data-verified-value="{{ quantity }}"
+                                        value="{{ quantity }}" type="number" readonly
+                                    />
+                                    <button 
+                                        class="o-button c-cart-product__action c-cart-product__action--increase-qty" 
+                                        type="button"
+                                        onclick="window.dispatchEvent(new CustomEvent('{{ ../productQtyAddEventName }}', { 'detail': this }))"
+                                        data-add-value="1"
+                                        data-variant-id="{{ variant_id }}"
+                                        data-key="{{ key }}"
+                                        data-target-selector="#product-{{ variant_id }}-qty"
+                                    >
+                                        <img class="o-image o-button__icon c-cart-product__action-icon" src="{{ ../plusIcon }}" alt="" width="11" height="11"/>
+                                    </button>
+                                </div>
+                                <button 
+                                    class="o-button c-cart-product__action c-cart-product__action--delete" 
+                                    title="{{ ../productDeleteTitle }}" 
+                                    type="button"
+                                    data-variant-id="{{ variant_id }}"
+                                    data-key="{{ key }}"
+                                    onclick="window.dispatchEvent(new CustomEvent('{{ ../productDeleteEventName }}', { 'detail': this }))"
+                                >
+                                    <img class="o-image o-button__icon c-cart-product__action-icon" src="{{ ../xIcon }}" alt="{{ ../productDeleteTitle }}" width="11" height="11"/>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                {{/each}}
+            </ol>
+
+        {{else}}
+
+            <div class="c-cart__empty-state">
+                <p>{{ emptyStateTitle }}</p>
+                {{#if emptyStateCTA }}
+                <a href="{{ emptyStateCTA.url }}" class="o-button o-title-1 c-cart__action-button">{{ emptyStateCTA.title }}</a>
+                {{/if}}
+            </div>
+
+        {{/if}}
+            
+    </div>
+</div>
+<div class="c-cart__bottom">
+    {{#if products.length }}
+        <div class="c-cart__status">
+            <h3 class="c-cart__status-title o-title-1">{{ subtotalTitle }}</h3>
+            <p class="c-cart__status-value c-cart__subtotal">{{ subtotal }}</p>
+        </div>
+        <form class="c-cart__footer" action="{{ cartURL }}" method="post" novalidate>
+            <ul class="o-list c-cart__actions">
+                <li class="o-list__item c-cart__action">
+                    <button class="c-cart__action-button o-title-1 c-cart__action-button--checkout o-button" name="checkout" type="submit">
+                        {{ checkoutTitle }}
+                    </button>
+                </li>
+            </ul>
+        </form>
+    {{/if}}
+</div>

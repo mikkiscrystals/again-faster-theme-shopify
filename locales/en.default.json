@@ -11,7 +11,10 @@
     },
     "cart": {
       "title": "My cart",
-      "empty_state_desc": "You cart is empty",
+      "empty_state_desc": "Your cart is empty",
+      "delete_product": "Delete product",
+      "to_checkout": "Continue to checkout",
+      "subtotal": "Subtotal",
       "close": "Close"
     }
   },

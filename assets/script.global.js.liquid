@@ -19,3 +19,8 @@ $(".js-product-gallery-slider").slick({
   vertical: true,
   arrows: false,
 });
+
+window.addEventListener(AF_EVENT.CART_VISIBILITY_CHANGE, ({ detail }) => {
+  const { isVisible } = detail;
+  document.querySelector("body").dataset.isCartVisible = isVisible;
+});

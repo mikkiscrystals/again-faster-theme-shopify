@@ -1,0 +1,20 @@
+async function initCart(templatePath, data, targetSelector) {
+  try {
+    const cartTemplate = await fetch(templatePath);
+    const cartTemplateHTML = await cartTemplate.text();
+    new Cart(cartTemplateHTML, data, targetSelector);
+  } catch (ex) {
+    console.error(ex);
+  }
+}
+
+initCart(
+  "{{ 'script.template.cart.hbs' | asset_url }}",
+  cartSectionData,
+  ".js-cart"
+);
+
+window.addEventListener(AF_EVENT.CART_PROCESSING, ({ detail }) => {
+  const { isProcessing } = detail;
+  document.querySelector(".c-cart").dataset.isProcessing = isProcessing;
+});
