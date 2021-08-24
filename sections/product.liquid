@@ -61,49 +61,66 @@
             extra_classes: 'u-scroll-ver'
         %}
 
-        <div class="c-product__actions-box">
-            {% if is_available %}
-
-                <ul class="o-list c-product__variants u-scroll-ver" data-total-options="{{ product.variants | size }}">
-                    {% for variant in product.variants %}
-                        <li class="o-list__item c-product__variant">
-                            <input type="radio" name="product{{product.id}}variant" id="variant-{{ variant.id }}" class="o-button c-product__variant-option" value="{{ variant.id }}" {% if variant.available == false %} disabled {% endif %}/>
-                            <label class="c-product__variant-label u-smooth" for="variant-{{ variant.id }}">
-                                <span class="o-text c-product__variant-title u-truncate">{{ variant.title }}</span>
-                                {% if variant.available %}
-                                    <span class="o-text c-product__variant-price">{{ variant.price | money }}</span>
-                                {% else %}
-                                    <span class="o-text c-product__variant-sold-out">{{ 'snippets.product.sold_out' | t }}</span>
-                                {% endif %}
-                            </label>
-                        </li>
-                    {% endfor %}
-                </ul>
-
-            {% endif %}
-
-            <ul class="o-list c-product__actions">
+        {% form 'product', product %}
+            <div class="c-product__actions-box">
                 {% if is_available %}
-                    <li class="o-list__item c-product__action c-product__action--add-to-cart">
-                        <button class="o-button c-product__action-button c-product__action-button--add-to-cart js-add-to-cart" data-qty="1" data-variant-name="product{{product.id}}variant" type="button">
-                            <span class="o-text">
-                                {{ 'snippets.product.add_to_cart' | t }}
-                            </span>
-                            <i class="o-icon c-icon-spinner">
-                                {% render 'icon-spinner' %}
-                            </i>
-                        </button>
-                        <p class="o-feedback o-feedback--success c-product__action-feedback c-product__action-feedback--success">
-                            {{ 'snippets.product.added_to_cart' | t }}.
-                            <button class="o-feedback__link" onclick="showCart()" type="button">{{ 'snippets.product.go_to_cart' | t }}</button>
-                        </p>
-                        <p class="o-feedback o-feedback--fail c-product__action-feedback c-product__action-feedback--fail">
-                            {{ 'snippets.product.failed_to_add_to_cart' | t }}.
-                        </p>
-                    </li>
+
+                    <ul class="o-list c-product__variants u-scroll-ver" data-total-options="{{ product.variants | size }}">
+                        {% for variant in product.variants %}
+                            <li class="o-list__item c-product__variant">
+                                <input 
+                                    type="radio" 
+                                    onclick="onProductVariantChange(this)" 
+                                    name="product{{product.id}}variant" 
+                                    id="variant-{{ variant.id }}" 
+                                    class="o-button c-product__variant-option" 
+                                    value="{{ variant.id }}" 
+                                    data-options-selector="#product{{ product.id }}selector"
+                                    {% if variant.available == false %} disabled {% endif %}
+                                />
+                                <label class="c-product__variant-label u-smooth" for="variant-{{ variant.id }}">
+                                    <span class="o-text c-product__variant-title u-truncate">{{ variant.title }}</span>
+                                    {% if variant.available %}
+                                        <span class="o-text c-product__variant-price">{{ variant.price | money }}</span>
+                                    {% else %}
+                                        <span class="o-text c-product__variant-sold-out">{{ 'snippets.product.sold_out' | t }}</span>
+                                    {% endif %}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <select name="id" id="product{{ product.id }}selector" class="c-product__variants-selector" hidden>
+                        {% for variant in product.variants %}
+                            <option data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }}</option>
+                        {% endfor %}
+                    </select>
+
                 {% endif %}
-            </ul>
-        </div>
+
+                <ul class="o-list c-product__actions">
+                    {% if is_available %}
+                        <li class="o-list__item c-product__action c-product__action--add-to-cart">
+                            <button type="submit" name="add" class="o-button c-product__action-button c-product__action-button--add-to-cart js-add-to-cart" data-qty="1" data-variant-name="product{{product.id}}variant">
+                                <span class="o-text">
+                                    {{ 'snippets.product.add_to_cart' | t }}
+                                </span>
+                                <i class="o-icon c-icon-spinner">
+                                    {% render 'icon-spinner' %}
+                                </i>
+                            </button>
+                            <p class="o-feedback o-feedback--success c-product__action-feedback c-product__action-feedback--success">
+                                {{ 'snippets.product.added_to_cart' | t }}.
+                                <button class="o-feedback__link" onclick="showCart()" type="button">{{ 'snippets.product.go_to_cart' | t }}</button>
+                            </p>
+                            <p class="o-feedback o-feedback--fail c-product__action-feedback c-product__action-feedback--fail">
+                                {{ 'snippets.product.failed_to_add_to_cart' | t }}.
+                            </p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        {% endform %}
 
         <div class="c-product__related-options">
 

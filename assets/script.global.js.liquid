@@ -8,6 +8,7 @@ addToCartButtons.forEach((button) => {
 
   // adds product to user's cart when button is clicked
   button.addEventListener("click", (event) => {
+    event.preventDefault();
     onAddToCartButtonClicked(event.target.closest("button"));
   });
 });

@@ -2,6 +2,7 @@
     const cartSectionData = {
         title: "{{ 'sections.cart.title' | t }}",
         subtotalTitle: "{{ 'sections.cart.subtotal' | t }}",
+        cartURL: "{{ routes.cart_url }}",
         cartHideTitle: "{{ 'sections.cart.close' | t }}",
         checkoutTitle: "{{ 'sections.cart.to_checkout' | t }}",
         featuredImagePlaceholder: `{{ 'image' | placeholder_svg_tag: 'o-image c-product-image-placeholder' }}`,
@@ -17,15 +18,18 @@
         products: []
     }
 </script>
-<div class="c-cart__box u-smooth js-cart"></div>
-<button class="c-cart__hide" onclick="hideCart()" type="button"></button>
+
+{% if template.name != 'cart' %}
+    <div class="c-cart__box u-smooth js-cart"></div>
+    <button class="c-cart__hide" onclick="hideCart()" type="button"></button>
+{% endif %}
 
 {% schema %}
 
 {
     "name": "Cart",
     "tag": "aside",
-    "class": "c-cart u-smooth",
+    "class": "c-cart c-cart--compact u-smooth",
     "settings": [
         {
             "type": "text",

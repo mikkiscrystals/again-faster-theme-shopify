@@ -149,8 +149,8 @@ class Cart {
 
     this._changeTimeout[id] = setTimeout(async () => {
       try {
-        await AgainFasterAPI.changeCartProductQty(id, qty);
-        this._onProductQtyChangeSucceed(id, qty, target);
+        const newData = await AgainFasterAPI.changeCartProductQty(id, qty);
+        this._onProductQtyChangeSucceed(id, qty, target, newData);
       } catch (ex) {
         console.error(ex);
         this._onProductQtyChangeFail(id, qty, target);
@@ -158,8 +158,8 @@ class Cart {
     }, doAfter);
   }
 
-  _onProductQtyChangeSucceed(id, qty, target) {
-    updateCart();
+  _onProductQtyChangeSucceed(id, qty, target, newData) {
+    updateCart(newData);
   }
 
   _onProductQtyChangeFail(id, qty, target) {
@@ -175,14 +175,19 @@ class Cart {
     this._onProductQtyChange(key, 0, button);
   }
 
-  async _getData() {
+  async _getData(newData) {
     try {
       window.dispatchEvent(
         new CustomEvent(AF_EVENT.CART_PROCESSING, {
           detail: { isProcessing: true },
         })
       );
-      const data = await AgainFasterAPI.getCartData();
+      let data;
+      if (newData) {
+        data = newData;
+      } else {
+        data = await AgainFasterAPI.getCartData();
+      }
       this._context.products = data.items.map((item) => {
         item.final_price = formatter.format(
           (item.final_price / 100) * item.quantity
@@ -193,7 +198,6 @@ class Cart {
         data.items_subtotal_price / 100
       );
       this._compile();
-      console.log({ data, ctx: this._context });
     } catch (ex) {
       console.error(ex);
     } finally {
@@ -212,10 +216,15 @@ class Cart {
         detail: { isVisible: this._isVisible },
       })
     );
+    if (this._isVisible) {
+      updateCart();
+    }
   }
 
   _initEventListeners() {
-    window.addEventListener(AF_EVENT.CART_UPDATE, () => this._getData());
+    window.addEventListener(AF_EVENT.CART_UPDATE, ({ detail: newData }) =>
+      this._getData(newData)
+    );
     window.addEventListener(AF_EVENT.CART_TOGGLE, () =>
       this._changeVisibility(!this._isVisible)
     );

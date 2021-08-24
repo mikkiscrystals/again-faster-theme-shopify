@@ -16,5 +16,5 @@ initCart(
 
 window.addEventListener(AF_EVENT.CART_PROCESSING, ({ detail }) => {
   const { isProcessing } = detail;
-  document.querySelector(".c-cart").dataset.isProcessing = isProcessing;
+  document.querySelector("body").dataset.cartIsProcessing = isProcessing;
 });

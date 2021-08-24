@@ -1,5 +1,5 @@
-body:not([data-is-cart-visible]) .c-cart,
-[data-is-cart-visible="false"] .c-cart {
+body:not([data-is-cart-visible]) .c-cart--compact,
+[data-is-cart-visible="false"] .c-cart--compact {
   opacity: 0;
 }
 
@@ -9,18 +9,35 @@ body:not([data-is-cart-visible]) .c-cart__box,
 }
 
 .c-cart {
+  display: grid;
+}
+
+.c-cart--compact {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  display: grid;
+  z-index: 400;
+  background-color: hsla(0, 0%, 0%, 0.36);
   grid-template-columns: 26rem;
   justify-content: end;
   justify-items: end;
-  z-index: 400;
-  background-color: hsla(0, 0%, 0%, 0.36);
+}
+
+.c-cart--fullsize {
+  padding-left: calc(var(--side-distance-4) * 2);
+  padding-right: calc(var(--side-distance-4) * 2);
+  gap: var(--side-distance-1);
+}
+
+.c-cart--fullsize .c-cart__bottom {
+  justify-content: end;
+}
+
+.c-cart--fullsize .c-cart__header-action-button--hide {
+  display: none;
 }
 
 @keyframes blink {
@@ -32,26 +49,32 @@ body:not([data-is-cart-visible]) .c-cart__box,
   }
 }
 
-[data-is-cart-visible="true"] .c-cart a,
-[data-is-cart-visible="true"] .c-cart button,
-[data-is-cart-visible="true"] .c-cart input,
-[data-is-cart-visible="true"] .c-cart select,
-[data-is-cart-visible="true"] .c-cart textarea,
-[data-is-cart-visible="true"] .c-cart__box {
+[data-is-cart-visible="true"] .c-cart--compact a,
+[data-is-cart-visible="true"] .c-cart--compact button,
+[data-is-cart-visible="true"] .c-cart--compact input,
+[data-is-cart-visible="true"] .c-cart--compact select,
+[data-is-cart-visible="true"] .c-cart--compact textarea,
+[data-is-cart-visible="true"] .c-cart--compact .c-cart__box,
+.c-cart--fullsize a,
+.c-cart--fullsize button,
+.c-cart--fullsize input,
+.c-cart--fullsize select,
+.c-cart--fullsize textarea,
+.c-cart--fullsize .c-cart__box {
   pointer-events: auto;
 }
 
-.c-cart[data-is-processing="true"] .c-cart__top,
-.c-cart[data-is-processing="true"] .c-cart__bottom {
+[data-cart-is-processing="true"] .c-cart__top,
+[data-cart-is-processing="true"] .c-cart__bottom {
   animation: blink 0.6s linear infinite normal both;
 }
 
-.c-cart[data-is-processing="true"] .c-cart__box a,
-.c-cart[data-is-processing="true"] .c-cart__box button,
-.c-cart[data-is-processing="true"] .c-cart__box input,
-.c-cart[data-is-processing="true"] .c-cart__box select,
-.c-cart[data-is-processing="true"] .c-cart__box textarea,
-.c-cart[data-is-processing="true"] .c-cart__box .c-cart__box {
+[data-cart-is-processing="true"] .c-cart__box a,
+[data-cart-is-processing="true"] .c-cart__box button,
+[data-cart-is-processing="true"] .c-cart__box input,
+[data-cart-is-processing="true"] .c-cart__box select,
+[data-cart-is-processing="true"] .c-cart__box textarea,
+[data-cart-is-processing="true"] .c-cart__box .c-cart__box {
   pointer-events: none;
 }
 
@@ -265,5 +288,12 @@ body:not([data-is-cart-visible]) .c-cart__box,
   grid-auto-flow: row;
   justify-items: center;
   gap: 1rem;
+}
+
+.c-cart--compact .c-cart__empty-state {
   margin-top: 35vh;
+}
+
+.c-cart--fullsize .c-cart__empty-state {
+  margin-top: var(--side-distance-4);
 }
