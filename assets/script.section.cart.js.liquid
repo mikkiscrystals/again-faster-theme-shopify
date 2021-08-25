@@ -8,11 +8,7 @@ async function initCart(templatePath, data, targetSelector) {
   }
 }
 
-initCart(
-  "{{ 'script.template.cart.hbs' | asset_url }}",
-  cartSectionData,
-  ".js-cart"
-);
+initCart("{{ 'template.cart.hbs' | asset_url }}", cartSectionData, ".js-cart");
 
 window.addEventListener(AF_EVENT.CART_PROCESSING, ({ detail }) => {
   const { isProcessing } = detail;

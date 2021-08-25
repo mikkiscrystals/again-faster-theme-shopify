@@ -1,1 +1,78 @@
-<div class="c-cart c-cart--fullsize js-cart"></div>
+<div class="c-cart c-cart--fullsize js-cart">
+    <div class="c-cart__top">
+        <div class="c-cart__header">
+            <h2 class="c-cart__title o-title-1">{{ 'sections.cart.title' | t }}</h2>
+        </div>
+        <div class="c-cart__content">
+            {% if cart.items != empty %}
+
+                <ol class="o-list c-cart__items">
+
+                    {% for item in cart.items %}
+
+                        <li class="o-list__item c-cart__item c-cart-product">
+
+                            <a title="{{ item.title }}" href="{{ item.url }}" class="c-cart-product__link"></a>
+                            <figure class="c-cart-product__image-box">
+                                {% if item.image %}
+                                    <img src="{{ item.image | img_url: '120x150' }}" alt="{{ item.title }}" class="c-cart-product__image">
+                                {% else %}
+                                    {{ 'image' | placeholder_svg_tag: 'o-image c-product-image-placeholder' }}
+                                {% endif %}
+                            </figure>
+                            <div class="c-cart-product__copy">
+                                <div class="c-cart-product__copy-block">
+                                    <h2 class="c-cart-product__title u-smooth u-truncate u-text-caps">{{ item.title }}</h2>
+                                    <p class="c-cart-product__price">{{ item.final_price | money }}</p>
+                                </div>
+                                <div class="c-cart-product__copy-block">
+                                    <p class="c-cart-product__variant-title">{{ item.variant.title }}</p>
+                                </div>
+                                <div class="c-cart-product__copy-block">
+                                    <div class="c-cart-product__qty">
+                                        <button class="o-button c-cart-product__action c-cart-product__action--decrease-qty" type="button" onclick="window.dispatchEvent(new CustomEvent(AF_EVENT.CART_PRODUCT_QTY_ADD, { 'detail': this }))" data-add-value="-1" data-variant-id="{{ item.variant_id }}" data-key="{{ item.key }}" data-target-selector="#product-{{ item.variant_id }}-qty">
+                                            <img class="o-image o-button__icon c-cart-product__action-icon" src="{{ 'icon.minus.png' | asset_url }}" alt="" width="11" height="11"/>
+                                        </button>
+                                        <input id="product-{{ item.variant_id }}-qty" data-variant-id="{{ item.variant_id }}" class="c-cart-product__input c-cart-product__input--qty" data-verified-value="{{ item.quantity }}" value="{{ item.quantity }}" type="number" readonly/>
+                                        <button class="o-button c-cart-product__action c-cart-product__action--increase-qty" type="button" onclick="window.dispatchEvent(new CustomEvent(AF_EVENT.CART_PRODUCT_QTY_ADD, { 'detail': this }))" data-add-value="1" data-variant-id="{{ item.variant_id }}" data-key="{{ item.key }}" data-target-selector="#product-{{ item.variant_id }}-qty">
+                                            <img class="o-image o-button__icon c-cart-product__action-icon" src="{{ 'icon.plus.png' | asset_url }}" alt="" width="11" height="11"/>
+                                        </button>
+                                    </div>
+                                    <button class="o-button c-cart-product__action c-cart-product__action--delete" title="{{ 'sections.cart.delete_product' | t }}" type="button" data-variant-id="{{ item.variant_id }}" data-key="{{ item.key }}" onclick="window.dispatchEvent(new CustomEvent(AF_EVENT.CART_PRODUCT_DELETE, { 'detail': this }))">
+                                        <img class="o-image o-button__icon c-cart-product__action-icon" src="{{ 'icon.x.png' | asset_url }}" alt="{{ 'sections.cart.delete_product' | t }}" width="11" height="11"/>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+
+                    {% endfor %}
+                </ol>
+
+            {% else %}
+
+                <div class="c-cart__empty-state">
+                    <p>{{ 'sections.cart.empty_state_desc' | t }}</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+    </div>
+    <div class="c-cart__bottom">
+        {% if cart.items != empty %}
+            <div class="c-cart__status">
+                <h3 class="c-cart__status-title o-title-1">{{ 'sections.cart.subtotal' | t }}</h3>
+                <p class="c-cart__status-value c-cart__subtotal">{{ cart.items_subtotal_price | money }}</p>
+            </div>
+            <form class="c-cart__footer" action="{{ routes.cart_url }}" method="post" novalidate>
+                <ul class="o-list c-cart__actions">
+                    <li class="o-list__item c-cart__action">
+                        <button class="c-cart__action-button o-title-1 c-cart__action-button--checkout o-button" name="checkout" type="submit">
+                            {{ 'sections.cart.to_checkout' | t }}
+                        </button>
+                    </li>
+                </ul>
+            </form>
+        {% endif %}
+    </div>
+</div>
