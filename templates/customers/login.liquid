@@ -1,8 +1,8 @@
-<!-- /templates/customers/login.liquid -->
-
 <section class="o-section c-login o-form c-form-login">
 
     {% form 'customer_login' %}
+
+        <h1 class="o-form__title o-title-1">{{ 'templates.login.title' | t }}</h1>
 
         {% assign form_id = 'login' %}
 
@@ -35,7 +35,7 @@
         {% if form.errors | size > 0 %}
             <ul class="o-list o-form__notes o-form__notes--centered">
                 {% for field in form.errors %}
-                    <li class="o-list__item o-form__note o-form__note--fail">{{ form.errors.translated_fields['email'] }}
+                    <li class="o-list__item o-form__note o-form__note--fail">
                         {% if field == 'form' %}
                             {{ form.errors.messages[field] }}
                         {% else %}
@@ -61,30 +61,3 @@
     {% endform %}
 
 </section>
-
-<!-- <h2>Login</h2>
-{% form 'customer_login' %}
-
-{{ form.errors | default_errors }}
-
-<label for="customer_email">Email Address</label>
-<input type="email" name="customer[email]" />
-
-<label for="customer_password">Password</label>
-<input type="password" name="customer[password]" />
-
-<input type="submit" value="Sign In" />
-
-{% endform %}
-
-<h2>Forgot Password</h2>
-{% form 'recover_customer_password' %}
-
-{{ form.errors | default_errors }}
-
-<label for="customer_email">Email Address</label>
-<input type="email" name="email" />
-
-<input type="submit" value="Submit" />
-
-{% endform %} -->

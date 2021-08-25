@@ -1,6 +1,84 @@
-<!-- /templates/customers/register.liquid -->
+<section class="o-section c-register o-form c-form-register">
 
-{% form 'create_customer' %}
+    {% form 'create_customer' %}
+
+        <h1 class="o-form__title o-title-1">{{ 'templates.register.title' | t }}</h1>
+
+        {% assign form_id = 'register' %}
+
+        <div class="o-form__input-box o-form__input-box--first-name">
+            <input name="customer[first_name]" id="{{ form_id }}-first-name" class="o-input" aria-label="{{ 'snippets.form.first_name.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-first-name">
+                {{ 'snippets.form.first_name.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box o-form__input-box--last-name">
+            <input name="customer[last_name]" id="{{ form_id }}-last-name" class="o-input" aria-label="{{ 'snippets.form.last_name.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-last-name">
+                {{ 'snippets.form.last_name.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box">
+            <input type="email" name="customer[email]" id="{{ form_id }}-email" class="o-input" aria-label="{{ 'snippets.form.email.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-email">
+                {{ 'snippets.form.email.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box">
+            <input type="password" data-password-group="{{ form_id }}" name="customer[password]" id="{{ form_id }}-password" class="o-input" aria-label="{{ 'snippets.form.password.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-password">
+                {{ 'snippets.form.password.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box">
+            <input type="password" data-password-group="{{ form_id }}" id="{{ form_id }}-password-repeat" class="o-input" aria-label="{{ 'snippets.form.password_repeat.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-password-repeat">
+                {{ 'snippets.form.password_repeat.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__action-group o-form__action-group--submit u-mt-1 c-form-register__action-group">
+            <button type="submit" title="{{ 'snippets.form.submit.register' | t }}" class="o-button o-form__action o-form__action--bordered o-form__action--cta">
+                {{ 'snippets.form.submit.register' | t }}
+            </button>
+        </div>
+
+        {% if form.errors | size > 0 %}
+            <ul class="o-list o-form__notes o-form__notes--centered">
+                {% for field in form.errors %}
+                    <li class="o-list__item o-form__note o-form__note--fail">
+                        {% if field == 'form' %}
+                            {{ form.errors.messages[field] }}
+                        {% else %}
+                            {{ form.errors.translated_fields[field] }}
+                            -
+                            {{ form.errors.messages[field] }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <ul class="o-list o-form__notes o-form__notes--centered">
+            <li class="o-list__item o-form__note">{{ 'snippets.form.notes.register.already_have_account' | t }}</li>
+        </ul>
+
+        <div class="o-form__action-group o-form__action-group--centered c-form-register__action-group">
+            <a href="{{ routes.account_login_url }}" title="{{ 'snippets.form.submit.login' | t }}" class="o-button o-form__action o-form__action--bordered">
+                {{ 'snippets.form.submit.login' | t }}
+            </a>
+        </div>
+
+    {% endform %}
+
+</section>
+
+
+<!-- {% form 'create_customer' %}
 
 {{ form.errors | default_errors }}
 
@@ -18,4 +96,4 @@
 
 <input type="submit" value="Create" />
 
-{% endform %}
+{% endform %} -->

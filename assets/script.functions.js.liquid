@@ -43,21 +43,66 @@ function onProductVariantChange(inputRadio) {
   selectInput.value = inputRadio.value;
 }
 
-function onInputChange(input) {
-  input.classList.add("o-input--touched");
-  const value = input.value;
+function updateFormState(form) {
+  const hasErrors = form.querySelectorAll(".o-input--has-error").length > 0;
+  if (hasErrors) {
+    form.classList.add("o-form--has-errors");
+  } else {
+    form.classList.remove("o-form--has-errors");
+  }
+}
+
+function updateInputState(form, input, value, tag, type, isRequired) {
   if (value) {
     input.classList.add("o-input--has-value");
   } else {
     input.classList.remove("o-input--has-value");
   }
+
+  switch (type) {
+    case "password": {
+      const { passwordGroup } = input.dataset;
+      const relatedPasswordInputs = document.querySelectorAll(
+        `[data-password-group="${passwordGroup}"]`
+      );
+      let passwordsMatch = true;
+      relatedPasswordInputs.forEach((pwdInput) => {
+        if (pwdInput.value !== value) passwordsMatch = false;
+      });
+      if (!passwordsMatch) {
+        relatedPasswordInputs.forEach((pwdInput) =>
+          pwdInput.classList.add("o-input--has-error")
+        );
+      } else {
+        relatedPasswordInputs.forEach((pwdInput) =>
+          pwdInput.classList.remove("o-input--has-error")
+        );
+      }
+      break;
+    }
+  }
+
+  updateFormState(form);
+}
+
+function onInputChange(form, input) {
+  input.classList.add("o-input--touched");
+  const value = input.value;
+  const tag = input.tagName;
+  const type = input.getAttribute("type");
+  const isRequired = input.hasAttribute("required");
+  updateInputState(form, input, value, tag, type, isRequired);
 }
 
 function watchFormState(form) {
   const inputs = form.querySelectorAll("input, select, textarea");
   inputs.forEach((input) => {
-    input.addEventListener("change", ({ target }) => onInputChange(target));
-    input.addEventListener("input", ({ target }) => onInputChange(target));
+    input.addEventListener("change", ({ target }) =>
+      onInputChange(form, target)
+    );
+    input.addEventListener("input", ({ target }) =>
+      onInputChange(form, target)
+    );
   });
 }
 

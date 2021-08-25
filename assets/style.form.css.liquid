@@ -6,6 +6,20 @@
   gap: 2rem;
 }
 
+.o-form--has-errors [type="submit"] {
+  pointer-events: none;
+  color: var(--color-text-3);
+  background-color: var(--color-text-2);
+}
+
+.o-form--has-errors .o-form__action-group--submit {
+  cursor: not-allowed;
+}
+
+.o-form__title {
+  text-align: center;
+}
+
 .o-input {
   padding: 1rem 0;
   border-bottom: solid 0.1em var(--color-text-3);
@@ -84,6 +98,7 @@
 .o-form__action--cta {
   color: var(--color-text-bg);
   background-color: var(--color-text);
+  border-color: transparent;
 }
 
 .o-form__action--cta:hover,
@@ -92,11 +107,27 @@
   background-color: var(--color-text-focus);
 }
 
-.c-form-login {
+.c-form-login,
+.c-form-register {
   display: grid;
   justify-content: center;
 }
 
-.c-form-login form {
+.c-form-login form,
+.c-form-register form {
   width: 30rem;
+}
+
+.c-form-register form {
+  grid-auto-flow: unset;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.c-form-register form > * {
+  grid-column: span 6;
+}
+
+.c-form-register form .o-form__input-box--first-name,
+.c-form-register form .o-form__input-box--last-name {
+  grid-column: span 3;
 }
