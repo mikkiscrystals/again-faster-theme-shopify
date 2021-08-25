@@ -51,13 +51,16 @@ body[data-is-cart-visible="true"] {
   position: relative;
 }
 
-.o-button {
+.o-button,
+.btn {
   color: var(--color-text);
   display: inline-flex;
   gap: 0.5em;
   align-items: center;
 }
 
+.btn:hover,
+.btn:focus,
 .o-button:hover,
 .o-button:focus {
   color: var(--color-text-focus);
@@ -219,4 +222,12 @@ body[data-is-cart-visible="true"] {
 
 [data-is-hidden="true"] {
   display: none !important;
+}
+
+.u-mt-1 {
+  margin-top: var(--side-distance-1);
+}
+
+.u-mt-2 {
+  margin-top: var(--side-distance-2);
 }

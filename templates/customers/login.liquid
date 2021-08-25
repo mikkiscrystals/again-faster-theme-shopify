@@ -1,6 +1,68 @@
 <!-- /templates/customers/login.liquid -->
 
-<h2>Login</h2>
+<section class="o-section c-login o-form c-form-login">
+
+    {% form 'customer_login' %}
+
+        {% assign form_id = 'login' %}
+
+        <div class="o-form__input-box">
+            <input type="email" name="customer[email]" id="{{ form_id }}-email" class="o-input" aria-label="{{ 'snippets.form.email.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-email">
+                {{ 'snippets.form.email.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box">
+            <input type="password" name="customer[password]" id="{{ form_id }}-password" class="o-input" aria-label="{{ 'snippets.form.password.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-password">
+                {{ 'snippets.form.password.title' | t }}
+            </label>
+            <ul class="o-list o-form__input-notes">
+                <li class="o-list__item o-form__input-note">
+                    <a href="{{ routes.account_recover_url }}" class="o-button">
+                        {{ 'snippets.form.notes.login.forgot_password' | t }}
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="o-form__action-group u-mt-1 c-form-login__action-group">
+            <button type="submit" title="{{ 'snippets.form.submit.login' | t }}" class="o-button o-form__action o-form__action--bordered o-form__action--cta">
+                {{ 'snippets.form.submit.login' | t }}
+            </button>
+        </div>
+        {% if form.errors | size > 0 %}
+            <ul class="o-list o-form__notes o-form__notes--centered">
+                {% for field in form.errors %}
+                    <li class="o-list__item o-form__note o-form__note--fail">{{ form.errors.translated_fields['email'] }}
+                        {% if field == 'form' %}
+                            {{ form.errors.messages[field] }}
+                        {% else %}
+                            {{ form.errors.translated_fields[field] }}
+                            -
+                            {{ form.errors.messages[field] }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <ul class="o-list o-form__notes o-form__notes--centered">
+            <li class="o-list__item o-form__note">{{ 'snippets.form.notes.login.dont_have_account' | t }}</li>
+        </ul>
+
+        <div class="o-form__action-group o-form__action-group--centered c-form-login__action-group">
+            <a href="{{ routes.account_register_url }}" title="{{ 'snippets.form.submit.login' | t }}" class="o-button o-form__action o-form__action--bordered">
+                {{ 'snippets.form.submit.register' | t }}
+            </a>
+        </div>
+
+    {% endform %}
+
+</section>
+
+<!-- <h2>Login</h2>
 {% form 'customer_login' %}
 
 {{ form.errors | default_errors }}
@@ -25,4 +87,4 @@
 
 <input type="submit" value="Submit" />
 
-{% endform %}
+{% endform %} -->

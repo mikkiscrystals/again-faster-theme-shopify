@@ -25,3 +25,6 @@ window.addEventListener(AF_EVENT.CART_VISIBILITY_CHANGE, ({ detail }) => {
   const { isVisible } = detail;
   document.querySelector("body").dataset.isCartVisible = isVisible;
 });
+
+const forms = document.querySelectorAll("form");
+forms.forEach((form) => watchFormState(form));

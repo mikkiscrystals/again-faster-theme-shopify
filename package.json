@@ -1,6 +1,6 @@
 {
   "name": "again-faster-theme-shopify",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "A theme for Again / Faster store",
   "scripts": {
     "dev": "theme watch --allow-live",

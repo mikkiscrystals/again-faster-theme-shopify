@@ -3,14 +3,39 @@
   display: grid;
   grid-auto-flow: row;
   align-content: start;
-  gap: 0.5rem;
+  gap: 2rem;
 }
 
 .o-input {
   padding: 1rem 0;
-  font-size: 0.75em;
   border-bottom: solid 0.1em var(--color-text-3);
   width: 100%;
+}
+
+.o-form__input-box {
+  position: relative;
+}
+
+.o-label,
+.o-form__input-notes {
+  position: absolute;
+  left: 0;
+}
+
+.o-label {
+  top: 1rem;
+  transform-origin: left center;
+}
+
+.o-input:focus ~ .o-label,
+.o-input--has-value ~ .o-label {
+  transform: translateY(-125%) scale(0.75);
+}
+
+.o-form__input-notes {
+  top: calc(100% + 0.5rem);
+  width: 100%;
+  text-align: right;
 }
 
 .o-form__notes {
@@ -23,4 +48,55 @@
 
 .o-form__note--fail {
   color: var(--color-fail);
+}
+
+.c-form-subscription form {
+  gap: 0.5rem;
+}
+
+.c-form-subscription .o-input {
+  font-size: 0.75em;
+}
+
+.o-form__notes--centered,
+.o-form__action-group--centered {
+  text-align: center;
+}
+
+.shopify-challenge__button,
+.o-form__action--bordered {
+  padding: 0.5rem 1rem;
+  border: 0.1em solid var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.o-form__action--bordered {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 0.5rem;
+  text-align: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.o-form__action--cta {
+  color: var(--color-text-bg);
+  background-color: var(--color-text);
+}
+
+.o-form__action--cta:hover,
+.o-form__action--cta:focus {
+  color: var(--color-text-bg);
+  background-color: var(--color-text-focus);
+}
+
+.c-form-login {
+  display: grid;
+  justify-content: center;
+}
+
+.c-form-login form {
+  width: 30rem;
 }

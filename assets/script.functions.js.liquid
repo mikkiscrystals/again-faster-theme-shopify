@@ -43,6 +43,24 @@ function onProductVariantChange(inputRadio) {
   selectInput.value = inputRadio.value;
 }
 
+function onInputChange(input) {
+  input.classList.add("o-input--touched");
+  const value = input.value;
+  if (value) {
+    input.classList.add("o-input--has-value");
+  } else {
+    input.classList.remove("o-input--has-value");
+  }
+}
+
+function watchFormState(form) {
+  const inputs = form.querySelectorAll("input, select, textarea");
+  inputs.forEach((input) => {
+    input.addEventListener("change", ({ target }) => onInputChange(target));
+    input.addEventListener("input", ({ target }) => onInputChange(target));
+  });
+}
+
 function updateCart(newData) {
   window.dispatchEvent(
     new CustomEvent(AF_EVENT.CART_UPDATE, { detail: newData })
