@@ -109,4 +109,6 @@
             const currentProductID = {{ product.id }};
         </script>
         <script src="{{ 'script.template.product.js' | asset_url }}" type="text/javascript" defer></script>
+    {% when 'login' %}
+        <script src="{{ 'script.template.login.js' | asset_url }}" type="text/javascript" defer></script>
 {% endcase %}

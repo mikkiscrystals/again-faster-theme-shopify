@@ -27,7 +27,11 @@
       "title": "Account"
     },
     "login": {
-      "title": "Log in"
+      "title": "Log in",
+      "recover_password": "Recover password"
+    },
+    "reset_password": {
+      "title": "Reset password"
     },
     "register": {
       "title": "Create an account"
@@ -63,9 +67,14 @@
         "login": "Log in",
         "logout": "Log out",
         "register": "Create an account",
+        "go_back": "Go back",
+        "recover_password": "Recover password",
         "reset_password": "Reset password"
       },
       "notes": {
+        "recover_password": {
+          "success": "Check your e-mail for further instructions"
+        },
         "newsletter": {
           "success": "You are subscribed to our newsletter"
         },

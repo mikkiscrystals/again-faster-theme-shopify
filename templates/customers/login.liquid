@@ -20,7 +20,7 @@
             </label>
             <ul class="o-list o-form__input-notes">
                 <li class="o-list__item o-form__input-note">
-                    <a href="{{ routes.account_recover_url }}" class="o-button">
+                    <a class="o-button" href="{{ routes.account_login_url }}#recover" onclick="setTimeout(() => checkURL(), 0)">
                         {{ 'snippets.form.notes.login.forgot_password' | t }}
                     </a>
                 </li>
@@ -55,6 +55,59 @@
         <div class="o-form__action-group o-form__action-group--centered c-form-login__action-group">
             <a href="{{ routes.account_register_url }}" title="{{ 'snippets.form.submit.login' | t }}" class="o-button o-form__action o-form__action--bordered">
                 {{ 'snippets.form.submit.register' | t }}
+            </a>
+        </div>
+
+    {% endform %}
+
+</section>
+
+<section class="o-section c-recover-password o-form c-form-recover-password">
+
+    {% form 'recover_customer_password' %}
+
+        <h1 class="o-form__title o-title-1">{{ 'templates.login.recover_password' | t }}</h1>
+
+        {% assign form_id = 'recover-password' %}
+
+        <div class="o-form__input-box">
+            <input type="email" name="email" id="{{ form_id }}-email" class="o-input" aria-label="{{ 'snippets.form.email.placeholder' | t }}" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-email">
+                {{ 'snippets.form.email.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__action-group u-mt-1 c-form-recover-password__action-group">
+            <button type="submit" title="{{ 'snippets.form.submit.login' | t }}" class="o-button o-form__action o-form__action--bordered o-form__action--cta">
+                {{ 'snippets.form.submit.recover_password' | t }}
+            </button>
+        </div>
+
+        {% if form.errors | size > 0 %}
+            <ul class="o-list o-form__notes o-form__notes--centered">
+                {% for field in form.errors %}
+                    <li class="o-list__item o-form__note o-form__note--fail">
+                        {% if field == 'form' %}
+                            {{ form.errors.messages[field] }}
+                        {% else %}
+                            {{ form.errors.translated_fields[field] }}
+                            -
+                            {{ form.errors.messages[field] }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {%- if form.posted_successfully? -%}
+            <ul class="o-list o-form__notes o-form__notes--centered">
+                <li class="o-list__item o-form__note o-form__note--success">{{ 'snippets.form.notes.newsletter.success' | t }}</li>
+            </ul>
+        {%- endif -%}
+
+        <div class="o-form__action-group o-form__action-group--centered c-form-recover-password__action-group">
+            <a href="{{ routes.account_login_url }}" title="{{ 'snippets.form.submit.login' | t }}" class="o-button o-form__action o-form__action--bordered" onclick="setTimeout(() => checkURL(), 0)">
+                {{ 'snippets.form.submit.go_back' | t }}
             </a>
         </div>
 
