@@ -24,7 +24,16 @@
       "description": "The page you were looking for does not exist"
     },
     "account": {
-      "title": "Account"
+      "title": "Account",
+      "orders": "Orders",
+      "no_orders_yet": "You haven't placed any orders yet",
+      "no_addresses_yet": "You haven't added any addresses yet",
+      "manage_addresses": "Manage your addresses",
+      "order_number": "Order no.",
+      "date": "Date",
+      "status": "Status",
+      "total": "Total",
+      "address_book": "Address book"
     },
     "login": {
       "title": "Log in",
@@ -106,6 +115,12 @@
       "go_to_cart": "Go to cart",
       "failed_to_add_to_cart": "Something went wrong, refresh the page or try again later",
       "failed_to_add_to_cart_short": "Something went wrong"
+    },
+    "sidebar": {
+      "title": "My account",
+      "order_details": "Order details",
+      "address_book": "Address book",
+      "acc_overview": "Account overview"
     }
   }
 }

@@ -1,0 +1,74 @@
+.c-account {
+  padding: var(--side-distance-1) var(--side-distance-3);
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--side-distance-1);
+}
+
+.c-account__block {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 0.5rem;
+}
+
+.c-account__title-2 {
+  font-weight: normal;
+}
+
+.c-orders-table,
+.c-orders-table__head,
+.c-orders-table__body {
+  display: block;
+}
+
+.c-orders-table__row {
+  display: flex;
+  flex-wrap: nowrap;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  gap: 1.5rem;
+}
+
+.c-orders-table__col {
+  flex: 1;
+}
+
+.c-orders-table__body .c-orders-table__row:nth-child(1),
+.c-orders-table__head .c-orders-table__row {
+  padding-top: 0.5rem;
+}
+
+.c-orders-table__head .c-orders-table__row {
+  padding-bottom: 0.5rem;
+}
+
+.c-orders-table__head .c-orders-table__col {
+  text-align: left;
+  color: var(--color-text-2);
+  font-weight: normal;
+}
+
+.c-orders-table__body .c-orders-table__row:not(:last-child) {
+  border-bottom: 0.1em solid var(--color-bg-2);
+}
+
+.c-account__status {
+  color: var(--color-text-2);
+}
+
+[data-col-name="status"] {
+  text-transform: capitalize;
+}
+
+.c-account__address-list {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.c-address-item {
+  background-color: var(--color-bg-1);
+  padding: 1rem 1.5rem;
+}

@@ -1,0 +1,23 @@
+.c-sidebar {
+  background-color: var(--color-bg-1);
+  padding: var(--side-distance-1);
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--side-distance-1);
+  align-items: start;
+  align-content: start;
+}
+
+.c-sidebar__title {
+  font-weight: normal;
+}
+
+.c-sidebar__list {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+}
+
+.c-sidebar__link--active {
+  border-bottom: 0.1em solid var(--color-accent-1);
+}

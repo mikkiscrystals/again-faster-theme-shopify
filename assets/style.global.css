@@ -231,3 +231,18 @@ body[data-is-cart-visible="true"] {
 .u-mt-2 {
   margin-top: var(--side-distance-2);
 }
+
+.c-cabinet {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  padding: 0.5rem;
+}
+
+.o-link-1 {
+  border-bottom: 0.1em solid var(--color-text-3);
+}
+
+.o-link-1:hover,
+.o-link-1:focus {
+  border-color: var(--color-accent-1);
+}

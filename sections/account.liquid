@@ -1,0 +1,95 @@
+<h1 class="c-account__title o-title-1">
+    {{ customer.name }}
+</h1>
+
+<div class="c-account__block c-account__orders">
+    <h2 class="c-account__title-2 o-title-1">
+        {{ 'templates.account.orders' | t }}
+    </h2>
+    {% paginate customer.orders by 12 %}
+        {% if customer.orders.size > 0 %}
+            <table class="o-list c-account__orders-table c-orders-table">
+                <thead class="c-orders-table__head">
+                    <tr class="c-orders-table__row">
+                        <th class="c-orders-table__col" data-col-name="order-number">
+                            {{ 'templates.account.order_number' | t }}
+                        </th>
+                        <th class="c-orders-table__col" data-col-name="date">
+                            {{ 'templates.account.date' | t }}
+                        </th>
+                        <th class="c-orders-table__col" data-col-name="status">
+                            {{ 'templates.account.status' | t }}
+                        </th>
+                        <th class="c-orders-table__col" data-col-name="total">
+                            {{ 'templates.account.total' | t }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="c-orders-table__body">
+                    {% for order in customer.orders %}
+                        <tr class="c-orders-table__row">
+                            <td class="c-orders-table__col" data-col-name="order-number">
+                                {{ order.name }}
+                            </td>
+                            <td class="c-orders-table__col" data-col-name="date">
+                                {{ order.created_at }}
+                            </td>
+                            <td class="c-orders-table__col" data-col-name="status">
+                                {{ order.fulfillment_status }}
+                            </td>
+                            <td class="c-orders-table__col" data-col-name="total">
+                                {{ order.total_price | money }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% render 'pagination' with paginate: paginate %}
+        {% else %}
+            <p class="c-account__status">{{ 'templates.account.no_orders_yet' | t }}</p>
+        {% endif %}
+    {% endpaginate %}
+</div>
+
+<div class="c-account__block c-account__address-book">
+    <h2 class="c-account__title-2 o-title-1">
+        {{ 'templates.account.address_book' | t }}
+    </h2>
+    {% if customer.addresses.size > 0 %}
+        <ul class="o-list c-account__address-list">
+            {% for address in customer.addresses %}
+                <li class="o-list__item c-account__address c-address-item">
+                    <div class="c-address-item-contacts">
+                        <p class="c-address-item-name">
+                            <strong>{{ address.name }}</strong>
+                        </p>
+                        <p class="c-address-item-phone">{{ address.phone }}</p>
+                    </div>
+                    <div class="c-address-item-location">
+                        <p class="c-address-item-street">{{ address.street }}</p>
+                        <p class="c-address-item-city-country">{{ address.city }},
+                            {{ address.country }}</p>
+                    </div>
+                    <p class="c-address-item-zip">{{ address.zip }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="c-account__status">{{ 'templates.account.no_addresses_yet' | t }}</p>
+    {% endif %}
+    <p>
+        <a href="{{ routes.account_addresses_url }}" class="o-button o-link-1">
+            {{ 'templates.account.manage_addresses' | t }}
+        </a>
+    </p>
+</div>
+
+{% schema %}
+
+{
+    "name": "Account",
+    "tag": "section",
+    "class": "o-section c-account"
+}
+
+{% endschema %}

@@ -1,0 +1,33 @@
+<nav class="c-sidebar">
+    <h2 class="c-sidebar__title o-title-1">{{ 'snippets.sidebar.title' | t }}</h2>
+    <ul class="o-list c-sidebar__list">
+        <li class="o-list__item c-sidebar__list-item">
+            <a 
+                href="{{ routes.account_url }}"
+                class="
+                    o-button
+                    c-sidebar__link
+                    {% if template.name == 'account' %}
+                        c-sidebar__link--active
+                    {% endif %}
+                "
+            >
+                {{ 'snippets.sidebar.acc_overview' | t }}
+            </a>
+        </li>
+        <li class="o-list__item c-sidebar__list-item">
+            <a 
+                href="{{ routes.account_addresses_url }}" 
+                class="
+                    o-button 
+                    c-sidebar__link
+                    {% if template.name == 'addresses' %}
+                        c-sidebar__link--active
+                    {% endif %}
+                "
+            >
+                {{ 'snippets.sidebar.address_book' | t }}
+            </a>
+        </li>
+    </ul>
+</nav>

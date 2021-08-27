@@ -81,6 +81,7 @@ function updateInputState(form, input, value, tag, type, isRequired) {
       break;
     }
   }
+  /* asd */
 
   updateFormState(form);
 }
