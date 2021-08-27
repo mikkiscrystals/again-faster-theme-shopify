@@ -12,4 +12,13 @@ const AF_EVENT = {
   CART_VISIBILITY_CHANGE: "cartVisibilityChange",
   CART_PRODUCT_QTY_ADD: "cartProductQtyAdd",
   CART_PRODUCT_DELETE: "cartProductDelete",
+  ADDRESS_MODAL_CLOSE: "addressModalClose",
+  ADDRESS_MODAL_SAVE: "addressModalSave",
 };
+
+const TEMPLATE_URL = {
+  CART: "{{ 'template.cart.hbs' | asset_url }}",
+  ADDRESS: "{{ 'template.address.hbs' | asset_url }}",
+};
+
+const ANIMATION_TIME = 300;

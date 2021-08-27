@@ -28,6 +28,7 @@
 <link rel="preload" as="style" href="{{ 'style.global.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.collection.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.form.css' | asset_url }}">
+<link rel="preload" as="style" href="{{ 'style.modal.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.snippet.form-subscription.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.snippet.collections-list-item.css' | asset_url }}">
 <link rel="preload" as="style" href="{{ 'style.snippet.products-list-item.css' | asset_url }}">
@@ -67,6 +68,7 @@
 {{ 'style.global.css' | asset_url | stylesheet_tag }}
 {{ 'style.collection.css' | asset_url | stylesheet_tag }}
 {{ 'style.form.css' | asset_url | stylesheet_tag }}
+{{ 'style.modal.css' | asset_url | stylesheet_tag }}
 
 {{ 'style.snippet.form-subscription.css' | asset_url | stylesheet_tag }}
 {{ 'style.snippet.collections-list-item.css' | asset_url | stylesheet_tag }}
@@ -115,4 +117,6 @@
         <script src="{{ 'script.template.product.js' | asset_url }}" type="text/javascript" defer></script>
     {% when 'login' %}
         <script src="{{ 'script.template.login.js' | asset_url }}" type="text/javascript" defer></script>
+    {% when 'addresses' %}
+        <script src="{{ 'script.template.addresses.js' | asset_url }}" type="text/javascript" defer></script>
 {% endcase %}

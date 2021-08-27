@@ -21,7 +21,8 @@ body > div:not([class]) {
   position: absolute;
 }
 
-body[data-is-cart-visible="true"] {
+body[data-is-cart-visible="true"],
+body[data-is-modal-visible="true"] {
   overflow: hidden;
 }
 
@@ -245,4 +246,8 @@ body[data-is-cart-visible="true"] {
 .o-link-1:hover,
 .o-link-1:focus {
   border-color: var(--color-accent-1);
+}
+
+.o-link--contextual {
+  border-bottom-style: dashed;
 }

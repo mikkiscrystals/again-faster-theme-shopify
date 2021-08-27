@@ -108,6 +108,15 @@ class AgainFasterAPI {
     const responseJSON = await response.json();
     return responseJSON.products;
   }
+
+  static async getAddress(customerID, addressID) {
+    const response = await fetch(
+      `/admin/api/2021-07/customers/${customerID}/addresses/${addressID}.json`
+    );
+    if (!response.ok) throw new Error("Something went wrong");
+    const responseJSON = await response.json();
+    return responseJSON;
+  }
 }
 
 class Cart {
@@ -239,6 +248,96 @@ class Cart {
     );
     window.addEventListener(AF_EVENT.CART_PRODUCT_DELETE, (event) =>
       this._deleteProduct(event)
+    );
+  }
+}
+
+class Address {
+  _isClosed = false;
+  _text = {
+    address1Label: "{{ 'templates.addresses.address_1' | t }}",
+    address2Label: "{{ 'templates.addresses.address_2' | t }}",
+    cityLabel: "{{ 'templates.addresses.city' | t }}",
+    companyLabel: "{{ 'templates.addresses.company' | t }}",
+    firstNameLabel: "{{ 'templates.addresses.first_name' | t }}",
+    lastNameLabel: "{{ 'templates.addresses.last_name' | t }}",
+    phoneLabel: "{{ 'templates.addresses.phone' | t }}",
+    provinceLabel: "{{ 'templates.addresses.province' | t }}",
+    countryLabel: "{{ 'templates.addresses.country' | t }}",
+    zipLabel: "{{ 'templates.addresses.zip' | t }}",
+    nameLabel: "{{ 'templates.addresses.name' | t }}",
+    provinceCodeLabel: "{{ 'templates.addresses.province_code' | t }}",
+    countryCodeLabel: "{{ 'templates.addresses.country_code' | t }}",
+    countryNameLabel: "{{ 'templates.addresses.country_name' | t }}",
+    saveChanges: "{{ 'general.save_changes' | t }}",
+    addAddress: "{{ 'templates.addresses.add_address' | t }}",
+    cancel: "{{ 'general.cancel' | t }}",
+  };
+
+  constructor(template, data, targetSelector) {
+    this._template = template;
+    this._context = {
+      text: this._text,
+      data,
+    };
+    if (data.id) {
+      this._context.text.title = "{{ 'templates.account.edit_address' | t }}";
+    } else {
+      this._context.text.title = "{{ 'templates.account.add_address' | t }}";
+    }
+    this._target = document.querySelector(targetSelector);
+    this._templateScript = Handlebars.compile(this._template);
+    this._target.classList.add("js-address--initialized");
+    this._initEventListeners();
+    this._initAddress();
+  }
+
+  _initAddress() {
+    this._compile();
+  }
+
+  _compile() {
+    this._html = this._templateScript(this._context);
+    this._target.innerHTML = this._html;
+    const dialog = this._target.closest("dialog");
+    if (dialog) {
+      dialog.open = true;
+      dialog.dataset.isClosing = false;
+    }
+    document.querySelector("body").dataset.isModalVisible = true;
+    watchFormState(dialog.querySelector("form"));
+  }
+
+  _close() {
+    if (!this._isClosed) {
+      const dialog = this._target.closest("dialog");
+      if (dialog) {
+        dialog.dataset.isClosing = true;
+      }
+      setTimeout(() => {
+        if (dialog) {
+          dialog.open = false;
+        }
+        document.querySelector("body").dataset.isModalVisible = false;
+        this._target.innerHTML = "";
+        this._isClosed = true;
+      }, ANIMATION_TIME);
+    }
+  }
+
+  async _saveChanges(form) {
+    const data = getFormData(form);
+    console.log(data);
+  }
+
+  _initEventListeners() {
+    window.addEventListener(AF_EVENT.ADDRESS_MODAL_CLOSE, () => this._close());
+    window.addEventListener(
+      AF_EVENT.ADDRESS_MODAL_SAVE,
+      ({ detail: button }) => {
+        const form = button.closest("form");
+        this._saveChanges(form);
+      }
     );
   }
 }

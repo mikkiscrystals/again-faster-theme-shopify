@@ -1,0 +1,38 @@
+.c-modal:not([open]),
+.c-modal[data-is-closing="true"] {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.c-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: hsla(0, 0%, 0%, 0.36);
+  z-index: 500;
+  display: grid;
+  grid-template-columns: 1fr 50rem 1fr;
+  align-items: start;
+  align-content: start;
+  overflow-y: auto;
+}
+
+.c-modal__content-box {
+  grid-column: 2 / 3;
+  width: 100%;
+}
+
+.c-modal__content {
+  margin-top: var(--side-distance-1);
+  margin-bottom: var(--side-distance-1);
+  background-color: var(--color-text-bg);
+  padding: var(--side-distance-1) var(--side-distance-3);
+}
+
+.c-modal:not([open]) .c-modal__content-box,
+.c-modal[data-is-closing="true"] .c-modal__content-box {
+  transform: translateY(10rem);
+}

@@ -12,6 +12,12 @@
   background-color: var(--color-text-2);
 }
 
+.o-form__action-group {
+  display: grid;
+  grid-auto-flow: row;
+  gap: 1rem;
+}
+
 .o-form--has-errors .o-form__action-group--submit {
   cursor: not-allowed;
 }
@@ -39,6 +45,11 @@
 .o-label {
   top: 1rem;
   transform-origin: left center;
+}
+
+[required] ~ .o-label::after {
+  content: "*";
+  color: var(--color-fail);
 }
 
 .o-input:focus ~ .o-label,
@@ -132,4 +143,18 @@
 .c-form-register form .o-form__input-box--first-name,
 .c-form-register form .o-form__input-box--last-name {
   grid-column: span 3;
+}
+
+.c-form-address form {
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-flow: unset;
+}
+
+.c-form-address .o-form__input-box {
+  grid-column: span 6;
+}
+
+.c-form-address .o-form__title,
+.c-form-address .o-form__action-group {
+  grid-column: span 12;
 }

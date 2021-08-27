@@ -1,5 +1,9 @@
-.c-account {
+.c-account,
+.c-account__address-book[data-is-compact="false"] {
   padding: var(--side-distance-1) var(--side-distance-3);
+}
+
+.c-account {
   display: grid;
   grid-auto-flow: row;
   gap: var(--side-distance-1);
@@ -15,6 +19,12 @@
   font-weight: normal;
 }
 
+.c-orders-table {
+  background-color: var(--color-bg-1);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .c-orders-table,
 .c-orders-table__head,
 .c-orders-table__body {
@@ -27,10 +37,27 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   gap: 1.5rem;
+  position: relative;
+}
+
+.c-orders-table__item-select {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+[data-col-name="select"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .c-orders-table__col {
   flex: 1;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .c-orders-table__body .c-orders-table__row:nth-child(1),
@@ -71,4 +98,17 @@
 .c-address-item {
   background-color: var(--color-bg-1);
   padding: 1rem 1.5rem;
+}
+
+.c-orders-table__body .c-orders-table__row:hover,
+.c-orders-table__body .c-orders-table__row:focus-within {
+  background-color: var(--color-bg-2);
+}
+
+.c-address-item-actions {
+  margin-top: 1em;
+}
+
+.c-address-item:not(:hover):not(:focus-within) .c-address-item-actions {
+  opacity: 0;
 }

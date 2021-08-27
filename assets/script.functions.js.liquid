@@ -53,11 +53,15 @@ function updateFormState(form) {
 }
 
 function updateInputState(form, input, value, tag, type, isRequired) {
+  let errorsCount = 0;
+
   if (value) {
     input.classList.add("o-input--has-value");
   } else {
     input.classList.remove("o-input--has-value");
   }
+
+  if (isRequired && !value) errorsCount++;
 
   switch (type) {
     case "password": {
@@ -69,42 +73,52 @@ function updateInputState(form, input, value, tag, type, isRequired) {
       relatedPasswordInputs.forEach((pwdInput) => {
         if (pwdInput.value !== value) passwordsMatch = false;
       });
-      if (!passwordsMatch) {
-        relatedPasswordInputs.forEach((pwdInput) =>
-          pwdInput.classList.add("o-input--has-error")
-        );
-      } else {
-        relatedPasswordInputs.forEach((pwdInput) =>
-          pwdInput.classList.remove("o-input--has-error")
-        );
-      }
+      if (!passwordsMatch) errorsCount++;
       break;
     }
   }
-  /* asd */
 
+  if (errorsCount > 0) {
+    input.classList.add("o-input--has-error");
+  } else {
+    input.classList.remove("o-input--has-error");
+  }
+}
+
+function getFormInputs(form) {
+  return form.querySelectorAll("input, select, textarea");
+}
+
+function updateInputsState(form, inputs = []) {
+  if (inputs.length === 0) {
+    inputs = getFormInputs(form);
+  }
+  inputs.forEach((input) => {
+    const value = input.value;
+    const tag = input.tagName;
+    const type = input.getAttribute("type");
+    const isRequired = input.hasAttribute("required");
+    updateInputState(form, input, value, tag, type, isRequired);
+  });
   updateFormState(form);
 }
 
-function onInputChange(form, input) {
+function onInputChange(form, input, allInputs) {
   input.classList.add("o-input--touched");
-  const value = input.value;
-  const tag = input.tagName;
-  const type = input.getAttribute("type");
-  const isRequired = input.hasAttribute("required");
-  updateInputState(form, input, value, tag, type, isRequired);
+  updateInputsState(form, allInputs);
 }
 
 function watchFormState(form) {
-  const inputs = form.querySelectorAll("input, select, textarea");
+  const inputs = getFormInputs(form);
   inputs.forEach((input) => {
     input.addEventListener("change", ({ target }) =>
-      onInputChange(form, target)
+      onInputChange(form, target, inputs)
     );
     input.addEventListener("input", ({ target }) =>
-      onInputChange(form, target)
+      onInputChange(form, target, inputs)
     );
   });
+  updateInputsState(form);
 }
 
 function updateCart(newData) {
@@ -123,4 +137,55 @@ function showCart() {
 
 function toggleCart() {
   window.dispatchEvent(new CustomEvent(AF_EVENT.CART_TOGGLE));
+}
+
+async function editAddress(id = null) {
+  try {
+    const addressTemplate = await fetch(TEMPLATE_URL.ADDRESS);
+    const addressTemplateHTML = await addressTemplate.text();
+    let data = {};
+    if (id) {
+      const addressData = await AgainFasterAPI.getAddress(
+        meta.page.customerId,
+        id
+      );
+      console.log({ addressData });
+      data = {
+        id,
+        ...addressData,
+      };
+    }
+    new Address(addressTemplateHTML, data, ".c-modal__content-box");
+  } catch (ex) {
+    console.error(ex);
+  }
+}
+
+function onCloseAddressModal() {
+  window.dispatchEvent(new CustomEvent(AF_EVENT.ADDRESS_MODAL_CLOSE));
+}
+
+function onSaveAddressModal(event) {
+  event.preventDefault();
+  const button = event.target.closest("button");
+  window.dispatchEvent(
+    new CustomEvent(AF_EVENT.ADDRESS_MODAL_SAVE, { detail: button })
+  );
+}
+
+function getFormData(form) {
+  const formData = new FormData(form);
+  const data = {};
+  for (const [key, value] of formData.entries()) {
+    if (!value) continue;
+    data[key] = value;
+  }
+  return data;
+}
+
+function onDangerFormSubmit(form) {
+  const confirmMessage = form.dataset.confirmMessage;
+  if (confirm(confirmMessage)) {
+    form.submit();
+  }
 }

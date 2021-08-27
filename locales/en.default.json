@@ -1,5 +1,8 @@
 {
-  "general": {},
+  "general": {
+    "save_changes": "Save changes",
+    "cancel": "Cancel"
+  },
   "sections": {
     "search": {
       "title": "Search"
@@ -26,14 +29,37 @@
     "account": {
       "title": "Account",
       "orders": "Orders",
+      "my_orders": "My orders",
       "no_orders_yet": "You haven't placed any orders yet",
       "no_addresses_yet": "You haven't added any addresses yet",
-      "manage_addresses": "Manage your addresses",
+      "manage_addresses": "Manage addresses",
       "order_number": "Order no.",
       "date": "Date",
       "status": "Status",
       "total": "Total",
+      "my_addresses": "My addresses",
+      "add_address": "Add new address",
+      "delete_address": "Delete address",
+      "delete_address_warning": "You are about to delete this address. Press \"OK\" to continue.",
+      "edit_address": "Edit address",
       "address_book": "Address book"
+    },
+    "addresses": {
+      "address_1": "Address 1",
+      "address_2": "Address 2",
+      "city": "City",
+      "company": "Company",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "phone": "Phone",
+      "province": "Province",
+      "country": "Country",
+      "zip": "ZIP",
+      "name": "Name",
+      "add_address": "Add address",
+      "province_code": "Province code",
+      "country_code": "Country code",
+      "country_name": "Country name"
     },
     "login": {
       "title": "Log in",
@@ -120,7 +146,7 @@
       "title": "My account",
       "order_details": "Order details",
       "address_book": "Address book",
-      "acc_overview": "Account overview"
+      "acc_overview": "Overview"
     }
   }
 }

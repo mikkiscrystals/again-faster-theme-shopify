@@ -1,0 +1,193 @@
+<div class="o-form c-form-address c-modal__content">
+    <form class="c-address__box">
+        
+        <h1 class="o-form__title o-title-1">{{ text.title }}</h1>
+
+        {{#if data.id}}
+            <input
+                name="id" 
+                id="address-id" 
+                class="o-input"
+                type="hidden"
+                value="{{ data.id }}"
+            />
+        {{/if}}
+
+        <div class="o-form__input-box">
+            <input
+                name="address1" 
+                id="address-address1" 
+                class="o-input"
+                value="{{ data.address1 }}"
+                required
+            />
+            <label class="o-label u-smooth" for="address-address1">
+                {{ text.address1Label }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="address2" 
+                id="address-address2" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-address2">
+                {{ text.address2Label }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="city" 
+                id="address-city" 
+                class="o-input"
+                required
+            />
+            <label class="o-label u-smooth" for="address-city">
+                {{ text.cityLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="company" 
+                id="address-company" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-company">
+                {{ text.companyLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="firstName" 
+                id="address-firstName" 
+                class="o-input"
+                required
+            />
+            <label class="o-label u-smooth" for="address-firstName">
+                {{ text.firstNameLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="lastName" 
+                id="address-lastName" 
+                class="o-input"
+                required
+            />
+            <label class="o-label u-smooth" for="address-lastName">
+                {{ text.lastNameLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="phone" 
+                id="address-phone" 
+                class="o-input"
+                required
+            />
+            <label class="o-label u-smooth" for="address-phone">
+                {{ text.phoneLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="province" 
+                id="address-province" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-province">
+                {{ text.provinceLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="country" 
+                id="address-country" 
+                class="o-input"
+                required
+            />
+            <label class="o-label u-smooth" for="address-country">
+                {{ text.countryLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="zip" 
+                id="address-zip" 
+                class="o-input"
+                required
+            />
+            <label class="o-label u-smooth" for="address-zip">
+                {{ text.zipLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="name" 
+                id="address-name" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-name">
+                {{ text.nameLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="provinceCode" 
+                id="address-provinceCode" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-provinceCode">
+                {{ text.provinceCodeLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="countryCode" 
+                id="address-countryCode" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-countryCode">
+                {{ text.countryCodeLabel }}
+            </label>
+        </div>
+        
+        <div class="o-form__input-box">
+            <input
+                name="countryName" 
+                id="address-countryName" 
+                class="o-input"
+            />
+            <label class="o-label u-smooth" for="address-countryName">
+                {{ text.countryNameLabel }}
+            </label>
+        </div>
+
+        <div class="o-form__action-group o-form__action-group--centered c-form-register__action-group">
+            <button type="submit" class="o-button o-form__action o-form__action--bordered o-form__action--cta" onclick="onSaveAddressModal()">
+                {{#if data.id }}
+                    {{ text.saveChanges }}
+                {{else}}
+                    {{ text.addAddress }}
+                {{/if}}
+            </button>
+
+            <button type="button" class="o-button o-form__action o-form__action--bordered"  onclick="onCloseAddressModal()">
+                {{ text.cancel }}
+            </button>
+        </div>
+
+    </form>
+</div>

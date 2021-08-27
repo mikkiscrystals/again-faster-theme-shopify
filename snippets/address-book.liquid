@@ -1,0 +1,47 @@
+<div class="c-account__block c-account__address-book" data-is-compact="{{ is_compact }}">
+    <h2 class="c-account__title-2 o-title-1">
+        {{ 'templates.account.my_addresses' | t }}
+    </h2>
+    {% if customer.addresses.size > 0 %}
+        <ul class="o-list c-account__address-list">
+            {% for address in customer.addresses %}
+                <li class="o-list__item c-account__address c-address-item">
+                    <div class="c-address-item-contacts">
+                        <p class="c-address-item-name">
+                            <strong>{{ address.name }}</strong>
+                        </p>
+                        <p class="c-address-item-phone">{{ address.phone }}</p>
+                    </div>
+                    <div class="c-address-item-location">
+                        <p class="c-address-item-street">{{ address.street }}</p>
+                        <p class="c-address-item-city-country">{{ address.city }},
+                            {{ address.country }}</p>
+                    </div>
+                    <p class="c-address-item-zip">{{ address.zip }}</p>
+                    {% if is_compact == false %}
+                        <form action="/account/addresses/{{ address.id }}" class="c-address-item-actions u-smooth" method="POST" onsubmit="event.preventDefault(); onDangerFormSubmit(this);" data-confirm-message="{{ 'templates.account.delete_address_warning' | t }}">
+                            <input name="_method" type="hidden" value="delete">
+                            <button class="o-button o-link-1 o-link--contextual" type="submit">
+                                {{ 'templates.account.delete_address' | t }}
+                            </button>
+                        </form>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="c-account__status">{{ 'templates.account.no_addresses_yet' | t }}</p>
+    {% endif %}
+
+    <p>
+        {% if is_compact %}
+            <a href="{{ routes.account_addresses_url }}" class="o-button o-link-1">
+                {{ 'templates.account.manage_addresses' | t }}
+            </a>
+        {% else %}
+            <button class="o-button o-link-1 o-link--contextual" onclick="editAddress()" type="button">
+                {{ 'templates.account.add_address' | t }}
+            </button>
+        {% endif %}
+    </p>
+</div>
