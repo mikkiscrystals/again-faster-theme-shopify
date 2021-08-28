@@ -3,10 +3,6 @@
         {{ 'templates.account.my_addresses' | t }}
     </h2>
 
-    {% form 'customer_address', customer.new_address %}
-        <p>erher</p>
-    {% endform %}
-
     {% if customer.addresses.size > 0 %}
         <ul class="o-list c-account__address-list">
             {% for address in customer.addresses %}
