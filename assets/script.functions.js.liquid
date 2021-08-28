@@ -52,6 +52,30 @@ function updateFormState(form) {
   }
 }
 
+function updateCountryProvinceOptions(
+  selectedCountry,
+  countrySelector,
+  provinceSelector
+) {
+  const countryProvinces = JSON.parse(
+    countrySelector.querySelector(`[value="${selectedCountry}"]`).dataset
+      .provinces
+  );
+  const currentProvinces = provinceSelector.querySelectorAll(
+    "option:not(:nth-child(1))"
+  );
+  currentProvinces.forEach((province) =>
+    province.parentNode.removeChild(province)
+  );
+  countryProvinces.forEach(([value, text]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.innerText = text;
+    provinceSelector.append(option);
+  });
+  countrySelector.dataset.oldValue = selectedCountry;
+}
+
 function updateInputState(form, input, value, tag, type, isRequired) {
   let errorsCount = 0;
 
@@ -62,6 +86,28 @@ function updateInputState(form, input, value, tag, type, isRequired) {
   }
 
   if (isRequired && !value) errorsCount++;
+
+  switch (tag) {
+    case "SELECT": {
+      const { isCountry, provinceSelector, oldValue } = input.dataset;
+      if (value === "---" && isRequired) {
+        errorsCount++;
+      }
+      if (
+        value &&
+        isCountry === "true" &&
+        provinceSelector &&
+        oldValue !== value
+      ) {
+        updateCountryProvinceOptions(
+          value,
+          input.closest("select"),
+          document.querySelector(provinceSelector)
+        );
+      }
+      break;
+    }
+  }
 
   switch (type) {
     case "password": {

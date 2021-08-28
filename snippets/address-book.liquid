@@ -2,6 +2,11 @@
     <h2 class="c-account__title-2 o-title-1">
         {{ 'templates.account.my_addresses' | t }}
     </h2>
+
+    {% form 'customer_address', customer.new_address %}
+        <p>erher</p>
+    {% endform %}
+
     {% if customer.addresses.size > 0 %}
         <ul class="o-list c-account__address-list">
             {% for address in customer.addresses %}
@@ -15,13 +20,16 @@
                     <div class="c-address-item-location">
                         <p class="c-address-item-street">{{ address.street }}</p>
                         <p class="c-address-item-city-country">{{ address.city }},
+                            {% if address.province != empty %}
+                                {{ address.province }},
+                            {% endif %}
                             {{ address.country }}</p>
                     </div>
                     <p class="c-address-item-zip">{{ address.zip }}</p>
                     {% if is_compact == false %}
                         <form action="/account/addresses/{{ address.id }}" class="c-address-item-actions u-smooth" method="POST" onsubmit="event.preventDefault(); onDangerFormSubmit(this);" data-confirm-message="{{ 'templates.account.delete_address_warning' | t }}">
                             <input name="_method" type="hidden" value="delete">
-                            <button class="o-button o-link-1 o-link--contextual" type="submit">
+                            <button class="o-button o-link-1 o-link--contextual o-button--fail" type="submit">
                                 {{ 'templates.account.delete_address' | t }}
                             </button>
                         </form>

@@ -279,7 +279,11 @@ class Address {
     this._context = {
       text: this._text,
       data,
+      other: {
+        countries: document.querySelector("#all-country-options").innerHTML,
+      },
     };
+    console.log(this._context);
     if (data.id) {
       this._context.text.title = "{{ 'templates.account.edit_address' | t }}";
     } else {
