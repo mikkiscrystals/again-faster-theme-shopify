@@ -1,0 +1,106 @@
+<div class="c-account__block c-account__order">
+
+    <div class="c-account__order-header">
+        <h2 class="c-account__title-2 o-title-1">
+            {{ 'templates.account.order_details' | t }}
+        </h2>
+
+        <h1 class="c-account__title-1">
+            {{ order.name }}
+        </h1>
+
+        <ul class="o-list c-account__order-meta-list">
+            <li class="o-list__item c-account__order-meta">{{ order.created_at | date: '%e %b, %Y' }}</li>
+            <li class="o-list__item c-account__order-meta">{{ order.financial_status }}</li>
+            <li class="o-list__item c-account__order-meta">{{ order.fulfillment_status }}</li>
+        </ul>
+    </div>
+
+    <div class="c-account__order-content">
+        <table class="c-account__order-cart c-order-cart">
+            <thead class="c-order-cart__head">
+                <tr class="c-order-cart__row">
+                    <th class="c-order-cart__col c-order-cart__col--image"></th>
+                    <th class="c-order-cart__col c-order-cart__col--product">
+                        {{ 'templates.account.product' | t }}
+                    </th>
+                    <th class="c-order-cart__col c-order-cart__col--qty">
+                        {{ 'templates.account.qty' | t }}
+                    </th>
+                    <th class="c-order-cart__col c-order-cart__col--total">
+                        {{ 'templates.account.total' | t }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="c-order-cart__body">
+                {% for line_item in order.line_items %}
+                    <tr class="c-order-cart__row">
+                        <td class="c-order-cart__col c-order-cart__col--image">
+                            <figure class="c-order-cart__image-box">
+                                {% if line_item.image %}
+                                    <img src="{{ line_item.image | img_url: '150x200' }}" alt="" class="c-order-cart__image o-image">
+                                {% else %}
+                                    {{ 'image' | placeholder_svg_tag: 'o-image c-order-cart__image' }}
+                                {% endif %}
+                            </figure>
+                        </td>
+                        <td class="c-order-cart__col c-order-cart__col--product">
+                            {{ line_item.title }}
+                        </td>
+                        <td class="c-order-cart__col c-order-cart__col--qty">
+                            {{ line_item.quantity }}
+                        </td>
+                        <td class="c-order-cart__col c-order-cart__col--total">
+                            {{ line_item.final_price | money }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul class="o-list c-account__order-summary">
+            <li class="o-list__item c-order-cart__summary-item">
+                <span class="c-order-cart__summary-term">{{ 'templates.account.total' | t }}</span>
+                <span class="c-order-cart__summary-value">{{ order.subtotal_price | money }}</span>
+            </li>
+            <li class="o-list__item c-order-cart__summary-item">
+                <span class="c-order-cart__summary-term">{{ 'templates.account.shipping' | t }}</span>
+                <span class="c-order-cart__summary-value" data-term="shipping">
+                    {% if order.shipping_price > 0 %}
+                        {{ order.shipping_price | money }}
+                    {% else %}
+                        {{ 'templates.account.free' | t }}
+                    {% endif %}
+                </span>
+            </li>
+            <li class="o-list__item c-order-cart__summary-item">
+                <span class="c-order-cart__summary-term">{{ 'templates.account.tax' | t }}</span>
+                <span class="c-order-cart__summary-value" data-term="tax">
+                    {% if order.tax_price > 0 %}
+                        {{ order.tax_price | money }}
+                    {% else %}
+                        {{ 'templates.account.free' | t }}
+                    {% endif %}
+                </span>
+            </li>
+            <li class="o-list__item c-order-cart__summary-item" data-type="conclusion">
+                <span class="c-order-cart__summary-term">{{ 'templates.account.subtotal' | t }}</span>
+                <span class="c-order-cart__summary-value">{{ order.subtotal_price + order.tax_price | money }}</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="c-account__order-footer">
+        {% capture shipping_address_title %}
+            {{ 'templates.account.shipping_address' | t }}
+        {% endcapture %}
+        {% capture billing_address_title %}
+            {{ 'templates.account.billing_address' | t }}
+        {% endcapture %}
+        <ul class="o-list c-account__order-addresses">
+            {% render 'address-list-item' with address: order.shipping_address, show_actions: false, title: shipping_address_title, status: order.fulfillment_status %}
+            {% render 'address-list-item' with address: order.billing_address, show_actions: false, title: billing_address_title, status: order.financial_status %}
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,5 @@
+<ul class="o-list c-address-list {{ class }}">
+    {% for address in addresses %}
+        {% render 'address-list-item' with address: address, is_compact: is_compact, show_actions: show_actions %}
+    {% endfor %}
+</ul>

@@ -1,0 +1,31 @@
+<li class="o-list__item c-address-item">
+    {% if title %}
+        <h3 class="c-address-item__title">{{ title }}</h3>
+    {% endif %}
+    <div class="c-address-item__contacts">
+        <p class="c-address-item-name">
+            <strong>{{ address.name }}</strong>
+        </p>
+        <p class="c-address-item-phone">{{ address.phone }}</p>
+    </div>
+    <div class="c-address-item__location">
+        <p class="c-address-item__street">{{ address.street }}</p>
+        <p class="c-address-item__city-country">{{ address.city }},
+            {% if address.province != empty %}
+                {{ address.province }},
+            {% endif %}
+            {{ address.country }}</p>
+    </div>
+    <p class="c-address-item__zip">{{ address.zip }}</p>
+    {% if is_compact == false and show_actions != true %}
+        <form action="/account/addresses/{{ address.id }}" class="c-address-item__actions u-smooth" method="POST" onsubmit="event.preventDefault(); onDangerFormSubmit(this);" data-confirm-message="{{ 'templates.account.delete_address_warning' | t }}">
+            <input name="_method" type="hidden" value="delete">
+            <button class="o-button o-link-1 o-link--contextual o-button--fail" type="submit">
+                {{ 'templates.account.delete_address' | t }}
+            </button>
+        </form>
+    {% endif %}
+    {% if status %}
+        <p class="c-address-item__status">{{ status }}</p>
+    {% endif %}
+</li>

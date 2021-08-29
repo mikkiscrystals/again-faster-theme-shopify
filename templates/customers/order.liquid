@@ -1,5 +1,7 @@
-<!-- /templates/customers/order.liquid -->
-{% render 'sidebar' %}
+<div class="c-cabinet">
+    {% render 'sidebar' %}
+    {% render 'order' with order: order %}
+</div>
 
 <h2>Billing Address</h2>
 <p>
