@@ -57,6 +57,10 @@
 
 {% render 'address-book' with is_compact: true %}
 
+<p>
+    <a href="{{ routes.account_logout_url }}" class="o-button o-link-1 o-button--fail">{{ 'snippets.form.submit.logout' | t }}</a>
+</p>
+
 {% schema %}
 
 {

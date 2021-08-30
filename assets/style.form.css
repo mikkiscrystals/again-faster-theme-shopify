@@ -32,8 +32,12 @@
 
 .o-input {
   padding: 1rem 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
   border-bottom: solid 0.1em var(--color-text-3);
   width: 100%;
+  outline: none;
 }
 
 .o-input--select {
@@ -128,6 +132,9 @@
 }
 
 .c-form-login,
+.c-form-reset-password,
+.c-form-recover-password,
+.c-form-contact,
 .c-form-register,
 .c-form-recover-password {
   display: grid;
@@ -135,6 +142,9 @@
 }
 
 .c-form-login form,
+.c-form-reset-password form,
+.c-form-recover-password form,
+.c-form-contact form,
 .c-form-register form,
 .c-form-recover-password form {
   width: 30rem;

@@ -1,14 +1,71 @@
-<h1>{{ page.title }}</h1>
-{% form 'contact' %}
-  {% if form.posted_successfully? %} Thank you for your contact {% endif %}
-  {{ form.errors | default_errors }}
-  <label for="ContactFormName">name</label>
-  <input type="text" id="ContactFormName" name="contact[name]">
-  <label for="ContactFormEmail">email</label>
-  <input type="email" id="ContactFormEmail" name="contact[email]">
-  <label for="ContactFormPhone">phone</label>
-  <input type="tel" id="ContactFormPhone" name="contact[phone]">
-  <label for="ContactFormMessage">message</label>
-  <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
-  <input type="submit" value="send">
-{% endform %}
+<section class="o-section o-section-contact o-section--default o-form c-form-contact">
+
+
+    {% form 'contact' %}
+
+        <h1 class="o-form__title o-title-1">{{ page.title }}</h1>
+
+        {% assign form_id = 'contact' %}
+
+        <div class="o-form__input-box o-form__input-box--name">
+            <input name="contact[name]" id="{{ form_id }}-name" class="o-input" aria-required="true" required/>
+            <label class="o-label u-smooth" for="{{ form_id }}-name">
+                {{ 'snippets.form.name.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box">
+            <input type="email" name="contact[email]" id="{{ form_id }}-email" class="o-input" aria-required="true"/>
+            <label class="o-label u-smooth" for="{{ form_id }}-email">
+                {{ 'snippets.form.email.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box">
+            <input name="contact[phone]" id="{{ form_id }}-phone" class="o-input" type="tel"/>
+            <label class="o-label u-smooth" for="{{ form_id }}-phone">
+                {{ 'snippets.form.phone.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__input-box o-form__input-box--message">
+            <textarea name="contact[body]" id="{{ form_id }}-message" class="o-input" aria-required="true" required rows="5"></textarea>
+            <label class="o-label u-smooth" for="{{ form_id }}-message">
+                {{ 'snippets.form.message.title' | t }}
+            </label>
+        </div>
+
+        <div class="o-form__action-group o-form__action-group--submit u-mt-1 c-form-contact__action-group">
+            <button type="submit" title="{{ 'snippets.form.submit.title' | t }}" class="o-button o-form__action o-form__action--bordered o-form__action--cta">
+                {{ 'snippets.form.submit.title' | t }}
+            </button>
+        </div>
+
+        {% if form.posted_successfully? %}
+            <ul class="o-list o-form__notes o-form__notes--centered">
+                <li class="o-list__item o-form__note o-form__note--success">
+                    {{ 'snippets.form.notes.contact.success' | t }}
+                </li>
+            </ul>
+        {% endif %}
+
+        {% if form.errors | size > 0 %}
+            <ul class="o-list o-form__notes o-form__notes--centered">
+                {% for field in form.errors %}
+                    <li class="o-list__item o-form__note o-form__note--fail">
+                        {% if field == 'form' %}
+                            {{ form.errors.messages[field] }}
+                        {% else %}
+                            {{ form.errors.translated_fields[field] }}
+                            -
+                            {{ form.errors.messages[field] }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+
+        {% endif %}
+
+    {% endform %}
+
+</section>

@@ -255,3 +255,8 @@ body[data-is-modal-visible="true"] {
 .o-link--contextual {
   border-bottom-style: dashed;
 }
+
+.o-section--default {
+  padding-left: var(--side-distance-4);
+  padding-right: var(--side-distance-4);
+}

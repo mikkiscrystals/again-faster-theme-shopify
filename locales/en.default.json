@@ -72,6 +72,7 @@
     },
     "login": {
       "title": "Log in",
+      "reset_password": "Reset password",
       "recover_password": "Recover password"
     },
     "reset_password": {
@@ -86,6 +87,15 @@
   },
   "snippets": {
     "form": {
+      "name": {
+        "title": "Name"
+      },
+      "phone": {
+        "title": "Phone"
+      },
+      "message": {
+        "title": "Message"
+      },
       "first_name": {
         "title": "First name",
         "placeholder": "Enter your first name"
@@ -102,9 +112,17 @@
         "title": "Password",
         "placeholder": "Enter your password"
       },
+      "new_password": {
+        "title": "New password",
+        "placeholder": "Enter your new password"
+      },
       "password_repeat": {
         "title": "Repeat password",
         "placeholder": "Repeat your password"
+      },
+      "new_password_repeat": {
+        "title": "Repeat new password",
+        "placeholder": "Repeat your new password"
       },
       "submit": {
         "title": "Submit",
@@ -117,6 +135,7 @@
       },
       "notes": {
         "recover_password": {
+          "description": "We will send further instructions to entered e-mail above",
           "success": "Check your e-mail for further instructions"
         },
         "newsletter": {
@@ -128,6 +147,9 @@
         },
         "register": {
           "already_have_account": "Already have an account yet?"
+        },
+        "contact": {
+          "success": "Thank you for you message!"
         }
       }
     },
