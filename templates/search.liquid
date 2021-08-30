@@ -10,7 +10,7 @@
                 {% assign form_id = 'search' %}
 
                 <div class="o-form__input-box o-form__input-box--q c-form-search__input-box--q">
-                    <input name="q" type="search" id="{{ form_id }}-first-name" class="o-input c-form-search__input" placeholder="{{ 'snippets.form.query.placeholder' | t }}" aria-label="{{ 'snippets.form.query.placeholder' | t }}" aria-required="true" value="{{ search.terms | escape }}" required/>
+                    <input autofocus name="q" type="search" id="{{ form_id }}-first-name" class="o-input c-form-search__input" placeholder="{{ 'snippets.form.query.placeholder' | t }}" aria-label="{{ 'snippets.form.query.placeholder' | t }}" aria-required="true" value="{{ search.terms | escape }}" required/>
                 </div>
 
                 <div class="o-form__action-group o-form__action-group--submit u-mt-1 c-form-search__action-group c-form-search__action-group--submit">

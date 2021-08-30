@@ -27,8 +27,8 @@
       "no_result": "No results"
     },
     "404": {
-      "title": "Not found",
-      "description": "The page you were looking for does not exist"
+      "title": "404",
+      "description": "Page not found"
     },
     "account": {
       "title": "Account",
