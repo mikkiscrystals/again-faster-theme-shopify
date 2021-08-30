@@ -148,6 +148,10 @@
   text-align: center;
 }
 
+.c-collection__title-link {
+  color: inherit;
+}
+
 .c-collection__header,
 .c-collection__content {
   padding-left: var(--side-distance-1);
