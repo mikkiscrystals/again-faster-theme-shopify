@@ -133,6 +133,7 @@
 
 .c-form-login,
 .c-form-reset-password,
+.c-form-search,
 .c-form-recover-password,
 .c-form-contact,
 .c-form-register,
@@ -143,6 +144,7 @@
 
 .c-form-login form,
 .c-form-reset-password form,
+.c-form-search form,
 .c-form-recover-password form,
 .c-form-contact form,
 .c-form-register form,
@@ -176,4 +178,29 @@
 .c-form-address .o-form__title,
 .c-form-address .o-form__action-group {
   grid-column: span 12;
+}
+
+.c-form-search form {
+  grid-auto-flow: unset;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 0;
+  row-gap: 1rem;
+  align-items: end;
+  align-content: end;
+}
+
+.c-form-search__title {
+  grid-column: span 12;
+}
+
+.c-form-search__input-box--q {
+  grid-column: span 8;
+}
+
+.c-form-search__input {
+  padding-right: 1rem;
+}
+
+.c-form-search__action-group--submit {
+  grid-column: span 4;
 }

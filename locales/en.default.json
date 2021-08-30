@@ -22,6 +22,10 @@
     }
   },
   "templates": {
+    "search": {
+      "title": "Search",
+      "no_result": "No results"
+    },
     "404": {
       "title": "Not found",
       "description": "The page you were looking for does not exist"
@@ -90,6 +94,9 @@
       "name": {
         "title": "Name"
       },
+      "query": {
+        "placeholder": "Product name..."
+      },
       "phone": {
         "title": "Phone"
       },
@@ -125,6 +132,7 @@
         "placeholder": "Repeat your new password"
       },
       "submit": {
+        "search": "Search",
         "title": "Submit",
         "login": "Log in",
         "logout": "Log out",

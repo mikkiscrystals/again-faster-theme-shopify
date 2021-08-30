@@ -65,7 +65,8 @@
   grid-template-columns: repeat(4, 1fr);
 }
 
-.c-products__list {
+.c-products__list,
+.c-search__list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--side-distance-1) 1rem;

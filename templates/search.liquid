@@ -1,22 +1,46 @@
-{% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
+{% paginate search.results by 12 %}
 
-  {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
-  {% endif %}
+    <section class="o-section c-search">
 
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
+        <div class="o-form c-form-search">
+            <form action="/search" method="get" role="search">
+
+                <h1 class="o-form__title c-form-search__title o-title-1">{{ 'templates.search.title' | t }}</h1>
+
+                {% assign form_id = 'search' %}
+
+                <div class="o-form__input-box o-form__input-box--q c-form-search__input-box--q">
+                    <input name="q" type="search" id="{{ form_id }}-first-name" class="o-input c-form-search__input" placeholder="{{ 'snippets.form.query.placeholder' | t }}" aria-label="{{ 'snippets.form.query.placeholder' | t }}" aria-required="true" value="{{ search.terms | escape }}" required/>
+                </div>
+
+                <div class="o-form__action-group o-form__action-group--submit u-mt-1 c-form-search__action-group c-form-search__action-group--submit">
+                    <button type="submit" title="{{ 'snippets.form.submit.search' | t }}" class="o-button o-form__action o-form__action--bordered o-form__action--cta">
+                        {{ 'snippets.form.submit.search' | t }}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if search.performed %}
+            {% if search.results.size > 0 %}
+                <ul class="o-list c-search__list">
+                    {% for item in search.results %}
+                        {% if item.object_type == 'article' %}
+
+                            {% elsif item.object_type == 'page' %}
+
+                            {% else %}
+                                {% render 'products-list-item' with product_item: item %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="c-search__status">{{ 'templates.search.no_result' | t }}</p>
+            {% endif %}
+        {% endif %}
+
+        {% render 'pagination' with paginate: paginate %}
+
+    </section>
+
 {% endpaginate %}

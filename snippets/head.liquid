@@ -96,6 +96,8 @@
         {{ 'style.template.index.css' | asset_url | stylesheet_tag }}
     {% when '404' %}
         {{ 'style.template.404.css' | asset_url | stylesheet_tag }}
+    {% when 'search' %}
+        {{ 'style.template.search.css' | asset_url | stylesheet_tag }}
 {% endcase %}
 
 <!-- scripts -->

@@ -1,0 +1,13 @@
+.c-search {
+  padding-left: var(--side-distance-1);
+  padding-right: var(--side-distance-1);
+  display: grid;
+  grid-auto-flow: row;
+  gap: var(--side-distance-1);
+}
+
+.c-search__status {
+  text-align: center;
+  font-size: 1.5em;
+  color: var(--color-text-2);
+}

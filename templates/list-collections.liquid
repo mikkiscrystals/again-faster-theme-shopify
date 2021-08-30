@@ -1,21 +1,27 @@
 {% for collection in collections %}
 
-    <div class="c-collection">
+    {% if collection.products.size > 0 %}
 
-        <div class="c-collection__header">
-            <h1 class="c-collection__title o-title-1">
-                <a class="c-collection__title-link" href="{{ collection.url }}">{{ collection.title | escape }} ></a>
-            </h1>
+        <div class="c-collection">
+
+            <div class="c-collection__header">
+                <h1 class="c-collection__title o-title-1">
+                    <a class="c-collection__title-link" href="{{ collection.url }}">{{ collection.title | escape }}
+                        ></a>
+                </h1>
+            </div>
+
+            <div class="c-collection__content c-products">
+                <ul class="o-list c-products__list">
+                    {% for product in collection.products limit:5 %}
+                        {% render 'products-list-item' with product_item: product %}
+                    {% endfor %}
+                </ul>
+            </div>
+
         </div>
 
-        <div class="c-collection__content c-products">
-            <ul class="o-list c-products__list">
-                {% for product in collection.products limit:5 %}
-                    {% render 'products-list-item' with product_item: product %}
-                {% endfor %}
-            </ul>
-        </div>
+    {% endif %}
 
-    </div>
 
 {% endfor %}
